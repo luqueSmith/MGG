@@ -1,7 +1,6 @@
 {
   "name": "Code MGG",
   "short_name": "Code MGG",
-  "description": "Códigos de Mutants: Genetic Gladiators",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
