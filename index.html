@@ -927,6 +927,157 @@
         height: 58px;
       }
     }
+
+    /* ====== DESCARGA SCRIPT ====== */
+    .download-card {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: linear-gradient(135deg, rgba(0, 240, 255, .08), rgba(157, 0, 255, .06));
+      box-shadow: 0 16px 45px rgba(0, 0, 0, .28), 0 0 18px rgba(0, 240, 255, .08);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(circle at 20% 10%, rgba(0, 240, 255, .18), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(157, 0, 255, .16), transparent 60%);
+      filter: blur(16px);
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .download-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .download-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      background: rgba(0, 0, 0, .35);
+      border: 1px solid rgba(0, 240, 255, .25);
+      box-shadow: 0 0 18px rgba(0, 240, 255, .12);
+      flex: 0 0 auto;
+    }
+
+    .download-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .download-text {
+      min-width: 0;
+    }
+
+    .download-title {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      letter-spacing: .03em;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .download-sub {
+      margin-top: 2px;
+      font-size: 12px;
+      color: rgba(154, 164, 178, .85);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    .download-btn {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: 12px;
+      background: var(--accent);
+      border: 1px solid rgba(0, 240, 255, .9);
+      box-shadow: 0 0 22px rgba(0, 240, 255, .25);
+      transform: translateY(0);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(0, 240, 255, .35);
+      filter: brightness(1.05);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+    }
+
+    .download-shine {
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+      transform: translateX(-120%) rotate(20deg);
+      animation: shine 2.8s ease-in-out infinite;
+      pointer-events: none;
+      opacity: .8;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-120%) rotate(20deg);
+        opacity: .0;
+      }
+
+      30% {
+        opacity: .9;
+      }
+
+      60% {
+        opacity: .9;
+      }
+
+      100% {
+        transform: translateX(120%) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .download-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .download-btn {
+        width: 100%;
+      }
+    }
+
+    /* ====== /DESCARGA SCRIPT ====== */
   </style>
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#00f0ff">
@@ -942,7 +1093,7 @@
 <script>
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
+      navigator.serviceWorker.register("./sw.js").catch(() => { });
     });
   }
 </script>
@@ -1161,6 +1312,34 @@
     <div class="wrap">
       MGG Codex (Para GG) · Raul Smith Luque, Código y Gen · En GitHub.
     </div>
+    <!-- ====== DESCARGA SCRIPT (ABAJO) ====== -->
+    <div class="wrap">
+      <div class="download-card" id="downloadCard">
+        <div class="download-left">
+          <div class="download-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M8 10l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M4 17.5c0 1.38 1.12 2.5 2.5 2.5h11c1.38 0 2.5-1.12 2.5-2.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="download-text">
+            <div class="download-title">Descargar Script LUA</div>
+            <div class="download-sub">Compatible · Game Guardian: <strong>Script.lua</strong></div>
+          </div>
+        </div>
+
+        <a class="download-btn" href="TodoCS.lua" download="Script.lua">
+          <span>DESCARGAR</span>
+          <span class="download-shine" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+    <!-- ====== /DESCARGA SCRIPT (ABAJO) ====== -->
+
   </footer>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
