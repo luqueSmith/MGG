@@ -928,7 +928,22 @@
       }
     }
   </style>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#00f0ff">
+  <link rel="icon" href="img/mutants_gg.jpg">
+  <link rel="apple-touch-icon" href="img/mutants_gg.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Code MGG">
+
 </head>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js").catch(() => { });
+    });
+  }
+</script>
 
 <body>
   <header>
@@ -982,7 +997,8 @@
 
           <div class="meta-title">
             <strong>Smith Luque - Catalogo MGG</strong>
-            <span><span id="countNow">0</span> MUTANTES ENCONTRADOS · <span id="countAll">0</span> TOTAL - CONSULTAS +51 906 328 464 WSP</span>
+            <span><span id="countNow">0</span> MUTANTES ENCONTRADOS · <span id="countAll">0</span> TOTAL - CONSULTAS +51
+              906 328 464 WSP</span>
           </div>
         </div>
 
