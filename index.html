@@ -1,0 +1,1938 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mutants: Genetic Gladiators | Códigos</title>
+  <meta name="description" content="Listado de mutantes (Nombre, Código y Gen) para Mutants: Genetic Gladiators." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050508;
+      --panel: #0e0e16;
+      --card: #161622;
+      --muted: #9aa4b2;
+      --text: #e2e8f0;
+
+      --accent: #00f0ff;
+      --accent2: #9d00ff;
+
+      --cyber: #2de2e6;
+      /* A */
+      --necro: #9d00ff;
+      /* B */
+      --saber: #ff003c;
+      /* C */
+      --zoomorph: #02c39a;
+      /* D */
+      --galactic: #fcee0a;
+      /* E */
+      --mythic: #ffffff;
+      /* F */
+      --unknown: #94a3b8;
+
+      --shadow: 0 0 20px rgba(0, 240, 255, .12);
+      --shadow2: 0 0 35px rgba(157, 0, 255, .10);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(26, 26, 46, .9) 0%, transparent 65%),
+        linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: 100% 100%, 40px 40px, 40px 40px, auto;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a12;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(10, 10, 18, .75);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 4px;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(0, 240, 255, .8);
+    }
+
+    .status {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      color: rgba(154, 164, 178, .75);
+      display: none;
+    }
+
+    @media (min-width: 860px) {
+      .status {
+        display: block;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 52px 0 28px;
+      text-align: center;
+    }
+
+    .rings {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      opacity: .9;
+    }
+
+    .ring {
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 50%;
+      animation: spin 14s linear infinite;
+      filter: drop-shadow(0 0 14px rgba(0, 240, 255, .06));
+    }
+
+    .ring.r1 {
+      width: 320px;
+      height: 320px;
+    }
+
+    .ring.r2 {
+      width: 260px;
+      height: 260px;
+      animation-direction: reverse;
+      animation-duration: 11s;
+    }
+
+    @media (min-width: 768px) {
+      .ring.r1 {
+        width: 560px;
+        height: 560px;
+      }
+
+      .ring.r2 {
+        width: 430px;
+        height: 430px;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hero-badge {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 240, 255, .35);
+      background: rgba(0, 0, 0, .45);
+      box-shadow: var(--shadow), var(--shadow2);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .hero-badge:after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, .22), rgba(157, 0, 255, .14));
+      filter: blur(14px);
+      z-index: -1;
+      opacity: .7;
+    }
+
+    .dna {
+      width: 34px;
+      height: 34px;
+      color: var(--text);
+      opacity: .95;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: clamp(34px, 6vw, 72px);
+      text-shadow: 0 0 18px rgba(0, 240, 255, .20);
+    }
+
+    h2 {
+      margin: 6px 0 18px;
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      font-size: clamp(18px, 3.6vw, 34px);
+      color: transparent;
+      background: linear-gradient(90deg, var(--accent), #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      letter-spacing: .06em;
+    }
+
+    .searchbar {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .searchbar .glow {
+      position: absolute;
+      inset: -1px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, rgba(0, 240, 255, .35), rgba(157, 0, 255, .30));
+      filter: blur(14px);
+      opacity: .25;
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+
+    .searchbar:focus-within .glow {
+      opacity: .55;
+    }
+
+    .searchrow {
+      position: relative;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 10px 10px 12px;
+      background: rgba(0, 0, 0, .70);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .searchicon {
+      width: 18px;
+      height: 18px;
+      opacity: .75;
+      flex: 0 0 auto;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+      outline: none;
+      font-size: 18px;
+      padding: 10px 6px;
+    }
+
+    input::placeholder {
+      color: rgba(154, 164, 178, .7);
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px 0 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .10);
+      margin-bottom: 16px;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meta-chip {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0, 0, 0, .25);
+    }
+
+    .meta-title {
+      line-height: 1.05;
+    }
+
+    .meta-title strong {
+      display: block;
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      letter-spacing: .02em;
+      font-size: 16px;
+    }
+
+    .meta-title span {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      color: rgba(154, 164, 178, .75);
+    }
+
+    .right-tools {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .right-tools {
+        width: auto;
+      }
+    }
+
+    select {
+      color: var(--text);
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
+      outline: none;
+      cursor: pointer;
+      min-width: 180px;
+    }
+
+    select:focus {
+      border-color: rgba(0, 240, 255, .35);
+      box-shadow: 0 0 0 4px rgba(0, 240, 255, .08);
+    }
+
+    .gene-filters {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+
+    .gene-filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pill {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .05);
+      color: rgba(226, 232, 240, .88);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .pill:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, .22);
+    }
+
+    .pill.active {
+      color: #000;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(0, 240, 255, .28);
+    }
+
+    .pill[data-gene="CYBER"].active {
+      background: var(--cyber);
+      border-color: var(--cyber);
+    }
+
+    .pill[data-gene="NECRO"].active {
+      background: var(--necro);
+      border-color: var(--necro);
+      color: #fff;
+    }
+
+    .pill[data-gene="SABER"].active {
+      background: var(--saber);
+      border-color: var(--saber);
+      color: #fff;
+    }
+
+    .pill[data-gene="ZOOMORPH"].active {
+      background: var(--zoomorph);
+      border-color: var(--zoomorph);
+      color: #002a22;
+    }
+
+    .pill[data-gene="GALACTIC"].active {
+      background: var(--galactic);
+      border-color: var(--galactic);
+      color: #1b1b00;
+    }
+
+    .pill[data-gene="MYTHIC"].active {
+      background: var(--mythic);
+      border-color: var(--mythic);
+      color: #000;
+    }
+
+    .pill[data-gene="UNKNOWN"].active {
+      background: var(--unknown);
+      border-color: var(--unknown);
+      color: #000;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+      padding: 14px 0 24px;
+    }
+
+    @media (min-width: 520px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1120px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card {
+      position: relative;
+      background: rgba(22, 22, 34, .92);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      min-height: 120px;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 240, 255, .28);
+      box-shadow: 0 0 24px rgba(0, 240, 255, .10), 0 14px 35px rgba(0, 0, 0, .32);
+    }
+
+    .stripe {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(180deg, rgba(0, 240, 255, .85), rgba(157, 0, 255, .45));
+      opacity: .95;
+    }
+
+    .card-inner {
+      padding: 14px 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toprow {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .name {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: .02em;
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    .gene-badge {
+      flex: 0 0 auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(0, 0, 0, .35);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .code {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(0, 0, 0, .35);
+      border: 1px solid rgba(0, 240, 255, .25);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 0 18px rgba(0, 240, 255, .08);
+    }
+
+    .code strong {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 16px;
+      letter-spacing: .08em;
+      color: var(--accent);
+      text-transform: lowercase;
+    }
+
+    .copybtn {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+      color: rgba(226, 232, 240, .9);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .copybtn:hover {
+      background: rgba(255, 255, 255, .10);
+      border-color: rgba(255, 255, 255, .20);
+      transform: translateY(-1px);
+    }
+
+    .copybtn:active {
+      transform: translateY(0px);
+    }
+
+    .empty {
+      margin: 18px 0 40px;
+      padding: 28px 16px;
+      border-radius: 22px;
+      border: 2px dashed rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      text-align: center;
+      color: rgba(154, 164, 178, .75);
+    }
+
+    .empty .big {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      color: rgba(226, 232, 240, .65);
+      font-size: 22px;
+      margin: 8px 0 6px;
+    }
+
+    .empty .small {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      margin: 0;
+    }
+
+    footer {
+      margin-top: 26px;
+      padding: 22px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      background: rgba(0, 0, 0, .28);
+      color: rgba(154, 164, 178, .75);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, .78);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: rgba(226, 232, 240, .92);
+      padding: 10px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, .35), 0 0 18px rgba(0, 240, 255, .10);
+      font-weight: 800;
+      letter-spacing: .04em;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    /* ====== GUÍA DE CÓDIGOS (GENES) ====== */
+    .gene-guide {
+      margin: 18px 0 18px;
+      padding: 18px 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(0, 0, 0, .32);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, .25), 0 0 20px rgba(0, 240, 255, .07);
+      backdrop-filter: blur(10px);
+    }
+
+    .guide-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .guide-badge {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 240, 255, .20);
+      background: rgba(0, 0, 0, .35);
+      box-shadow: 0 0 18px rgba(0, 240, 255, .10);
+      flex: 0 0 auto;
+    }
+
+    .guide-title h3 {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      letter-spacing: .03em;
+      font-size: 18px;
+    }
+
+    .guide-title p {
+      margin: 4px 0 0;
+      color: rgba(154, 164, 178, .85);
+      font-size: 14px;
+    }
+
+    .guide-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 560px) {
+      .guide-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 980px) {
+      .guide-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .guide-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(22, 22, 34, .90);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .guide-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 240, 255, .25);
+      box-shadow: 0 0 22px rgba(0, 240, 255, .10), 0 14px 35px rgba(0, 0, 0, .32);
+    }
+
+    .guide-strip {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(180deg, rgba(0, 240, 255, .75), rgba(157, 0, 255, .35));
+      opacity: .95;
+    }
+
+    .guide-inner {
+      padding: 14px 14px 14px 16px;
+    }
+
+    .guide-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .gene-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .35);
+      box-shadow: 0 0 14px rgba(0, 0, 0, .25);
+      object-fit: contain;
+      padding: 6px;
+      flex: 0 0 auto;
+    }
+
+    /* Si no has puesto src, que no salga el icono vacío: */
+    .gene-logo[data-empty="true"] {
+      display: grid;
+      place-items: center;
+    }
+
+    .gene-logo[data-empty="true"]::after {
+      content: "LOGO";
+      color: rgba(154, 164, 178, .70);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    .guide-name {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .gene-name {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      letter-spacing: .02em;
+      font-size: 15px;
+    }
+
+    .gene-hint {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 11px;
+      color: rgba(154, 164, 178, .75);
+    }
+
+    .gene-letter {
+      flex: 0 0 auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-weight: 900;
+      letter-spacing: .12em;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .40);
+      text-transform: lowercase;
+      min-width: 42px;
+      text-align: center;
+    }
+
+    .guide-code {
+      margin-top: 10px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, .35);
+      border: 1px solid rgba(255, 255, 255, .10);
+      color: rgba(226, 232, 240, .88);
+      font-size: 13px;
+    }
+
+    .guide-code strong {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      letter-spacing: .08em;
+    }
+
+    .guide-note {
+      margin: 14px 0 0;
+      color: rgba(154, 164, 178, .80);
+      font-size: 13px;
+    }
+
+    /* Colores por gen (se integran con tu paleta) */
+    .guide-card[data-gene="CYBER"] .guide-strip {
+      background: linear-gradient(180deg, var(--cyber), rgba(157, 0, 255, .25));
+    }
+
+    .guide-card[data-gene="NECRO"] .guide-strip {
+      background: linear-gradient(180deg, var(--necro), rgba(0, 240, 255, .22));
+    }
+
+    .guide-card[data-gene="SABER"] .guide-strip {
+      background: linear-gradient(180deg, var(--saber), rgba(157, 0, 255, .22));
+    }
+
+    .guide-card[data-gene="ZOOMORPH"] .guide-strip {
+      background: linear-gradient(180deg, var(--zoomorph), rgba(0, 240, 255, .18));
+    }
+
+    .guide-card[data-gene="GALACTIC"] .guide-strip {
+      background: linear-gradient(180deg, var(--galactic), rgba(157, 0, 255, .18));
+    }
+
+    .guide-card[data-gene="MYTHIC"] .guide-strip {
+      background: linear-gradient(180deg, var(--mythic), rgba(0, 240, 255, .14));
+    }
+
+    .guide-card[data-gene="CYBER"] .gene-letter {
+      border-color: color-mix(in srgb, var(--cyber) 55%, rgba(255, 255, 255, .14));
+    }
+
+    .guide-card[data-gene="NECRO"] .gene-letter {
+      border-color: color-mix(in srgb, var(--necro) 55%, rgba(255, 255, 255, .14));
+    }
+
+    .guide-card[data-gene="SABER"] .gene-letter {
+      border-color: color-mix(in srgb, var(--saber) 55%, rgba(255, 255, 255, .14));
+    }
+
+    .guide-card[data-gene="ZOOMORPH"] .gene-letter {
+      border-color: color-mix(in srgb, var(--zoomorph) 55%, rgba(255, 255, 255, .14));
+    }
+
+    .guide-card[data-gene="GALACTIC"] .gene-letter {
+      border-color: color-mix(in srgb, var(--galactic) 55%, rgba(255, 255, 255, .14));
+    }
+
+    .guide-card[data-gene="MYTHIC"] .gene-letter {
+      border-color: color-mix(in srgb, var(--mythic) 55%, rgba(255, 255, 255, .14));
+    }
+
+    /* ====== /GUÍA DE CÓDIGOS (GENES) ====== */
+    /* ====== PERFIL EN META CHIP ====== */
+    .profile-chip {
+      padding: 0;
+      overflow: hidden;
+      border-color: rgba(0, 240, 255, .35);
+      box-shadow:
+        0 0 18px rgba(0, 240, 255, .25),
+        inset 0 0 12px rgba(0, 240, 255, .15);
+    }
+
+    .profile-chip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* Glow extra al pasar el ratón */
+    .profile-chip:hover {
+      box-shadow:
+        0 0 26px rgba(0, 240, 255, .45),
+        inset 0 0 16px rgba(0, 240, 255, .25);
+    }
+
+    /* ====== LOGO MGG EN HERO ====== */
+    .hero-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 0 10px rgba(0, 240, 255, .45)) drop-shadow(0 0 22px rgba(0, 240, 255, .25));
+    }
+
+    /* Ajuste responsive */
+    @media (min-width: 768px) {
+      .hero-logo {
+        width: 58px;
+        height: 58px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>MUTANTS: <span style="color:var(--accent)">GG</span> — CÓDIGOS</span>
+        </div>
+        <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="rings" aria-hidden="true">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+    </div>
+
+    <div class="wrap">
+      <div class="hero-badge" aria-hidden="true">
+        <img src="img/mgg.png" alt="Mutants Genetic Gladiators" class="hero-logo">
+      </div>
+      <h1>MUTANTS</h1>
+      <h2>GENETIC GLADIATORS</h2>
+
+      <div class="searchbar">
+        <div class="glow"></div>
+        <div class="searchrow">
+          <svg class="searchicon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <input id="searchInput" type="text" placeholder="Buscar por Nombre o Código (ej: aa_01, zombi...)"
+            autocomplete="off" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="controls">
+      <div class="meta">
+        <div class="meta-left">
+          <div class="meta-chip profile-chip" aria-hidden="true">
+            <img
+              src="https://scontent.flim14-1.fna.fbcdn.net/v/t39.30808-1/340765662_245127071382413_3869265906603158469_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeHPMh94fIRW1FgJwkMx7lRB3lxazpPcU_beXFrOk9xT9gIDs14OxVNBOjM4EzVloVPL7J4ZueyuDMZm27_ScQs2&_nc_ohc=O2dCdH1Kzp4Q7kNvwFXWSvL&_nc_oc=AdkAn9bvpZ2CpCP4Pz0-f-cYSSe7J5f6HQchOPKIJW7dpDRYe6zTylpV8I-hblENCAQ&_nc_zt=24&_nc_ht=scontent.flim14-1.fna&_nc_gid=Ka7U_ULuJ2qT-zaDuB5XOA&oh=00_AfmQxywtqNeVh-C3HSzL4mcUn0kP-e3N07us2QNtaurlfQ&oe=6943A835"
+              alt="Perfil">
+          </div>
+
+          <div class="meta-title">
+            <strong>Smith Luque - Catalogo MGG</strong>
+            <span><span id="countNow">0</span> MUTANTES ENCONTRADOS · <span id="countAll">0</span> TOTAL - CONSULTAS +51 906 328 464 WSP</span>
+          </div>
+        </div>
+
+        <div class="right-tools">
+          <label>
+            <select id="sortSelect" title="Ordenar">
+              <option value="name-asc">Orden: Nombre (A→Z)</option>
+              <option value="name-desc">Orden: Nombre (Z→A)</option>
+              <option value="code-asc">Orden: Código (A→Z)</option>
+              <option value="code-desc">Orden: Código (Z→A)</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="gene-filters" id="geneFilters" aria-label="Filtros por gen"></div>
+    </section>
+
+    <section id="grid" class="grid" aria-live="polite"></section>
+
+    <section id="emptyState" class="empty" style="display:none;">
+      <div style="font-size:56px; opacity:.35;">🧬</div>
+      <div class="big">No se encontraron mutantes</div>
+      <p class="small">Prueba cambiando el texto de búsqueda o el filtro de gen.</p>
+    </section>
+    <!-- ====== PANEL: GUÍA DE CÓDIGOS (GENES) ====== -->
+    <section class="gene-guide" aria-label="Guía de códigos por gen">
+      <div class="guide-head">
+        <div class="guide-badge" aria-hidden="true">🧾</div>
+        <div class="guide-title">
+          <h3>Guía rápida de códigos</h3>
+          <p>El <strong>primer carácter</strong> del código indica el <strong>gen/tipo</strong> del mutante.</p>
+        </div>
+      </div>
+
+      <div class="guide-grid">
+        <!-- CYBER -->
+        <article class="guide-card" data-gene="CYBER">
+          <div class="guide-strip"></div>
+          <div class="guide-inner">
+            <div class="guide-top">
+              <!-- LOGO (opcional): pon tu ruta en src cuando tengas los logos -->
+              <img class="gene-logo" src="img/cyber.png" alt="" data-empty="true">
+              <div class="guide-name">
+                <span class="gene-name">Cyber</span>
+                <span class="gene-hint">Prefijo del código</span>
+              </div>
+              <span class="gene-letter">a</span>
+            </div>
+            <div class="guide-code">
+              Ejemplo: <strong>a_01</strong>, <strong>aa_03</strong>, <strong>af_12</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- SABER -->
+        <article class="guide-card" data-gene="SABER">
+          <div class="guide-strip"></div>
+          <div class="guide-inner">
+            <div class="guide-top">
+              <img class="gene-logo" src="img/sable.png" alt="" data-empty="true">
+              <div class="guide-name">
+                <span class="gene-name">Sable</span>
+                <span class="gene-hint">Prefijo del código</span>
+              </div>
+              <span class="gene-letter">c</span>
+            </div>
+            <div class="guide-code">
+              Ejemplo: <strong>c_01</strong>, <strong>cb_09</strong>, <strong>cf_10</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- NECRO -->
+        <article class="guide-card" data-gene="NECRO">
+          <div class="guide-strip"></div>
+          <div class="guide-inner">
+            <div class="guide-top">
+              <img class="gene-logo" src="img/necro.png" alt="" data-empty="true">
+              <div class="guide-name">
+                <span class="gene-name">Necro</span>
+                <span class="gene-hint">Prefijo del código</span>
+              </div>
+              <span class="gene-letter">b</span>
+            </div>
+            <div class="guide-code">
+              Ejemplo: <strong>b_01</strong>, <strong>ba_06</strong>, <strong>bf_10</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- ZOOMORPH -->
+        <article class="guide-card" data-gene="ZOOMORPH">
+          <div class="guide-strip"></div>
+          <div class="guide-inner">
+            <div class="guide-top">
+              <img class="gene-logo" src="img/zomorfo.png" alt="" data-empty="true">
+              <div class="guide-name">
+                <span class="gene-name">Zoomorph</span>
+                <span class="gene-hint">Prefijo del código</span>
+              </div>
+              <span class="gene-letter">d</span>
+            </div>
+            <div class="guide-code">
+              Ejemplo: <strong>d_01</strong>, <strong>dd_10</strong>, <strong>df_13</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- GALACTIC -->
+        <article class="guide-card" data-gene="GALACTIC">
+          <div class="guide-strip"></div>
+          <div class="guide-inner">
+            <div class="guide-top">
+              <img class="gene-logo" src="img/galactico.png" alt="" data-empty="true">
+              <div class="guide-name">
+                <span class="gene-name">Galatic</span>
+                <span class="gene-hint">Prefijo del código</span>
+              </div>
+              <span class="gene-letter">e</span>
+            </div>
+            <div class="guide-code">
+              Ejemplo: <strong>e_01</strong>, <strong>ea_04</strong>, <strong>ef_11</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- MYTHIC -->
+        <article class="guide-card" data-gene="MYTHIC">
+          <div class="guide-strip"></div>
+          <div class="guide-inner">
+            <div class="guide-top">
+              <img class="gene-logo" src="img/mitico.png" alt="" data-empty="true">
+              <div class="guide-name">
+                <span class="gene-name">Mytih</span>
+                <span class="gene-hint">Prefijo del código</span>
+              </div>
+              <span class="gene-letter">f</span>
+            </div>
+            <div class="guide-code">
+              Ejemplo: <strong>f_01</strong>, <strong>fa_12</strong>, <strong>ff_02</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="guide-note">
+        Tip: Si te aprendes estos codigos es mas facil cambiar de mutantes <strong>CODE MGG</strong>. Mucha suerte.
+      </p>
+    </section>
+    <!-- ====== /PANEL: GUÍA DE CÓDIGOS (GENES) ====== -->
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      MGG Codex (Para GG) · Raul Smith Luque, Código y Gen · En GitHub.
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /******************************************************************
+     * 1) LISTA INTEGRADA (sin fetch)
+     *    Formato: "Nombre<TAB>codigo"
+     *    También soporta el formato del txt que enviaste con índices:
+     *    "0. Celcius Thermoid  ea_99"
+     ******************************************************************/
+    const RAW_LIST = `
+Celcius Thermoid\tea_99
+Robot\ta_01
+Robot Debil\ta_02
+Androide\taa_01
+Goliat\taa_02
+Necrobot\tab_01
+Hypnos\tab_02
+Xenarach\tab_03
+Humanoide Perfido\tac_01
+Capitan Mecano\tac_02
+Dezinger\tac_03
+Escarabot\tad_01
+Monocerus\tad_02
+Coloso\tae_01
+Libraro\tae_02_silver
+Deus Machina\taf_01
+Virgon\taf_02_silver
+Zombi\tb_01
+Zombi Debil\tb_02
+Jack O'Lantern\tb_03
+Zomborg\tba_01
+Muñeca Diabolica\tba_02
+Lord Blood\tbb_01
+Espectro de la Cripta\tbb_02
+Despota Negro\tbc_01
+Capitan Osamenta\tbc_02
+Necrodragon\tbd_01
+Cancernia\tbd_02_silver
+Fantasmonauta\tbe_01
+Caprika\tbe_02_silver
+Quebrantacuellos\tbe_03
+Baron Lundi\tbf_01
+Mago Tetrico\tbf_02
+Guerrero\tc_01
+Guerrero Debil\tc_02
+Ejecutor\tca_01
+Interceptrix\tca_02
+General Caos\tca_03
+Banshee Guerrera\tcb_01
+Bushi\tcb_02
+Caballero Nordico\tcc_01
+Buck Maurice\tcc_02
+Honey Bunny\tcd_01
+Sagitauro\tcd_02_silver
+Haggis\tcd_03
+Marciano Errante\tce_01
+Guardian Galactico\tce_03
+Valkiria\tcf_01
+Thor\tcf_02
+Bestia\td_01
+Reptoide\tda_01
+Aracno\tda_02
+Cerbero\tdb_01
+Zombat\tdb_02
+Cobrakai\tdb_03
+Rakshasa\tdc_01
+Leohart\tdc_02_silver
+Gargantus\tdc_03_gothic
+Kaiju Kitty\tdd_01
+Maestro Splitter\tdd_02
+Reina Parasita\tde_01
+Cosmo Kong\tde_02
+Dracus Nobilis\tdf_01
+Satiro Hechicero\tdf_02
+Extraterrestre\te_01
+Aniquilador\tea_01
+Sentry\tea_02
+Exopez\tea_03_silver
+Tutti Viscosi\teb_01
+Sirenia\teb_02
+Devorador\teb_03
+Sundance Bug\tec_01
+Behemoth\tec_02
+Xenos\ted_01
+Rocageno\ted_02
+Astrosurfista\tee_01
+Supernovus\tee_02
+Maestro Oida\tee_03
+Nebulon\tef_01
+Mr Marvelous\tef_02_heroes
+Aquapunzel\tef_03_silver
+Diablesa\tf_01
+Mago de las Nieves\tf_03
+Tecno Tao\tfa_01
+Mekali\tfa_02
+La Parca\tfb_01
+Principe Escorpion\tfb_02_silver
+Anubis\tfb_03
+Gandolphus\tfc_01
+Capitan Paz\tfc_02
+Medusa\tfd_01
+Horus\tfd_02
+Ivory Hanzo\tfd_03_japan
+C'thlig\tfe_01
+Azuria\tfe_02
+Señor del Abismo\tff_01
+Castigo\tff_02
+Oriax\tfc_03
+Ragnar\tcb_03
+Triple-B\tba_03
+Mandragora\tff_03
+Motero Maldito\tbb_03
+Armadizo\tde_03
+Mantidroide\tda_03
+Carnero Vengador\tbf_03_silver
+Battle Toad\tcd_04
+Cezanne\tdc_04
+H.U.M.A.N.\taa_03
+Rambit\td_03
+Star Trooper\tec_03
+Micky Krueger\tbc_03
+Tauridus\tad_03_silver
+Autonoraptor\taf_04
+Invadron\tae_03
+Bruja Malvada\tfb_04
+Oso Espantoso\tbd_03
+Azog\tcf_04
+Geminium\tce_02_silver
+Psicojabali\tdd_03
+Zena\tcc_03
+Absolem\tdf_03
+Wampara\ted_03
+Barbaroca\taf_03
+George Washington\tbc_04
+Louis XVI\tdb_04
+Bazzinger\tfa_03
+Space Princess\tfe_04
+Astromago\tfe_03
+Garuda\ta_03
+Hada Machete\tcf_03
+Genshiryoku\tde_04
+El Experimento\tba_04
+Leonidas\tcb_04
+Buranka\tfd_04
+Mexihcatl\tfc_04
+Banker\tfa_04
+Emperador Galactico\tbf_04_starwars
+Nebulus\tfe_05_silver
+Project X27\tca_04
+Miroku\tdf_04
+Mapach Wik\ted_04
+El Fontanero\tac_04
+Matafantasmas\teb_04
+Exo Cookie\tde_05
+Britany\tbf_05
+Frostmass\tc_03
+Santactopus\tec_04
+Mephisto\tef_04
+Monolith\tff_04
+Malvatron\tad_04
+Lara\tcc_04
+Commander Ender\tab_04
+Zortrex\tce_04
+Tengu\tbd_99
+Sacamantecas\tbb_04
+Oculus\taa_04
+Supraman X\tae_04
+Cupido\tcb_05
+Abraham Lincoln\taf_05
+Escuadron Rhino\tda_04
+Dama Harpia\tbd_04
+Yelda\tfc_05
+Flying Jordson\tee_04
+Cernunnos\tdd_04
+Capitan Perla Negra\tbe_04
+Brick McGole\tea_04
+Kraken\tef_05
+Genimal\tdf_99
+Hardcorius\tfb_05
+Marine Muerto\teb_05
+Challengeer\tca_05
+Ciberpunk\tac_05
+Neo Urban XIII\tab_05_gachaboss
+Tecnoforzer\taa_05
+Chaman Sombra\tfa_05
+Ingeniero\tfe_99
+Sun-Duke\tce_05_villains
+Ceres\te_03
+Shin Hakuho\tcc_05
+Fenec Plus Ultra\tda_05
+Madre de los Dragones\tdf_05
+Brawler\tdb_05
+Loco de la Motosierra\tbc_05
+Rey Mono\tdc_05
+Acarius\ted_05
+Cazador Espacial\tec_05
+Artista Siniestro\tfd_05
+Zeus\tec_06_olympians
+Glubber\tff_05
+Nyrlatoth\tbe_05
+Cibercroc\tad_05
+Bulldozer\tbd_05
+Pejelagarto\tdd_05
+Triceratanque\tda_06
+Monje Akuso\tcf_05
+Caronte\tbb_05
+Tio Sam\tcf_06
+Hog the Ripper\tcd_05
+Rey Steven\tea_05
+Duplicado de Eva\taf_06
+Ciberbabosa\tae_05
+Jhingal\tee_05
+Doctor Blaw\tba_05
+Tomahawk\tce_06
+Hechicera\tfb_06
+Dandi oscar\tbc_06
+Kung Chow\tfd_06
+Comeabuelas\tdc_06
+Mau-Jack\ted_06
+Lily\tfa_06_movies
+El Rey de Mimphys\tbf_06
+Bioerizo\tad_06
+Gladiadog\tcd_06
+Casto\tdb_06
+Viper\tac_06
+Dollbyte\tfe_06
+Garlog\teb_06_elements
+Krunk\tea_06
+Apofis\tbe_06
+Cuervo\tb_04
+Drusella\tab_06
+Mandor\tef_06
+Borrasca\tfc_06
+Sable\tdf_06
+Artemisa\tcb_06
+Mama Kangu\tdd_06
+Darwin\tde_06
+ERR-ADI-K-Bot\tca_06
+Namaste\tff_06
+Tyrtiduron\tbd_06
+Bounda\taf_07
+Mega Claus\tcf_07
+Marv\tae_06
+Z-0\tba_06
+Falcon\tec_07
+Paramic\ted_07
+El Original\tbd_07_soldiers
+Señor Dragon\tdb_07
+Carlingger\tda_07
+Rey de los Insectos\tfe_07
+Aplastador\tab_07
+Quimera\tdf_07
+Champicorteza\tbf_07
+Reina Rakkti\tee_06
+Hercules\taa_06
+Aran\tce_07
+El Gringo\tcc_06
+Spartac\tcc_07
+Amarok\tfc_07
+Pikabu\tba_07
+Leprechaun\tf_04
+Fenix\tfd_07
+Kal Wayne\tef_07
+Avispa Diesel\tad_07
+Robofuerte\tac_07_lucha
+Rocky Botboa\tca_07
+Las Moiras\tfb_07
+Dr. Frost\tfa_07
+Capitan Gluglu\tde_07
+Rey Esqueleto\tcb_07
+Turbacieno\tbc_07
+Juan Hielo\tcd_07
+Capitan Patriota\tea_07
+Astro Gummy\tee_07
+Nezarim\tbe_07
+Globomono\tdd_07
+Starminator\teb_07
+Espectra\tec_08
+Wynn\tcf_08
+Thran\tbc_08
+Blender\tac_08
+Rinotauro\tdd_08
+Cosmopandas\tde_08
+Kudamono\tfc_08
+Alfie\tae_07
+Tiranozomb\tdb_08
+H0ud1n1\taf_08
+FootBot\tfa_08
+Geomega\tff_07
+Gloton\tbb_06
+Seiyatsu\tef_08
+Asaylan\tda_08
+Wrath\tcb_08
+Lady Libertad\tea_08
+Gozer\tfb_08
+Van Helsing\tbf_08
+Kitty Ranger\tad_08
+Gorthaur el Cruel\tfc_09_fantasy
+El Rey sin Nombre\tce_08
+Naraxis\tba_08
+Andromeda\tae_08
+Enano y Cerebro\tbd_08
+Arcangel\tfa_99
+Diablo\teb_99
+Drall\tcd_08
+Noren\tdc_07
+Sgt. Pandamonium\ted_08
+Omikami\tfd_08
+Makino\tca_08
+Chantecler\tdf_08
+Dr. Nucleus\teb_08
+Amo de las Llaves\tcf_09
+Carcinus Gigas\tad_09
+Sanik\tdc_08
+Necroparasito\tbb_07
+Proyecto 3V3\taa_07
+Optimus Zord\tac_09
+Faucesnegras\tbd_09
+Tormenta de Fuego\tff_08
+Golemagnus\tee_08
+Dug Dario\tbe_08
+Centinela R0B-H4N\taa_08
+Big Bo$$\tca_09
+Reina Sylvidra\teb_09
+Quetzalcoatl\tdf_09
+Majin Zam\tfe_08
+Bruja de la Peste\tbb_08
+Excaliduro\tec_09
+Zigmo\tde_09
+Gran Señor de las Tumbas\tab_08
+Pirotropo\tbe_09
+Altaris\tca_10
+Capitan Gorn\tea_09
+Yokozuna\tcc_08
+Calaca\tbf_09
+Lancelot\tcc_09
+Centaurus\tae_09
+Mon-Key Crew\tcd_09
+Sound Killah\tda_09_music
+Dracomago\tfd_09
+Caudillo Steam\taf_09
+Cazarrecompensas\ta_05
+Surfista del Espacio\tea_10
+Mister T-Ger\tdd_09
+Master Paw\tfd_10
+Grumpy Claus\tab_09
+Sargento Dusk\tac_10
+Gwenn\tdf_10
+El Coleccionista\tbc_09
+El Veneno\taf_10
+Frankenhuahua\tbb_09
+Mad Mike\tde_10
+Jane Saw\tcb_09
+Horax\tdb_09
+Maestro Shinzo\tdc_09
+Xeleroth\tfe_09
+Excavalipsis\tba_09
+El Enterrador\tbf_10_western
+Zenguru\tfa_09
+H.U.N.T.3.R\taa_09
+Arelvam\tcf_10
+Zar Bomba\tce_09
+Mago Ryzafredd\tef_09
+Hawkeye\tda_10
+Megastral\tee_09
+Liquidador\tff_09
+Yggdrasil\tfb_10
+Rox McRain\ted_09
+Hadeath\tfb_09
+Divastator\tef_10
+Angry Pork\ted_10
+Frankendwarf\tcb_10
+Akai-Bot\tae_10
+Krampus\tdc_10
+Waryena\tbd_10
+Bahamut\tfe_10
+Mimi Cronocurva\tfa_10
+Guardia Men'ki\tcd_10
+Hipopotanque\tad_10
+Hefesto\tfc_10
+T-3rr0r\tbb_10
+A027441\taf_99
+King Lulu\tbc_10
+Kameo\tdd_10
+Kolossus\tce_99
+ED-404\taa_10
+Hellsaw\tba_10
+Urgan\tcc_10
+Buffalor\tdb_10
+Gamallia\tec_10
+Gakarian\teb_10
+S-K-Venger\tab_10
+Overkill\tbe_10
+Capitan Achabe\tce_10
+Aubraea Mutantula\teb_11
+Bregbeam\tff_10
+Piwisher\tdb_11
+Nimrod\tfc_99
+E.T.-Liot\tee_10
+Spin Fury\tac_11
+Cooktouille\tbd_11
+Orion\tfa_11
+Heimdall\taf_11
+Chun-Lei\tce_11
+The Reef\tca_11_beach
+Sir Bannog\tcd_11
+Pesadilla Viviente\tfb_11
+An0malie\tda_11
+Owlock\ted_11
+TriAD\taa_11
+La Olvidada\tbb_11
+Mago de la Singularidad\tef_99
+Ishi no Ōkami\tfd_11
+Disension\tcb_11
+Aqueronte\tbf_11
+Drei, Space Corgi\tde_11
+Mix0-Logo\tae_11
+Veren Kaeesu\tec_11
+Spada\tdc_11
+Roadmaster\tba_11
+Gerard Steelgarden\tff_11
+Chocolem\tdf_11
+Drudge Zombie\tb_05
+Animus de Irrealidad\tee_99
+Midas\tfc_11
+Caliburn EX\tcf_11
+Santagonista\tcc_11
+Barbaro\tc_05
+Dama del Crepusculo\tfb_12
+Mecaovoide Aracneo\tad_11
+Terror Abisal\tdd_11
+Oculys\tbe_11
+Pierrot\tfe_11
+Phileas Derocas\tac_12
+Dreadnought\tea_11
+Missy Despierta\tca_99
+Enviro 3.0\tab_11
+Asteroide Gestalt\tee_11
+X'astuth\tef_12
+Colmillo Rabioso\tbc_11
+Doctor del Farol\tbb_12
+Leviatan\tde_12
+Explorador Sideral\te_12
+Aullosaurio\td_12
+Protector de los Sueños\taf_12
+Basilisco y Esdragon\tdf_12_vegetal
+Heredero de los 5 anillos\tcf_12
+Ballesto\tcb_12
+Cibermantico Etereo\tfa_12
+Lampyrion Solar\tdd_12
+Dimentio\tef_11
+Generalisimo Chocoleon IV\tfc_12
+Archivista Eterno\tff_12
+Ammonia Atlantica\ted_12
+General Terracota\tca_12
+Gran Gusano de los Tuneles\tdb_12
+Litominero Stellariano\tec_12
+Capitan aguila\tcd_12
+Octopia\ted_99
+Medico Astral\teb_12
+Simurgh\tfd_12
+Väinämöinen\tf_13
+Disfuncidroide\tab_12
+Caronte (Halloween)\tbc_12
+Cabloide\taa_12
+Exoceleste algido\tfe_12
+Clerigo Oscuro\tbf_12
+D'Arathomis\tc_13
+Tenacity\tae_12
+Regulo&amp;Juzya\tce_12
+Gelatina Purulenta\tbe_12
+Vivaldi\tfe_13
+Tecnocaracol\tda_12
+Zapador de Madrigueras\tdc_12
+Invocador\tf_12
+Lepidoptech\tad_12
+Huesamblaje\tb_12
+Sasquatch\td_13
+Thanaconda\tbd_12
+A00-C0R3-C0NTR0L\taa_99
+Hijo de la Tormenta\tcf_13
+Bricodron LLK-215\tea_12
+GAR, Zombi Soberano\tb_13
+Amalgalmas\tbf_13
+Llama Sensei\tdd_13
+Polaris\tee_12
+Myrmidus.exe\tad_13
+Helicoide Boreal\tfa_13
+Antropobot Soñador\tda_13
+Anteros\tca_13
+Doctor Desollador\tbc_13
+Oryctolagus Exobioicus\tde_13
+Cr&#8364;$u$\tba_12
+Asimov\ta_13
+Achernar\tef_13
+El Motin\tcb_13
+Xinomas\teb_13
+Simulacro de Combate\tab_99
+Helidron KxT-271\tae_13
+Reed, El Verdadero Heroe\tcf_99
+El Fosforescente\tbb_13
+Tezcatlipoca\tfd_13
+Scaramouche\tcc_12
+Traiciobaza\tbc_14
+Astrobservador\te_13
+Sierrametrodon\tdc_13
+Capsuladora MTZ-004\tac_13
+Núcleo seráfico\tfe_14
+Rey De Avalon\tfc_13
+K'yu T'ypaï\tef_14
+Amistad Sin Limites\tcc_13
+Sakuraboshi\tff_13
+Giganto-Moai\tae_14
+TCB-8566 Trafficroid\taa_13
+Bearsikk Sikleast\tcd_13
+Capitan Barbanegra\tcb_14
+La Anárquica\tba_13
+Terror Jurasico\tdc_14
+Emperador Helado\tdf_13
+Breakmaster\tca_14_olympics
+El Descolorido\tdb_13
+Azaronimo\tae_99
+Professor Cronomantico\tac_14
+Golem de Epocas\taf_13
+La Locura Reptante\tdb_14
+Hekantocheiros\tec_13
+`.trim();
+
+    /******************************************************************
+     * 2) Utilidades: parseo, decode entidades HTML raras del TXT, genes
+     ******************************************************************/
+    function decodeEntities(str) {
+      // Para casos como "Regulo&amp;Juzya" o "Cr&#8364;$u$"
+      const txt = document.createElement('textarea');
+      txt.innerHTML = str;
+      return txt.value;
+    }
+
+    function geneFromCode(code) {
+      const first = (code || '').trim().toLowerCase()[0] || '';
+      switch (first) {
+        case 'a': return 'CYBER';
+        case 'b': return 'NECRO';
+        case 'c': return 'SABER';
+        case 'd': return 'ZOOMORPH';
+        case 'e': return 'GALACTIC';
+        case 'f': return 'MYTHIC';
+        default: return 'UNKNOWN';
+      }
+    }
+
+    const GENE_META = {
+      ALL: { label: 'Todos', color: 'var(--accent)' },
+      CYBER: { label: 'Cyber', color: 'var(--cyber)' },
+      NECRO: { label: 'Necro', color: 'var(--necro)' },
+      SABER: { label: 'Saber', color: 'var(--saber)' },
+      ZOOMORPH: { label: 'Zoomorph', color: 'var(--zoomorph)' },
+      GALACTIC: { label: 'Galactic', color: 'var(--galactic)' },
+      MYTHIC: { label: 'Mythic', color: 'var(--mythic)' },
+      UNKNOWN: { label: 'Unknown', color: 'var(--unknown)' },
+    };
+
+    function parseRawList(raw) {
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const out = [];
+
+      for (const line of lines) {
+        // soporta: "0. Nombre ...   codigo" o "Nombre<TAB>codigo"
+        // buscamos un "codigo" al final tipo a_01, aa_01, ef_02_heroes, etc.
+        const match = line.match(/([a-z]{1,3}_[0-9]{2}(?:_[a-z0-9]+)*)\s*$/i);
+        if (!match) continue;
+
+        const code = match[1].trim();
+        let namePart = line.slice(0, match.index).trim();
+
+        // quita prefijo "123." si existiera
+        namePart = namePart.replace(/^\d+\.\s*/, '').trim();
+
+        const name = decodeEntities(namePart);
+        const gene = geneFromCode(code);
+
+        out.push({ name, code, gene });
+      }
+      return out;
+    }
+
+    /******************************************************************
+     * 3) Estado + UI
+     ******************************************************************/
+    const allMutants = parseRawList(RAW_LIST);
+
+    const els = {
+      search: document.getElementById('searchInput'),
+      grid: document.getElementById('grid'),
+      empty: document.getElementById('emptyState'),
+      countNow: document.getElementById('countNow'),
+      countAll: document.getElementById('countAll'),
+      sort: document.getElementById('sortSelect'),
+      geneFilters: document.getElementById('geneFilters'),
+      toast: document.getElementById('toast')
+    };
+
+    const state = {
+      q: '',
+      gene: 'ALL',
+      sort: 'name-asc',
+    };
+
+    function showToast(msg) {
+      els.toast.textContent = msg;
+      els.toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => els.toast.classList.remove('show'), 1100);
+    }
+
+    function buildGeneFilters() {
+      const order = ['ALL', 'CYBER', 'NECRO', 'SABER', 'ZOOMORPH', 'GALACTIC', 'MYTHIC', 'UNKNOWN'];
+      els.geneFilters.innerHTML = '';
+
+      for (const key of order) {
+        const btn = document.createElement('button');
+        btn.className = 'pill' + (state.gene === key ? ' active' : '');
+        btn.type = 'button';
+        btn.dataset.gene = key;
+        btn.textContent = GENE_META[key].label;
+
+        btn.addEventListener('click', () => {
+          state.gene = key;
+          for (const b of els.geneFilters.querySelectorAll('.pill')) b.classList.remove('active');
+          btn.classList.add('active');
+          render();
+        });
+
+        els.geneFilters.appendChild(btn);
+      }
+    }
+
+    function applyFilters() {
+      const q = state.q.trim().toLowerCase();
+      let list = allMutants;
+
+      if (q) {
+        list = list.filter(m =>
+          m.name.toLowerCase().includes(q) ||
+          m.code.toLowerCase().includes(q)
+        );
+      }
+
+      if (state.gene !== 'ALL') {
+        list = list.filter(m => m.gene === state.gene);
+      }
+
+      // sorting
+      const [field, dir] = state.sort.split('-'); // name/code + asc/desc
+      const sign = dir === 'asc' ? 1 : -1;
+
+      list = [...list].sort((a, b) => {
+        const A = (a[field] || '').toLowerCase();
+        const B = (b[field] || '').toLowerCase();
+        if (A < B) return -1 * sign;
+        if (A > B) return 1 * sign;
+        // desempate por el otro campo
+        const A2 = (a[field === 'name' ? 'code' : 'name'] || '').toLowerCase();
+        const B2 = (b[field === 'name' ? 'code' : 'name'] || '').toLowerCase();
+        return A2.localeCompare(B2) * sign;
+      });
+
+      return list;
+    }
+
+    function geneBadgeStyle(gene) {
+      const color = (GENE_META[gene] || GENE_META.UNKNOWN).color;
+      return `
+        border-color: color-mix(in srgb, ${color} 55%, rgba(255,255,255,.18));
+        box-shadow: 0 0 18px color-mix(in srgb, ${color} 22%, transparent);
+      `;
+    }
+
+    function codeColorStyle(gene) {
+      const color = (GENE_META[gene] || GENE_META.UNKNOWN).color;
+      return `
+        border-color: color-mix(in srgb, ${color} 45%, rgba(0,240,255,.18));
+        box-shadow: 0 0 18px color-mix(in srgb, ${color} 18%, transparent);
+      `;
+    }
+
+    function render() {
+      const filtered = applyFilters();
+
+      els.countAll.textContent = allMutants.length;
+      els.countNow.textContent = filtered.length;
+
+      els.grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        els.empty.style.display = 'block';
+        return;
+      }
+      els.empty.style.display = 'none';
+
+      const frag = document.createDocumentFragment();
+
+      for (const m of filtered) {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const stripe = document.createElement('div');
+        stripe.className = 'stripe';
+        stripe.style.background = `linear-gradient(180deg,
+          color-mix(in srgb, ${GENE_META[m.gene]?.color || 'var(--unknown)'} 85%, rgba(0,240,255,.30)),
+          rgba(157,0,255,.35)
+        )`;
+
+        const inner = document.createElement('div');
+        inner.className = 'card-inner';
+
+        const top = document.createElement('div');
+        top.className = 'toprow';
+
+        const name = document.createElement('h3');
+        name.className = 'name';
+        name.textContent = m.name;
+
+        const gene = document.createElement('div');
+        gene.className = 'gene-badge';
+        gene.textContent = (GENE_META[m.gene] ? GENE_META[m.gene].label : 'Unknown');
+        gene.style.cssText = geneBadgeStyle(m.gene);
+
+        top.appendChild(name);
+        top.appendChild(gene);
+
+        const codeBox = document.createElement('div');
+        codeBox.className = 'code';
+        codeBox.style.cssText = codeColorStyle(m.gene);
+
+        const codeText = document.createElement('strong');
+        codeText.textContent = m.code;
+
+        const copy = document.createElement('button');
+        copy.className = 'copybtn';
+        copy.type = 'button';
+        copy.textContent = 'COPIAR';
+        copy.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          try {
+            await navigator.clipboard.writeText(m.code);
+            showToast(`Copiado: ${m.code}`);
+          } catch {
+            // fallback para navegadores sin clipboard (o file:// a veces)
+            const tmp = document.createElement('input');
+            tmp.value = m.code;
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand('copy');
+            tmp.remove();
+            showToast(`Copiado: ${m.code}`);
+          }
+        });
+
+        codeBox.appendChild(codeText);
+        codeBox.appendChild(copy);
+
+        inner.appendChild(top);
+        inner.appendChild(codeBox);
+
+        card.appendChild(stripe);
+        card.appendChild(inner);
+        frag.appendChild(card);
+      }
+
+      els.grid.appendChild(frag);
+    }
+
+    /******************************************************************
+     * 4) Eventos
+     ******************************************************************/
+    els.search.addEventListener('input', (e) => {
+      state.q = e.target.value || '';
+      render();
+    });
+
+    els.sort.addEventListener('change', (e) => {
+      state.sort = e.target.value;
+      render();
+    });
+
+    // Init
+    buildGeneFilters();
+    render();
+  </script>
+</body>
+
+</html>
