@@ -1,0 +1,552 @@
+/* ===== PILLS (genes) ===== */
+.gene-filters {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.gene-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.pill {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(255, 255, 255, .05);
+  color: rgba(226, 232, 240, .88);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, .22);
+}
+
+.pill.active {
+  color: #000;
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 18px rgba(0, 240, 255, .28);
+}
+
+.pill[data-gene="CYBER"].active {
+  background: var(--cyber);
+  border-color: var(--cyber);
+}
+
+.pill[data-gene="NECRO"].active {
+  background: var(--necro);
+  border-color: var(--necro);
+  color: #fff;
+}
+
+.pill[data-gene="SABER"].active {
+  background: var(--saber);
+  border-color: var(--saber);
+  color: #fff;
+}
+
+.pill[data-gene="ZOOMORPH"].active {
+  background: var(--zoomorph);
+  border-color: var(--zoomorph);
+  color: #002a22;
+}
+
+.pill[data-gene="GALACTIC"].active {
+  background: var(--galactic);
+  border-color: var(--galactic);
+  color: #1b1b00;
+}
+
+.pill[data-gene="MYTHIC"].active {
+  background: var(--mythic);
+  border-color: var(--mythic);
+  color: #000;
+}
+
+.pill[data-gene="UNKNOWN"].active {
+  background: var(--unknown);
+  border-color: var(--unknown);
+  color: #000;
+}
+
+/* ====== GUÍA DE CÓDIGOS (GENES) ====== */
+.gene-guide {
+  margin: 18px 0 18px;
+  padding: 18px 14px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(0, 0, 0, .32);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, .25), 0 0 20px rgba(0, 240, 255, .07);
+  backdrop-filter: blur(10px);
+}
+
+.guide-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.guide-badge {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 240, 255, .20);
+  background: rgba(0, 0, 0, .35);
+  box-shadow: 0 0 18px rgba(0, 240, 255, .10);
+  flex: 0 0 auto;
+}
+
+.guide-title h3 {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: 18px;
+}
+
+.guide-title p {
+  margin: 4px 0 0;
+  color: rgba(154, 164, 178, .85);
+  font-size: 14px;
+}
+
+.guide-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  margin-top: 12px;
+}
+
+@media (min-width: 560px) {
+  .guide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .guide-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.guide-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(22, 22, 34, .90);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.guide-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 240, 255, .25);
+  box-shadow: 0 0 22px rgba(0, 240, 255, .10), 0 14px 35px rgba(0, 0, 0, .32);
+}
+
+.guide-strip {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: linear-gradient(180deg, rgba(0, 240, 255, .75), rgba(157, 0, 255, .35));
+  opacity: .95;
+}
+
+.guide-inner {
+  padding: 14px 14px 14px 16px;
+}
+
+.guide-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.gene-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(0, 0, 0, .35);
+  box-shadow: 0 0 14px rgba(0, 0, 0, .25);
+  object-fit: contain;
+  padding: 6px;
+  flex: 0 0 auto;
+}
+
+.gene-logo[data-empty="true"] {
+  display: grid;
+  place-items: center;
+}
+
+.gene-logo[data-empty="true"]::after {
+  content: "LOGO";
+  color: rgba(154, 164, 178, .70);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.guide-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gene-name {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: 15px;
+}
+
+.gene-hint {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  color: rgba(154, 164, 178, .75);
+}
+
+.gene-letter {
+  flex: 0 0 auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-weight: 900;
+  letter-spacing: .12em;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(0, 0, 0, .40);
+  text-transform: lowercase;
+  min-width: 42px;
+  text-align: center;
+}
+
+.guide-code {
+  margin-top: 10px;
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, .35);
+  border: 1px solid rgba(255, 255, 255, .10);
+  color: rgba(226, 232, 240, .88);
+  font-size: 13px;
+}
+
+.guide-code strong {
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  letter-spacing: .08em;
+}
+
+.guide-note {
+  margin: 14px 0 0;
+  color: rgba(154, 164, 178, .80);
+  font-size: 13px;
+}
+
+/* Colores por gen */
+.guide-card[data-gene="CYBER"] .guide-strip {
+  background: linear-gradient(180deg, var(--cyber), rgba(157, 0, 255, .25));
+}
+
+.guide-card[data-gene="NECRO"] .guide-strip {
+  background: linear-gradient(180deg, var(--necro), rgba(0, 240, 255, .22));
+}
+
+.guide-card[data-gene="SABER"] .guide-strip {
+  background: linear-gradient(180deg, var(--saber), rgba(157, 0, 255, .22));
+}
+
+.guide-card[data-gene="ZOOMORPH"] .guide-strip {
+  background: linear-gradient(180deg, var(--zoomorph), rgba(0, 240, 255, .18));
+}
+
+.guide-card[data-gene="GALACTIC"] .guide-strip {
+  background: linear-gradient(180deg, var(--galactic), rgba(157, 0, 255, .18));
+}
+
+.guide-card[data-gene="MYTHIC"] .guide-strip {
+  background: linear-gradient(180deg, var(--mythic), rgba(0, 240, 255, .14));
+}
+
+.guide-card[data-gene="CYBER"] .gene-letter {
+  border-color: color-mix(in srgb, var(--cyber) 55%, rgba(255, 255, 255, .14));
+}
+
+.guide-card[data-gene="NECRO"] .gene-letter {
+  border-color: color-mix(in srgb, var(--necro) 55%, rgba(255, 255, 255, .14));
+}
+
+.guide-card[data-gene="SABER"] .gene-letter {
+  border-color: color-mix(in srgb, var(--saber) 55%, rgba(255, 255, 255, .14));
+}
+
+.guide-card[data-gene="ZOOMORPH"] .gene-letter {
+  border-color: color-mix(in srgb, var(--zoomorph) 55%, rgba(255, 255, 255, .14));
+}
+
+.guide-card[data-gene="GALACTIC"] .gene-letter {
+  border-color: color-mix(in srgb, var(--galactic) 55%, rgba(255, 255, 255, .14));
+}
+
+.guide-card[data-gene="MYTHIC"] .gene-letter {
+  border-color: color-mix(in srgb, var(--mythic) 55%, rgba(255, 255, 255, .14));
+}
+
+/* ====== OTROS CÓDIGOS (si tu HTML ya lo tiene) ====== */
+.other-codes {
+  margin: 18px 0;
+  padding: 18px 14px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(0, 0, 0, .32);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, .25), 0 0 20px rgba(0, 240, 255, .07);
+  backdrop-filter: blur(10px);
+}
+
+.other-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.other-badge {
+  width: 56px;
+
+/* CARD: diseño responsive (móvil: vertical / PC: horizontal) */
+.other-card{
+  position: relative;
+  background: rgba(22, 22, 34, .92);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+
+/* =========================
+   OTROS CÓDIGOS - CÓDIGO + BOTÓN
+   (reemplaza tu .other-code / strong / .other-copy)
+========================= */
+
+.other-code{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  width: 100%;
+  min-width:0;
+
+  background: rgba(0, 0, 0, .35);
+  border: 1px solid rgba(0, 240, 255, .22);
+  border-radius: 14px;
+  padding: 10px 12px;
+
+  box-shadow: 0 0 18px rgba(0, 240, 255, .08);
+}
+
+.other-code strong{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  letter-spacing: .08em;
+  color: var(--accent);
+  text-transform: uppercase;
+
+  flex: 1 1 auto;
+  min-width: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.other-copy{
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .06);
+  color: rgba(226, 232, 240, .9);
+
+  border-radius: 12px;
+  padding: 8px 10px;
+
+  font-weight: 900;
+  letter-spacing: .06em;
+  font-size: 12px;
+
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  white-space: nowrap;
+}
+
+.other-copy:hover{
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .20);
+  transform: translateY(-1px);
+}
+
+/* Cards de descarga */
+.download-card {
+  margin: 18px auto 0;
+  max-width: 980px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: linear-gradient(135deg, rgba(0, 240, 255, .08), rgba(157, 0, 255, .06));
+  box-shadow: 0 16px 45px rgba(0, 0, 0, .28), 0 0 18px rgba(0, 240, 255, .08);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.download-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0, 240, 255, .18), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(157, 0, 255, .16), transparent 60%);
+  filter: blur(16px);
+  opacity: .9;
+  pointer-events: none;
+}
+
+.download-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.download-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: rgba(0, 0, 0, .35);
+  border: 1px solid rgba(0, 240, 255, .25);
+  box-shadow: 0 0 18px rgba(0, 240, 255, .12);
+  flex: 0 0 auto;
+}
+
+.download-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.download-text {
+  min-width: 0;
+}
+
+.download-title {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.download-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(154, 164, 178, .85);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.download-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 900;
+  letter-spacing: .08em;
+  font-size: 12px;
+  background: var(--accent);
+  border: 1px solid rgba(0, 240, 255, .9);
+  box-shadow: 0 0 22px rgba(0, 240, 255, .25);
+  transform: translateY(0);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(0, 240, 255, .35);
+  filter: brightness(1.05);
+}
+
+.download-btn:active {
+  transform: translateY(0);
+}
+
+.download-shine {
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+  transform: translateX(-120%) rotate(20deg);
+  animation: shine 2.8s ease-in-out infinite;
+  pointer-events: none;
+  opacity: .8;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-120%) rotate(20deg);
+    opacity: .0;
+  }
+
+  30% {
+    opacity: .9;
+  }
+
+  60% {
+    opacity: .9;
+  }
+
+  100% {
+    transform: translateX(120%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .download-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .download-btn {
+    width: 100%;
+  }
+}{}

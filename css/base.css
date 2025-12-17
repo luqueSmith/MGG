@@ -1,0 +1,140 @@
+:root {
+  --bg: #050508;
+  --panel: #0e0e16;
+  --card: #161622;
+  --muted: #9aa4b2;
+  --text: #e2e8f0;
+
+  --accent: #00f0ff;
+  --accent2: #9d00ff;
+
+  --cyber: #2de2e6;
+  /* A */
+  --necro: #9d00ff;
+  /* B */
+  --saber: #ff003c;
+  /* C */
+  --zoomorph: #02c39a;
+  /* D */
+  --galactic: #fcee0a;
+  /* E */
+  --mythic: #ffffff;
+  /* F */
+  --unknown: #94a3b8;
+
+  --shadow: 0 0 20px rgba(0, 240, 255, .12);
+  --shadow2: 0 0 35px rgba(157, 0, 255, .10);
+  --radius: 18px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: 70px;
+  /* para header fixed */
+  font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(26, 26, 46, .9) 0%, transparent 65%),
+    linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 100% 100%, 40px 40px, 40px 40px, auto;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: 70px;
+  /* para header fixed */
+  font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(26, 26, 46, .9) 0%, transparent 65%),
+    linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 100% 100%, 40px 40px, 40px 40px, auto;
+  overflow-x: hidden;
+}
+
+/* Ancla real para "Inicio" */
+#top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 1px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Ancla real para "Inicio" */
+#top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 1px;
+}
