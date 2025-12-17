@@ -53,10 +53,14 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(req.url);
 
   // No cachear descargas (siempre traer lo último)
-  if (url.origin === self.location.origin && url.pathname.startsWith("/downloads/")) {
+  if (
+    url.origin === self.location.origin &&
+    url.pathname.includes("/downloads/")
+  ) {
     event.respondWith(fetch(req, { cache: "no-store" }));
     return;
   }
+
 
   // Solo mismo origen
   if (url.origin !== self.location.origin) return;
