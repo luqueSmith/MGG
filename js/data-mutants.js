@@ -1,6 +1,7 @@
 // js/data-mutants.js
 // Contiene la lista de mutantes (Nombre <TAB> código)
 window.RAW_LIST = `
+Escuadron Rhino	 da_04
 Celcius Thermoid	ea_99
 Robot	a_01
 Don Gamberitti	cd_14

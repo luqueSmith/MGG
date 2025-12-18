@@ -3,10 +3,13 @@
 ========================= */
 .mascota{
   position: fixed;
-  right: 22px;
-  bottom: 18px;
+  right: 18px;
+  bottom: 14px;
   z-index: 9999;
-  pointer-events: none; /* no molesta al usar la web */
+
+  /* IMPORTANTE: si quieres poder clicearla */
+  pointer-events: auto;
+
   display: grid;
   place-items: center;
   transform-origin: 60% 90%;
@@ -14,64 +17,71 @@
 }
 
 .mascota-img{
-  width: 140px;
+  width: 190px;
   height: auto;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* burbujita */
+/* Burbuja “de hablar” (pequeña, tipo comic) */
 .mascota-bubble{
   position: absolute;
+
+  /* pegada a la cabeza (ajusta si quieres) */
   right: 120px;
-  bottom: 86px;
-  max-width: 220px;
+  bottom: 120px;
+
+  max-width: 210px;
   padding: 10px 12px;
   border-radius: 14px;
-  background: rgba(10, 12, 18, .75);
-  border: 1px solid rgba(0,240,255,.22);
-  color: rgba(226,232,240,.92);
-  font-weight: 800;
+  background: rgba(8, 10, 14, .92);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+
+  color: rgba(226,232,240,.95);
+  font-weight: 700;
   letter-spacing: .02em;
   font-size: 13px;
+  line-height: 1.2;
+
+  /* que pueda partir líneas */
+  white-space: normal;
+
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(6px) scale(.98);
   transition: opacity .18s ease, transform .18s ease;
-  white-space: nowrap;
+}
+
+/* piquito */
+.mascota-bubble::after{
+  content:"";
+  position:absolute;
+  right: 18px;
+  bottom: -8px;
+  width: 14px;
+  height: 14px;
+  background: rgba(8, 10, 14, .92);
+  border-right: 1px solid rgba(255,255,255,.12);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  transform: rotate(45deg);
 }
 
 .mascota-bubble.show{
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* botón ocultar (solo si quieres) */
-.mascota-hide{
-  pointer-events: auto; /* este sí clickeable */
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 28px;
-  height: 28px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(226,232,240,.9);
-  font-weight: 900;
-  cursor: pointer;
-}
-
-/* Animación idle (flotar suave) */
+/* Idle flotar */
 .mascota.idle{
-  animation: none;
+  animation: mascota-float 3.2s ease-in-out infinite;
 }
 @keyframes mascota-float{
   0%,100%{ transform: translateY(0); }
   50%{ transform: translateY(-8px); }
 }
 
-/* Reacciones (se aplican como clases) */
+/* Reacciones */
 .mascota.react-bounce{ animation: mascota-bounce .55s ease; }
 @keyframes mascota-bounce{
   0%{ transform: translateY(0) scale(1); }
@@ -91,70 +101,11 @@
 .mascota.react-pop{ animation: mascota-pop .45s ease; }
 @keyframes mascota-pop{
   0%{ transform: scale(1); }
-  45%{ transform: scale(1.10); }
+  45%{ transform: scale(1.08); }
   100%{ transform: scale(1); }
 }
 
-/* =========================
-   MÓVIL (no estorba)
-========================= */
-@media (max-width: 719px){
-  .mascota{
-    right: 10px;
-    bottom: 10px;
-    opacity: .95;
-  }
-  .mascota-img{
-    width: 96px;
-  }
-  .mascota-bubble{
-    right: 86px;
-    bottom: 60px;
-    max-width: 180px;
-    font-size: 12px;
-  }
-}
-
-/* Si el usuario la oculta */
-.mascota.hidden{
-  display: none;
-}
-/* ===== Evolución / Transformación ===== */
-.mascota{
-  position: fixed;
-  right: 22px;
-  bottom: 18px;
-  z-index: 9999;
-  pointer-events: none;
-  display: grid;
-  place-items: center;
-  transform-origin: 60% 90%;
-  filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
-}
-
-.mascota-img{
-  width: 140px;
-  height: auto;
-  display: block;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* Idle */
-.mascota.idle{ animation: mascota-float 3.2s ease-in-out infinite; }
-@keyframes mascota-float{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-8px); } }
-
-/* Scroll react (ya la tenías, la dejamos) */
-.mascota.react-shake{ animation: mascota-shake .5s ease; }
-@keyframes mascota-shake{
-  0%,100%{ transform: translateX(0); }
-  20%{ transform: translateX(-6px) rotate(-2deg); }
-  40%{ transform: translateX(6px) rotate(2deg); }
-  60%{ transform: translateX(-4px) rotate(-1deg); }
-  80%{ transform: translateX(4px) rotate(1deg); }
-}
-
-/* ===== EFECTO “EVOLUCIÓN” ===== */
+/* Evolución (aura) */
 .mascota::before{
   content:"";
   position:absolute;
@@ -162,18 +113,16 @@
   border-radius: 999px;
   opacity: 0;
   background: radial-gradient(circle at 50% 55%,
-    rgba(0,240,255,.55) 0%,
-    rgba(157,0,255,.22) 35%,
+    rgba(0,240,255,.35) 0%,
+    rgba(157,0,255,.18) 35%,
     rgba(0,0,0,0) 70%);
   filter: blur(2px);
   transform: scale(.85);
   pointer-events:none;
 }
-
 .mascota.evolve::before{
   animation: evolve-aura .85s ease;
 }
-
 @keyframes evolve-aura{
   0%{ opacity:0; transform: scale(.70); }
   35%{ opacity:1; transform: scale(1.05); }
@@ -183,71 +132,25 @@
 .mascota-img.evolve-img{
   animation: evolve-img .85s ease;
   filter:
-    drop-shadow(0 0 16px rgba(0,240,255,.45))
-    drop-shadow(0 0 28px rgba(0,240,255,.25));
+    drop-shadow(0 0 14px rgba(0,240,255,.30))
+    drop-shadow(0 0 22px rgba(0,240,255,.18));
 }
-
 @keyframes evolve-img{
-  0%{ transform: scale(.92) rotate(-2deg); opacity:.85; }
-  25%{ transform: scale(1.10) rotate(2deg); opacity:1; }
-  45%{ transform: scale(.70) rotate(-6deg); opacity:.2; }  /* “flash” */
-  70%{ transform: scale(1.18) rotate(0deg); opacity:1; }
+  0%{ transform: scale(.94) rotate(-1deg); opacity:.9; }
+  25%{ transform: scale(1.08) rotate(1deg); opacity:1; }
+  45%{ transform: scale(.75) rotate(-4deg); opacity:.25; }
+  70%{ transform: scale(1.12) rotate(0deg); opacity:1; }
   100%{ transform: scale(1.00) rotate(0deg); opacity:1; }
-}
-
-/* Burbujita (si la usas) */
-.mascota-bubble{ /* si ya la tienes, déjala; esto es opcional */ }
-
-/* =========================
-   MASCOTA – TAMAÑO FINAL
-========================= */
-
-/* PC */
-.mascota-img{
-  width: 220px !important;
-  height: auto !important;
 }
 
 /* MÓVIL */
 @media (max-width: 719px){
-  .mascota{
-    right: 10px;
-    bottom: 10px;
+  .mascota{ right: 10px; bottom: 10px; }
+  .mascota-img{ width: 130px; }
+  .mascota-bubble{
+    right: 88px;
+    bottom: 88px;
+    max-width: 170px;
+    font-size: 12px;
   }
-
-  .mascota-img{
-    width: 150px !important;
-    height: auto !important;
-  }
-}
-.mascota {
-  cursor: pointer;
-  transition: transform .3s ease;
-}
-
-.mascota.activa {
-  transform: scale(1.1) rotate(-2deg);
-}
-
-/* Mensaje flotante */
-.mascota-msg {
-  position: fixed;
-  right: 90px;
-  bottom: 120px;
-  background: rgba(10,10,20,.95);
-  color: #00f0ff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  box-shadow: 0 0 15px rgba(0,240,255,.4);
-  z-index: 999;
-  animation: aparecer .3s ease;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.mascota:hover {
-  transform: translateY(-6px) scale(1.05);
 }

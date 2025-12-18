@@ -1,11 +1,11 @@
 // js/other-codes.js
-(function(){
+(function () {
   const { showToast, copyTextLower } = window.MGG_UTILS;
 
   const OTHER_DATASETS = {
-  ORBES: {
-    label: "Orbes",
-    raw: `
+    ORBES: {
+      label: "Orbes",
+      raw: `
 Orbe de Ataque nivel 0	orb_basic_attack_00	https://s-ak.kobojo.com/mutants/assets/thumbnails/orb_basic_attack.png
 Orbe de Ataque nivel 1	orb_basic_attack_01	https://s-ak.kobojo.com/mutants/assets/thumbnails/orb_basic_attack_01.png
 Orbe de Ataque nivel 2	orb_basic_attack_02	https://s-ak.kobojo.com/mutants/assets/thumbnails/orb_basic_attack_02.png
@@ -129,78 +129,113 @@ Orbe Especial de Velocidad nivel 3	orb_special_speed_03	https://s-ak.kobojo.com/
 Orbe Especial de Velocidad nivel 4	orb_special_speed_04	https://s-ak.kobojo.com/mutants/assets/thumbnails/orb_special_speed_04.png
 Orbe Especial de Velocidad nivel 5	orb_special_speed_05	https://s-ak.kobojo.com/mutants/assets/thumbnails/orb_special_speed_05.png
 `.trim()
-  },
+    },
 
-  OBJETOS: {
-    label: "Objetos",
-    raw: `
-Llave Antigua\tKEY_01
-Caja Misteriosa\tBOX_MYST
+    CONSUMIBLES: {
+      label: "Consumibles",
+      raw: `
+Ataque Crítico\tcharm_critical_7\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_critical_7.png
+Escudo Anticrítico\tcharm_anticritical_3\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_anticritical_3.png
+Tickets x25\tmaterial_energy25\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/material_energyx25.png
+Fichas Jackpot\tmaterial_jackpot_token\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/material_jackpot_token.png
+Doble Regeneración\tcharm_regenx2_3\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_regenx2_3.png
+Triple Experiencia\tcharm_xpx3_7\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_xpx3_7.png
+Cuádruple Regeneración\tcharm_regenx4_3\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_regenx4_3.png
+Ficha Reto\tmaterial_event_token\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/material_event_token.png
+Tickets x5\tmaterial_energy5\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/material_energy5.png
+Doble Experiencia\tcharm_xpx2_3\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_xpx2_3.png
+Fichas Reactor\tmaterial_gacha_token\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/material_gacha_token.png
+Triple Experiencia\tcharm_xpx3_3\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/charm_xpx3_3.png
 `.trim()
-  },
-  ESTRUCTURAS: {
-    label: "Estructuras",
-    raw: `
+    },
+    ESTRUCTURAS: {
+      label: "Estructuras",
+      raw: `
 Torre Alfa\tSTR_TOWER_A
 Base Central\tSTR_BASE_01
 `.trim()
-  },
-  ZONAS: {
-    label: "Zonas",
-    raw: `
-Zona Helada\tZONE_ICE
-Zona Desierto\tZONE_SAND
+    },
+    CAJAS: {
+      label: "Cajas",
+      raw: `
+Caja Ciber\tmystery_cyber\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_cyber.png
+Caja Necro\tmystery_dead\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_undead.png
+Caja Sable\tmystery_saber\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_saber.png
+Caja Zoomorfo\tmystery_zoo\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_zoo.png
+Caja Galáctica\tmystery_galactic\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_galactic.png
+Caja Mítica\tmystery_mystic\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_mystic.png
 `.trim()
-  },
-  OFERTAS: {
-    label: "Ofertas",
-    raw: `
+    },
+    OFERTAS: {
+      label: "Ofertas",
+      raw: `
 Paquete Inicial\tOFFER_START
 Promo VIP\tOFFER_VIP
 `.trim()
-  },
-};
+    },
+  };
 
-  function parseOtherList(raw){
+
+  window.OTHER_DATASETS = OTHER_DATASETS;
+
+  function parseOtherList(raw) {
     const lines = (raw || "")
       .split(/\r?\n/)
       .map(l => l.trim())
       .filter(Boolean);
 
     const out = [];
-    for(const line of lines){
+    for (const line of lines) {
       const parts = line.split(/\t+/).map(p => p.trim()).filter(Boolean);
-      let name="", code="", img="";
-      if(parts.length >= 3){ name = parts[0]; code = parts[1]; img = parts[2]; }
-      else if(parts.length === 2){ name = parts[0]; code = parts[1]; }
+      let name = "", code = "", img = "";
+      if (parts.length >= 3) { name = parts[0]; code = parts[1]; img = parts[2]; }
+      else if (parts.length === 2) { name = parts[0]; code = parts[1]; }
       else {
-        const m = line.match(/(.+)\s+([A-Za-z0-9_:-]+)\s*$/);
-        if(!m) continue;
-        name = m[1].trim(); code = m[2].trim();
+        const mm = line.match(/(.+)\s+([A-Za-z0-9_:-]+)\s*$/);
+        if (!mm) continue;
+        name = mm[1].trim(); code = mm[2].trim();
       }
       out.push({ name, code, img });
     }
     return out;
   }
 
-  (function initOtherCodes(){
+  (function initOtherCodes() {
     const tabs = document.getElementById("otherTabs");
     const search = document.getElementById("otherSearch");
     const grid = document.getElementById("otherGrid");
     const empty = document.getElementById("otherEmpty");
-    if(!tabs || !search || !grid || !empty) return;
+    const loadMoreWrap = document.getElementById("otherLoadMoreWrap");
+    const loadMoreBtn = document.getElementById("otherLoadMoreBtn");
+    if (!tabs || !search || !grid || !empty) return;
 
-    const otherState = { key: "ORBES", q: "" };
+    const PAGE_SIZE = 60;
+    const MIN_CHARS_TO_RENDER = 2;
 
-    function buildTabs(){
+    const otherState = { key: Object.keys(OTHER_DATASETS)[0] || "ORBES", q: "", limit: PAGE_SIZE };
+    const cache = new Map(); // cache por pestaña (ya parseado)
+
+    function getListForKey(key) {
+      if (cache.has(key)) return cache.get(key);
+      const ds = OTHER_DATASETS[key];
+      const list = parseOtherList(ds ? ds.raw : "");
+      cache.set(key, list);
+
+      // libera string grande para ayudar RAM (opcional)
+      try { if (ds) ds.raw = ""; } catch { }
+      return list;
+    }
+
+    function buildTabs() {
       tabs.innerHTML = "";
-      Object.keys(OTHER_DATASETS).forEach((key)=>{
+      Object.keys(OTHER_DATASETS).forEach((key) => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "other-tab" + (otherState.key === key ? " active" : "");
         btn.textContent = OTHER_DATASETS[key].label;
-        btn.addEventListener("click", ()=>{
+        btn.addEventListener("click", () => {
           otherState.key = key;
+          otherState.limit = PAGE_SIZE;
           [...tabs.querySelectorAll(".other-tab")].forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
           renderOther();
@@ -209,31 +244,51 @@ Promo VIP\tOFFER_VIP
       });
     }
 
-    function renderOther(){
-      const ds = OTHER_DATASETS[otherState.key];
-      const list = parseOtherList(ds.raw);
+    function shouldRender() {
+      // En "Otros códigos" no ocultamos nada: siempre renderiza
+      return true;
+    }
+
+
+    function renderOther() {
+      const list = getListForKey(otherState.key);
       const q = otherState.q.trim().toLowerCase();
-      const filtered = q ? list.filter(x =>
-        x.name.toLowerCase().includes(q) || x.code.toLowerCase().includes(q)
-      ) : list;
+
+      if (!shouldRender()) {
+        grid.innerHTML = "";
+        empty.style.display = "block";
+        empty.textContent = `Escribe al menos ${MIN_CHARS_TO_RENDER} letras para mostrar resultados.`;
+        if (loadMoreWrap) loadMoreWrap.style.display = "none";
+        return;
+      }
+
+      const filtered = q
+        ? list.filter(x => x.name.toLowerCase().includes(q) || x.code.toLowerCase().includes(q))
+        : list;
+
 
       grid.innerHTML = "";
-      if(filtered.length === 0){
+      if (filtered.length === 0) {
         empty.style.display = "block";
+        if (loadMoreWrap) loadMoreWrap.style.display = "none";
         return;
       }
       empty.style.display = "none";
 
+      const visible = filtered.slice(0, otherState.limit);
+
       const frag = document.createDocumentFragment();
-      for(const item of filtered){
+      for (const item of visible) {
         const card = document.createElement("article");
         card.className = "other-card";
 
-        if(item.img){
+        if (item.img) {
           const im = document.createElement("img");
           im.className = "other-thumb";
           im.src = item.img;
           im.alt = item.name;
+          im.loading = "lazy";
+          im.decoding = "async";
           card.appendChild(im);
         }
 
@@ -245,13 +300,13 @@ Promo VIP\tOFFER_VIP
         codeBox.className = "other-code";
 
         const codeText = document.createElement("strong");
-        codeText.textContent = String(item.code || "").toUpperCase();
+        codeText.textContent = String(item.code || "");
 
         const copy = document.createElement("button");
         copy.className = "other-copy";
         copy.type = "button";
         copy.textContent = "COPIAR";
-        copy.addEventListener("click", async ()=>{
+        copy.addEventListener("click", async () => {
           const copied = await copyTextLower(item.code);
           showToast(`Copiado: ${copied}`);
         });
@@ -265,12 +320,29 @@ Promo VIP\tOFFER_VIP
       }
 
       grid.appendChild(frag);
+
+      if (loadMoreWrap && loadMoreBtn) {
+        if (otherState.limit < filtered.length) {
+          loadMoreWrap.style.display = "flex";
+          loadMoreBtn.textContent = `Cargar más (${Math.min(PAGE_SIZE, filtered.length - otherState.limit)})`;
+        } else {
+          loadMoreWrap.style.display = "none";
+        }
+      }
     }
 
-    search.addEventListener("input", (e)=>{
+    search.addEventListener("input", (e) => {
       otherState.q = e.target.value || "";
+      otherState.limit = PAGE_SIZE;
       renderOther();
     });
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        otherState.limit += PAGE_SIZE;
+        renderOther();
+      });
+    }
 
     buildTabs();
     renderOther();
