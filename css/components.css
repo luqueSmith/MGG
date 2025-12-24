@@ -12,13 +12,16 @@
 }
 
 .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   flex: 0 0 auto;
   border-radius: 999px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid rgba(255, 255, 255, .10);
   background: rgba(255, 255, 255, .05);
   color: rgba(226, 232, 240, .88);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -26,6 +29,24 @@
   transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
   user-select: none;
   white-space: nowrap;
+}
+
+.pill .gene-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+  opacity: .95;
+}
+
+.pill .gene-label {
+  line-height: 1;
+}
+
+/* En activo, el fondo cambia fuerte: mejor contraste del icono */
+.pill.active .gene-icon {
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.45));
 }
 
 .pill:hover {
@@ -618,6 +639,202 @@
           drop-shadow(0 0 22px rgba(157,0,255,.10));
 }
 
+/* ===== Mutantes: 2 genes + stats ===== */
+.gene-badges{
+  display:flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* fila dedicada para los genes (debajo del código) */
+.gene-row{
+  display:flex;
+  justify-content:center;
+}
+
+.gene-badges .gene-badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  font-weight: 900;
+  letter-spacing: .04em;
+  font-size: 11px;
+}
+
+.gene-badge .gene-mini-icon{
+  width: 25px;
+  height: 25px;
+  border-radius: 6px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+  opacity: .95;
+}
+
+/* 2 iconos: pequeño solape para que se note que son "doble gen" */
+.gene-badge .gene-mini-icon + .gene-mini-icon{
+  margin-left: -6px;
+  border: 1px solid rgba(0,0,0,.35);
+}
+
+/* Cuando hay 2 iconos (AA, BB, etc.), que se vean como “doble sello” */
+.gene-badge .gene-mini-icon + .gene-mini-icon{
+  margin-left: -6px;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.25);
+}
+
+.gene-badge .gene-mini-label{
+  line-height: 1;
+}
+
+.gene-badge .gene-mult{
+  margin-left: 2px;
+  font-size: 10px;
+  font-weight: 900;
+  opacity: .8;
+  letter-spacing: .06em;
+}
+
+.mutant-stats{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.mutant-stats .stat{
+  display:grid;
+  grid-template-columns: 18px 1fr auto;
+  align-items:center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.22);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.mutant-stats .sicon{
+  width: 18px;
+  height: 18px;
+  display:grid;
+  place-items:center;
+  color: rgba(226,232,240,.85);
+}
+
+.mutant-stats .sicon svg{
+  width: 18px;
+  height: 18px;
+}
+
+.mutant-stats .slabel{
+  font-size: 11px;
+  opacity: .8;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.mutant-stats .sval{
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* =========================
+   CAJAS (pestaña Otros códigos)
+========================= */
+
+.box-card{
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(22, 22, 34, .90);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.box-head{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 12px 12px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.box-left{ display:flex; align-items:center; gap: 12px; min-width:0; }
+
+.box-thumb{
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(0,240,255,.18);
+  object-fit: contain;
+  padding: 8px;
+  box-shadow: 0 0 18px rgba(0,240,255,.10);
+  flex: 0 0 auto;
+}
+
+.box-title{ min-width:0; }
+.box-title strong{
+  display:block;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: .02em;
+  font-size: 15px;
+}
+.box-title span{ display:block; opacity: .75; font-size: 12px; }
+
+.box-chevron{
+  font-size: 18px;
+  opacity: .9;
+  transition: transform .18s ease;
+}
+
+.box-body{ display:none; padding: 0 12px 12px; }
+.box-card.open .box-body{ display:block; }
+.box-card.open .box-chevron{ transform: rotate(180deg); }
+
+.box-table-wrap{
+  overflow:auto;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.22);
+}
+
+.box-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.box-table td{
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 10px;
+  vertical-align: top;
+}
+
+.box-table img{
+  margin: 2px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.25);
+}
+
+.box-table img{
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  margin: 3px;
+}
+
+@media (min-width: 720px){
+  .mutant-stats{ grid-column: 2; }
+}
+
 /* PC: layout horizontal (foto izq, info der) */
 @media (min-width: 720px){
   .card-inner{
@@ -632,7 +849,8 @@
   }
 
   .toprow,
-  .code{
+  .code,
+  .gene-row{
     grid-column: 2;
   }
 

@@ -18,15 +18,34 @@
     }
   }
 
+  // Devuelve hasta N genes (por defecto 2) leyendo el prefijo del código:
+  // - "ab_14" => [CYBER, NECRO]
+  // - "ff_02" => [MYTHIC]
+  // - "a_01"  => [CYBER]
+  function genesFromCode(code, maxGenes = 2) {
+    const c = String(code || '').trim().toLowerCase();
+    if (!c) return ['UNKNOWN'];
+
+    const prefix = (c.split('_')[0] || '').replace(/[^a-z]/g, '');
+    const out = [];
+    for (const ch of prefix) {
+      const g = geneFromCode(ch);
+      if (g && g !== 'UNKNOWN') out.push(g);
+      if (out.length >= maxGenes) break;
+    }
+    return out.length ? out : ['UNKNOWN'];
+  }
+
   const GENE_META = {
-    ALL: { label: 'Todos', color: 'var(--accent)' },
-    CYBER: { label: 'Cyber', color: 'var(--cyber)' },
-    NECRO: { label: 'Necro', color: 'var(--necro)' },
-    SABER: { label: 'Saber', color: 'var(--saber)' },
-    ZOOMORPH: { label: 'Zoomorph', color: 'var(--zoomorph)' },
-    GALACTIC: { label: 'Galactic', color: 'var(--galactic)' },
-    MYTHIC: { label: 'Mythic', color: 'var(--mythic)' },
-    UNKNOWN: { label: 'Unknown', color: 'var(--unknown)' },
+    // icon: ruta local (la web ya incluye estos png en /img)
+    ALL: { label: 'Todos', color: 'var(--accent)', icon: '' },
+    CYBER: { label: 'Cyber', color: 'var(--cyber)', icon: 'img/cyber.png' },
+    NECRO: { label: 'Necro', color: 'var(--necro)', icon: 'img/necro.png' },
+    SABER: { label: 'Saber', color: 'var(--saber)', icon: 'img/sable.png' },
+    ZOOMORPH: { label: 'Zoomorph', color: 'var(--zoomorph)', icon: 'img/zomorfo.png' },
+    GALACTIC: { label: 'Galactic', color: 'var(--galactic)', icon: 'img/galactico.png' },
+    MYTHIC: { label: 'Mythic', color: 'var(--mythic)', icon: 'img/mitico.png' },
+    UNKNOWN: { label: 'Unknown', color: 'var(--unknown)', icon: '' },
   };
 
   function showToast(msg) {
@@ -74,6 +93,7 @@
   window.MGG_UTILS = {
     decodeEntities,
     geneFromCode,
+    genesFromCode,
     GENE_META,
     showToast,
     copyTextLower,
