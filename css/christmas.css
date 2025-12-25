@@ -1,0 +1,416 @@
+/* =========================================================
+   MUTANTS: GG — CHRISTMAS OVERHAUL (SOLO DISEÑO)
+   - Tema navideño TOTAL (sin mezclar con el diseño anterior)
+   - Carga este CSS AL FINAL para que sobrescriba TODO.
+========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Outfit:wght@300;400;600;700;800;900&display=swap");
+
+:root{
+  /* Base navideña (oscuro cálido) */
+  --bg: #080203;
+  --panel: #120405;
+  --card: #160607;
+
+  --text: #fffaf2;
+  --muted: rgba(255,250,242,.72);
+
+  --x-red: #c1121f;
+  --x-red2:#780000;
+  --x-green:#2d6a4f;
+  --x-green2:#1b4332;
+  --x-gold:#f6c177;
+  --x-gold2:#ffd166;
+  --snow:#ffffff;
+
+  /* Reemplaza los acentos originales */
+  --accent: var(--x-gold2);
+  --accent2: var(--x-red);
+
+  /* genes (se mantienen, pero más “festivos”) */
+  --cyber: #60a5fa;
+  --necro: #a855f7;
+  --saber: #fb7185;
+  --zoomorph: #34d399;
+  --galactic: #fbbf24;
+  --mythic: #ffffff;
+  --unknown: #94a3b8;
+
+  --radius: 22px;
+  --shadow: 0 28px 80px rgba(0,0,0,.55);
+  --shadow2: 0 0 45px rgba(246,193,119,.18);
+}
+
+/* ========= RESET FUERTE (para evitar “mezcla”) ========= */
+html, body { background: none !important; }
+body{
+  margin:0 !important;
+  padding-top: 88px !important; /* header navideño más alto */
+  font-family: "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+  color: var(--text) !important;
+  overflow-x: hidden !important;
+
+  /* Fondo navidad PRO (sin grid cyber) */
+  background:
+    radial-gradient(1200px 700px at 15% 0%, rgba(193,18,31,.26), transparent 62%),
+    radial-gradient(900px 600px at 85% 5%, rgba(45,106,79,.26), transparent 58%),
+    radial-gradient(900px 650px at 50% 100%, rgba(246,193,119,.18), transparent 58%),
+    linear-gradient(180deg, #120405, #070102) !important;
+}
+
+/* overlay original: lo convertimos a brillo + nieve ligera */
+.bg-overlay{
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events:none !important;
+  z-index: -1 !important;
+  background:
+    radial-gradient(900px 500px at 50% 20%, rgba(255,255,255,.07), transparent 60%),
+    radial-gradient(800px 520px at 10% 40%, rgba(193,18,31,.10), transparent 60%),
+    radial-gradient(800px 520px at 90% 40%, rgba(45,106,79,.10), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 80px) !important;
+  opacity: .55 !important;
+  mix-blend-mode: overlay !important;
+  animation: twinkle 6s ease-in-out infinite !important;
+}
+@keyframes twinkle{ 50%{ opacity:.78; } }
+
+/* nieve (2 capas) */
+body::before, body::after{
+  content:"";
+  position: fixed;
+  inset: -10%;
+  pointer-events:none;
+  z-index: -2;
+  background-image:
+    radial-gradient(2px 2px at 20% 10%, rgba(255,255,255,.9) 40%, transparent 45%),
+    radial-gradient(1.5px 1.5px at 55% 25%, rgba(255,255,255,.7) 40%, transparent 45%),
+    radial-gradient(1.2px 1.2px at 80% 40%, rgba(255,255,255,.6) 40%, transparent 45%),
+    radial-gradient(2.4px 2.4px at 30% 60%, rgba(255,255,255,.85) 40%, transparent 45%),
+    radial-gradient(1.3px 1.3px at 70% 80%, rgba(255,255,255,.6) 40%, transparent 45%);
+  opacity: .28;
+  animation: snowFallA 14s linear infinite;
+}
+body::after{
+  z-index: -3;
+  opacity: .18;
+  filter: blur(0.6px);
+  animation: snowFallB 22s linear infinite;
+}
+@keyframes snowFallA{ to{ transform: translateY(160px); } }
+@keyframes snowFallB{ to{ transform: translateY(220px); } }
+
+/* scrollbar navideño */
+::-webkit-scrollbar{ width: 10px; }
+::-webkit-scrollbar-track{ background: rgba(255,255,255,.05); }
+::-webkit-scrollbar-thumb{
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--x-red), var(--x-green));
+}
+::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(180deg, var(--x-gold2), var(--x-red));
+}
+
+/* ========= HEADER / NAV (guirnalda + luces) ========= */
+header{
+  position: fixed !important;
+  top:0 !important; left:0 !important; right:0 !important;
+  z-index: 9999 !important;
+  backdrop-filter: blur(10px) !important;
+  background: linear-gradient(90deg, rgba(120,0,0,.92), rgba(27,67,50,.92), rgba(120,0,0,.92)) !important;
+  border-bottom: 3px solid rgba(246,193,119,.85) !important;
+  box-shadow: 0 18px 70px rgba(0,0,0,.65) !important;
+}
+
+/* banda candy */
+header::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0;
+  height: 10px;
+  background: repeating-linear-gradient(45deg, #fff 0 12px, var(--x-red) 12px 24px, var(--x-green) 24px 36px);
+  opacity: .95;
+}
+
+/* luces navideñas */
+header::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:10px;
+  height: 28px;
+  background:
+    radial-gradient(8px 8px at 10% 50%, rgba(255,209,102,.95), transparent 60%),
+    radial-gradient(7px 7px at 22% 50%, rgba(45,106,79,.92), transparent 60%),
+    radial-gradient(7px 7px at 34% 50%, rgba(193,18,31,.92), transparent 60%),
+    radial-gradient(8px 8px at 46% 50%, rgba(255,255,255,.95), transparent 60%),
+    radial-gradient(7px 7px at 58% 50%, rgba(45,106,79,.92), transparent 60%),
+    radial-gradient(7px 7px at 70% 50%, rgba(193,18,31,.92), transparent 60%),
+    radial-gradient(8px 8px at 82% 50%, rgba(255,209,102,.95), transparent 60%),
+    radial-gradient(7px 7px at 94% 50%, rgba(255,255,255,.95), transparent 60%);
+  opacity: .62;
+  filter: blur(.2px);
+  animation: lightsGlow 2.2s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes lightsGlow{ to{ opacity:.98; filter: blur(.6px);} }
+
+.nav{
+  display:flex !important;
+  align-items:center !important;
+  justify-content: space-between !important;
+  padding: 16px 0 14px !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+}
+
+.brand{
+  font-family: "Outfit", system-ui, sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  font-size: 13px !important;
+}
+.brand .dot{
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 4px !important;
+  background: linear-gradient(135deg, var(--x-gold2), #fff) !important;
+  box-shadow: 0 0 18px rgba(255,209,102,.55) !important;
+}
+
+.menu a{
+  text-decoration:none !important;
+  color: rgba(255,255,255,.95) !important;
+  font-weight: 900 !important;
+  letter-spacing: .10em !important;
+  font-size: 12px !important;
+  padding: 10px 12px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.20) !important;
+  background: rgba(0,0,0,.18) !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,.25) !important;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease !important;
+}
+.menu a:hover{
+  transform: translateY(-1px) !important;
+  background: linear-gradient(135deg, var(--x-red), var(--x-green)) !important;
+  box-shadow: 0 0 0 4px rgba(255,209,102,.14), 0 16px 40px rgba(0,0,0,.35) !important;
+}
+
+.status{
+  color: rgba(255,250,242,.78) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+/* ========= HERO (poster navideño) ========= */
+.hero{
+  padding: 44px 0 24px !important;
+  text-align:center !important;
+  position: relative !important;
+}
+.rings{ display:none !important; }
+
+.hero .wrap{
+  position: relative !important;
+  padding: 28px 18px 22px !important;
+  border-radius: 28px !important;
+  background:
+    linear-gradient(145deg, rgba(193,18,31,.50), rgba(27,67,50,.52)) !important;
+  border: 4px solid rgba(246,193,119,.85) !important;
+  box-shadow: var(--shadow), 0 0 0 6px rgba(246,193,119,.10) !important;
+  overflow: hidden !important;
+}
+
+/* brillo superior */
+.hero .wrap::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(800px 240px at 50% 0%, rgba(255,209,102,.35), transparent 60%),
+    radial-gradient(700px 280px at 10% 40%, rgba(193,18,31,.18), transparent 60%),
+    radial-gradient(700px 280px at 90% 40%, rgba(45,106,79,.18), transparent 60%);
+  filter: blur(12px);
+  opacity: .95;
+  pointer-events:none;
+}
+
+/* barra candy interior */
+.hero .wrap::after{
+  content:"";
+  position:absolute;
+  left: 18px; right: 18px; top: 14px;
+  height: 8px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(45deg, #fff 0 12px, var(--x-red) 12px 24px, var(--x-green) 24px 36px);
+  opacity: .85;
+}
+
+/* “ornamento” para el logo */
+.hero-badge{
+  width: 86px !important;
+  height: 86px !important;
+  border-radius: 999px !important;
+  border: 2px solid rgba(255,209,102,.65) !important;
+  background: rgba(0,0,0,.22) !important;
+  box-shadow: 0 0 0 7px rgba(255,255,255,.06), 0 24px 60px rgba(0,0,0,.45) !important;
+}
+.hero-badge::after{
+  content:"";
+  position:absolute;
+  top:-15px; left:50%;
+  width: 18px; height: 18px;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(255,209,102,.95), rgba(255,255,255,.45));
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+/* títulos: Navidad obvia */
+h1{
+  margin: 6px 0 0 !important;
+  font-family: "Mountains of Christmas", serif !important;
+  font-size: clamp(48px, 7vw, 92px) !important;
+  color: var(--snow) !important;
+  text-shadow: 0 0 18px rgba(255,209,102,.55), 0 0 55px rgba(193,18,31,.45) !important;
+}
+h2{
+  margin: 8px 0 16px !important;
+  font-family: "Outfit", system-ui, sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: .30em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,209,102,.95) !important;
+  background: none !important;
+}
+
+/* buscador: “caja de regalo” */
+.searchrow{
+  background: linear-gradient(135deg, rgba(120,0,0,.55), rgba(27,67,50,.55)) !important;
+  border: 2px solid rgba(246,193,119,.80) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 0 0 4px rgba(246,193,119,.10), 0 18px 55px rgba(0,0,0,.45) !important;
+}
+input[type="text"]{
+  color: var(--text) !important;
+  font-size: 18px !important;
+}
+input::placeholder{ color: rgba(255,250,242,.65) !important; }
+
+/* ========= CONTROLS ========= */
+.controls{
+  border-bottom: 1px solid rgba(255,255,255,.14) !important;
+}
+.profile-chip{
+  border: 2px solid rgba(255,209,102,.65) !important;
+  box-shadow: 0 0 0 5px rgba(255,255,255,.05), 0 18px 45px rgba(0,0,0,.35) !important;
+}
+
+/* select más navideño */
+select{
+  color: var(--text) !important;
+  background: linear-gradient(135deg, rgba(120,0,0,.28), rgba(27,67,50,.28)) !important;
+  border: 1px solid rgba(255,209,102,.45) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 0 0 4px rgba(246,193,119,.08) !important;
+}
+
+/* ========= PILLS (caramelos) ========= */
+.pill{
+  border-radius: 999px !important;
+  border: 2px solid rgba(255,209,102,.42) !important;
+  background: linear-gradient(135deg, rgba(193,18,31,.55), rgba(45,106,79,.55)) !important;
+  color: rgba(255,255,255,.96) !important;
+  font-weight: 900 !important;
+  letter-spacing: .12em !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25) !important;
+}
+.pill:hover{ transform: translateY(-1px) !important; }
+.pill.active{
+  background: linear-gradient(135deg, var(--x-red), var(--x-green)) !important;
+  border-color: rgba(255,209,102,.78) !important;
+  box-shadow: 0 0 0 4px rgba(255,209,102,.10), 0 18px 55px rgba(0,0,0,.40) !important;
+}
+
+/* ========= CARDS (regalos oscuros) ========= */
+.card{
+  background: linear-gradient(180deg, rgba(22,6,7,.92), rgba(8,2,3,.92)) !important;
+  border: 2px solid rgba(246,193,119,.38) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 26px 70px rgba(0,0,0,.55) !important;
+}
+.card:hover{
+  border-color: rgba(255,209,102,.78) !important;
+  box-shadow: 0 0 0 4px rgba(255,209,102,.10), 0 34px 90px rgba(0,0,0,.65) !important;
+}
+.stripe{
+  width: 8px !important;
+  background: linear-gradient(180deg, rgba(255,209,102,.95), rgba(193,18,31,.70)) !important;
+}
+.name{
+  font-weight: 900 !important;
+  font-family: "Outfit", system-ui, sans-serif !important;
+}
+.code{
+  border: 1px solid rgba(255,209,102,.30) !important;
+  background: rgba(0,0,0,.22) !important;
+  box-shadow: 0 0 30px rgba(246,193,119,.10) !important;
+  border-radius: 18px !important;
+}
+.code strong{
+  color: rgba(255,209,102,.95) !important;
+  text-shadow: 0 0 14px rgba(255,209,102,.25) !important;
+}
+.copybtn{
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  background: rgba(255,255,255,.06) !important;
+  font-weight: 900 !important;
+  letter-spacing: .08em !important;
+}
+.copybtn:hover{
+  background: linear-gradient(135deg, var(--x-red), var(--x-green)) !important;
+  box-shadow: 0 0 0 4px rgba(255,209,102,.10) !important;
+}
+
+/* ========= SECCIONES (otros códigos / guía) ========= */
+.other-codes, .gene-guide{
+  border: 2px solid rgba(255,209,102,.22) !important;
+  background: linear-gradient(145deg, rgba(193,18,31,.14), rgba(45,106,79,.14)) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35) !important;
+  border-radius: 26px !important;
+}
+
+/* ========= TOAST ========= */
+.toast{
+  background: rgba(8,2,3,.86) !important;
+  border: 1px solid rgba(255,209,102,.25) !important;
+  box-shadow: 0 0 0 4px rgba(255,209,102,.08), 0 18px 55px rgba(0,0,0,.55) !important;
+}
+
+/* ========= MASCOTA (aura navideña) ========= */
+.mascota{
+  filter: drop-shadow(0 20px 45px rgba(0,0,0,.55)) !important;
+}
+.mascota::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255,209,102,.20), transparent 60%),
+    radial-gradient(circle, rgba(193,18,31,.18), transparent 65%),
+    radial-gradient(circle, rgba(45,106,79,.18), transparent 70%);
+  filter: blur(12px);
+  opacity: .95;
+  z-index:-1;
+  animation: mascotGlow 2.8s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes mascotGlow{ to{ transform: scale(1.03); opacity:.78; } }
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}

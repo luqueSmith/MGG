@@ -1,0 +1,102 @@
+/* ============================
+   MUTANTS GG — CHRISTMAS THEME
+   SAFE VERSION (NO LAYOUT BREAK)
+   SOLO DISEÑO
+============================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap");
+
+body.christmas{
+  --x-red:#c1121f;
+  --x-green:#2d6a4f;
+  --x-gold:#ffd166;
+  --x-dark:#0b0506;
+  --x-panel:#140708;
+  --x-card:#1b0b0c;
+  --x-text:#fffaf0;
+
+  background:
+    radial-gradient(circle at top, rgba(193,18,31,.25), transparent 55%),
+    radial-gradient(circle at bottom, rgba(45,106,79,.25), transparent 55%),
+    linear-gradient(180deg, #140708, #050203) !important;
+  color: var(--x-text);
+  font-family: system-ui, sans-serif;
+}
+
+/* HEADER */
+body.christmas header{
+  background: linear-gradient(90deg, #780000, #1b4332, #780000) !important;
+  border-bottom: 4px solid var(--x-gold);
+}
+body.christmas header::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:8px;
+  background: repeating-linear-gradient(
+    45deg,#fff 0 12px,var(--x-red) 12px 24px,var(--x-green) 24px 36px
+  );
+}
+
+/* HERO */
+body.christmas .hero .wrap{
+  background: linear-gradient(135deg, rgba(193,18,31,.5), rgba(45,106,79,.5)) !important;
+  border: 3px solid var(--x-gold);
+  box-shadow: 0 40px 120px rgba(0,0,0,.7);
+}
+
+/* TITULOS */
+body.christmas h1{
+  font-family: "Mountains of Christmas", cursive !important;
+  color: #fff;
+  text-shadow: 0 0 25px rgba(255,209,102,.8);
+}
+body.christmas h2{
+  color: var(--x-gold);
+  letter-spacing: .3em;
+}
+
+/* BUSCADOR */
+body.christmas .searchrow{
+  background: linear-gradient(135deg, #780000, #1b4332) !important;
+  border: 2px solid var(--x-gold);
+}
+
+/* PILLS */
+body.christmas .pill{
+  background: linear-gradient(135deg, var(--x-red), var(--x-green)) !important;
+  border: 2px solid var(--x-gold);
+  color: #fff;
+}
+body.christmas .pill.active{
+  box-shadow: 0 0 0 3px var(--x-gold);
+}
+
+/* CARDS */
+body.christmas .card{
+  background: linear-gradient(180deg, var(--x-card), var(--x-dark)) !important;
+  border: 2px solid rgba(255,209,102,.5);
+}
+body.christmas .stripe{
+  background: linear-gradient(180deg, var(--x-gold), var(--x-red)) !important;
+}
+
+/* BOTONES */
+body.christmas .copybtn:hover{
+  background: linear-gradient(135deg, var(--x-red), var(--x-green)) !important;
+}
+
+/* NIEVE LIGERA */
+body.christmas::after{
+  content:"";
+  position: fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(2px 2px at 20% 10%, #fff 40%, transparent 45%),
+    radial-gradient(1.5px 1.5px at 60% 40%, #fff 40%, transparent 45%),
+    radial-gradient(1px 1px at 80% 70%, #fff 40%, transparent 45%);
+  opacity:.25;
+  animation: snow 18s linear infinite;
+}
+@keyframes snow{ to{ transform: translateY(160px);} }
