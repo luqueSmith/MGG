@@ -158,12 +158,32 @@ Base Central\tSTR_BASE_01
     CAJAS: {
       label: "Cajas",
       raw: `
-Caja Ciber\tmystery_cyber\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_cyber.png
-Caja Necro\tmystery_dead\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_undead.png
-Caja Sable\tmystery_saber\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_saber.png
-Caja Zoomorfo\tmystery_zoo\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_zoo.png
-Caja Galáctica\tmystery_galactic\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_galactic.png
-Caja Mítica\tmystery_mystic\thttps://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_mystic.png
+Caja Ciber	mystery_cyber	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_cyber.png
+Caja Necro	mystery_dead	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_undead.png
+Caja Sable	mystery_saber	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_saber.png
+Caja Zoomorfo	mystery_zoo	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_zoo.png
+Caja Galáctica	mystery_galactic	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_galactic.png
+Caja Mítica	mystery_mystic	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_mystic.png
+
+Caja Undead	mystery_undead	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_undead.png
+
+Caja Elite Ciber	mystery_elite_cyber	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_elite_cyber.png
+Caja Elite Necro	mystery_elite_necro	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_elite_necro.png
+Caja Elite Sable	mystery_elite_saber	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_elite_saber.png
+Caja Elite Zoomorfo	mystery_elite_zoo	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_elite_zoo.png
+Caja Elite Galáctica	mystery_elite_galactic	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_elite_galactic.png
+Caja Elite Mítica	mystery_elite_mystic	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_elite_mystic.png
+
+Caja Investigación 5	mystery_research_5	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_research_5.png
+Caja Investigación 6	mystery_research_6	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_research_6.png
+Caja Investigación 7	mystery_research_7	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_research_7.png
+Caja Investigación IX	mystery_research_ix	https://s-ak.kobojo.com/mutants/assets/thumbnails/mystery_research_ix.png
+
+Caja (Fortalecer)	mystery_strengthen	https://s-ak.kobojo.com/mutants/assets/thumbnails/shop_mystery_strengthen.png
+Caja (Corte)	mystery_slash	https://s-ak.kobojo.com/mutants/assets/thumbnails/shop_mystery_slash.png
+Caja (Escudo)	mystery_shield	https://s-ak.kobojo.com/mutants/assets/thumbnails/shop_mystery_shield.png
+Caja (Contraataque)	mystery_retaliate	https://s-ak.kobojo.com/mutants/assets/thumbnails/shop_mystery_retaliate.png
+Caja (Regeneración)	mystery_regenerate	https://s-ak.kobojo.com/mutants/assets/thumbnails/shop_mystery_regenerate.png
 `.trim()
     },
     OFERTAS: {

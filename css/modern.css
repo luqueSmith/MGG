@@ -1,0 +1,233 @@
+/* =========================================================
+   MUTANTS: GG — Modern polish (NO NAVIDAD)
+   Solo mejoras visuales: tipografía, contraste, hover, foco,
+   espaciado, responsive. No toca JS ni HTML.
+   Cárgalo al final para que sobrescriba lo anterior.
+========================================================= */
+
+:root{
+  /* Mantiene tu vibe “neon/cyber”, solo la hace más consistente */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  --elev-1: 0 10px 28px rgba(0,0,0,.28);
+  --elev-2: 0 18px 48px rgba(0,0,0,.38);
+  --elev-3: 0 28px 90px rgba(0,0,0,.55);
+
+  --ring: 0 0 0 4px rgba(0,240,255,.18);
+  --ring-strong: 0 0 0 5px rgba(0,240,255,.26);
+
+  --text-hi: rgba(255,255,255,.92);
+  --text-mid: rgba(255,255,255,.78);
+  --text-lo: rgba(255,255,255,.62);
+}
+
+/* ---------- Base polish ---------- */
+html{
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrap{
+  max-width: 1180px;
+}
+
+/* ---------- Focus (accesibilidad pro) ---------- */
+:where(a, button, input, select, textarea, .pill, .copybtn):focus{
+  outline: none;
+}
+:where(a, button, input, select, textarea, .pill, .copybtn):focus-visible{
+  box-shadow: var(--ring);
+  border-color: rgba(0,240,255,.55) !important;
+}
+
+/* ---------- Header / nav ---------- */
+header{
+  backdrop-filter: blur(12px);
+  background:
+    linear-gradient(180deg, rgba(10,14,18,.88), rgba(10,14,18,.58));
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 70px rgba(0,0,0,.45);
+}
+
+.nav{
+  gap: 14px;
+}
+
+.brand{
+  letter-spacing: .06em;
+}
+.brand .dot{
+  border-radius: 6px;
+  box-shadow: 0 0 14px rgba(0,240,255,.35);
+}
+
+.menu a{
+  border-radius: 999px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.10);
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease;
+}
+.menu a:hover{
+  transform: translateY(-1px);
+  background: rgba(0,240,255,.08);
+  border-color: rgba(0,240,255,.32);
+  box-shadow: 0 10px 26px rgba(0,0,0,.28);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  padding-top: 56px;
+}
+
+h1{
+  letter-spacing: .06em;
+  color: var(--text-hi);
+  text-shadow: 0 18px 70px rgba(0,0,0,.55);
+}
+h2{
+  color: var(--text-mid);
+}
+
+/* Redondear la imagen del badge (avatar) */
+.hero-badge{
+  border-radius: 999px;  /* círculo */
+  overflow: hidden;      /* recorta la imagen */
+}
+
+.hero-badge img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* llena sin deformar */
+  border-radius: 999px;  /* asegura círculo */
+  display: block;
+}
+
+
+/* ---------- Search ---------- */
+.searchrow{
+  border-radius: var(--radius-lg);
+  border-color: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  box-shadow: var(--elev-1);
+}
+.searchrow:focus-within{
+  box-shadow: var(--ring-strong), var(--elev-2);
+  border-color: rgba(0,240,255,.38);
+}
+.searchicon{
+  opacity: .85;
+}
+input[type="text"]{
+  color: var(--text-hi);
+}
+input::placeholder{
+  color: rgba(255,255,255,.55);
+}
+
+/* ---------- Meta / Select ---------- */
+.meta-chip{
+  border-radius: var(--radius-lg);
+  border-color: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  box-shadow: var(--elev-1);
+}
+select{
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.12);
+}
+select:focus-visible{
+  box-shadow: var(--ring);
+}
+
+/* ---------- Pills ---------- */
+.gene-filters{
+  gap: 10px;
+}
+.pill{
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.10);
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+}
+.pill:hover{
+  transform: translateY(-1px);
+  border-color: rgba(0,240,255,.26);
+  box-shadow: 0 16px 38px rgba(0,0,0,.32);
+}
+.pill.active{
+  background: rgba(0,240,255,.10);
+  border-color: rgba(0,240,255,.36);
+  box-shadow: var(--ring), 0 18px 44px rgba(0,0,0,.40);
+}
+
+/* ---------- Grid ---------- */
+.grid{
+  gap: 14px;
+}
+@media (min-width: 520px){
+  .grid{ gap: 16px; }
+}
+@media (min-width: 900px){
+  .grid{ gap: 18px; }
+}
+
+/* ---------- Cards ---------- */
+.card{
+  border-radius: var(--radius-lg);
+  border-color: rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  box-shadow: var(--elev-1);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(0,240,255,.28);
+  box-shadow: var(--elev-2), 0 0 0 4px rgba(0,240,255,.08);
+}
+
+/* code block más legible */
+.code{
+  border-radius: var(--radius-md);
+  border-color: rgba(255,255,255,.12);
+  background: rgba(0,0,0,.18);
+}
+
+/* botón copiar más moderno */
+.copybtn{
+  border-radius: var(--radius-md);
+  border-color: rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  transition: transform .12s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+}
+.copybtn:hover{
+  background: rgba(0,240,255,.12);
+  border-color: rgba(0,240,255,.30);
+  box-shadow: 0 12px 34px rgba(0,0,0,.35);
+}
+.copybtn:active{
+  transform: translateY(1px);
+}
+
+/* ---------- Toast / Empty ---------- */
+.toast{
+  border-radius: var(--radius-lg);
+  border-color: rgba(255,255,255,.12);
+  background: rgba(10,14,18,.85);
+  box-shadow: var(--elev-2);
+}
+.empty{
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.10);
+}
+
+/* ---------- Reduce motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; animation: none !important; }
+}
