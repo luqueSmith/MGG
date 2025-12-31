@@ -1,0 +1,63 @@
+/* =========================================================
+   Descargas page — compare tables + layout polish
+========================================================= */
+
+.dl-hero{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.compare{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+.compare th, .compare td{
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  vertical-align: top;
+}
+.compare th{
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.78);
+  text-transform: uppercase;
+  background: rgba(0,0,0,.18);
+}
+.compare tr:last-child td{ border-bottom: 0; }
+.compare td{
+  color: rgba(255,255,255,.80);
+}
+.compare td b{ color: rgba(255,255,255,.92); }
+
+@media (max-width: 720px){
+  .compare, .compare thead, .compare tbody, .compare th, .compare td, .compare tr{
+    display:block;
+  }
+  .compare thead{ display:none; }
+  .compare tr{
+    border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  .compare td{
+    border-bottom: 0;
+    padding: 10px 12px;
+  }
+  .compare td::before{
+    content: attr(data-label);
+    display:block;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.58);
+    margin-bottom: 4px;
+  }
+}

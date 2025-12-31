@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/legacy.css">
   <link rel="stylesheet" href="css/mascota.css">
-  <link rel="stylesheet" href="css/modern.css">
 
   <!-- PWA -->
   <link rel="manifest" href="./manifest.webmanifest">
@@ -50,10 +49,10 @@
 
         <nav class="menu">
           <a href="#top">Inicio</a>
-          <a href="#evo">Evo</a>
-          <a href="#otros-codigos">Otros códigos</a>
-          <a href="#guia-codigos">Guía</a>
-          <a href="#descargas">Descargas</a>
+          <a href="html/descargas.html">Evo</a>
+          <a href="html/otros.html">Otros códigos</a>
+          <a href="html/guia.html">Guía</a>
+          <a href="html/descargas.html">Descargas</a>
         </nav>
 
         <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
@@ -128,230 +127,12 @@
     </section>
 
     <!-- ====== OTROS CÓDIGOS ====== -->
-    <section class="other-codes" id="otros-codigos" aria-label="Otros códigos">
-      <div class="other-head">
-        <div class="other-badge" aria-hidden="true">
-          <img src="img/logo-2.png" alt="Otros códigos">
-        </div>
-        <div class="other-title">
-          <h3>Otros códigos</h3>
-          <p>Orbes, Objetos, Estructuras, Zonas y Ofertas (Estos codigos estan separado de Mutantes).</p>
-        </div>
-      </div>
-
-
-      <div class="other-tabs" id="otherTabs" aria-label="Categorías de otros códigos"></div>
-
-      <div class="searchbar other-searchbar">
-        <div class="glow"></div>
-        <div class="searchrow">
-          <svg class="searchicon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
-            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          </svg>
-          <input id="otherSearch" type="text" placeholder="Buscar en otros códigos (nombre o código)..."
-            autocomplete="off" />
-        </div>
-      </div>
-
-      <div id="otherGrid" class="grid other-grid" aria-live="polite"></div>
-
-      <div id="otherLoadMoreWrap" class="load-more" style="display:none;">
-        <button id="otherLoadMoreBtn" class="btn">Cargar más</button>
-      </div>
-
-      <section id="otherEmpty" class="empty" style="display:none;">
-        <div style="font-size:56px; opacity:.35;">📦</div>
-        <div class="big">No se encontraron códigos</div>
-        <p class="small">Prueba cambiando la categoría o el texto de búsqueda.</p>
-      </section>
-    </section>
+</section>
     <!-- ====== /OTROS CÓDIGOS ====== -->
 
     <!-- ====== GUÍA DE CÓDIGOS ====== -->
-    <section class="gene-guide" id="guia-codigos" aria-label="Guía de códigos por gen">
-      <div class="guide-head">
-        <div class="guide-badge" aria-hidden="true">🧾</div>
-        <div class="guide-title">
-          <h3>Guía rápida de códigos</h3>
-          <p>El <strong>primer carácter</strong> del código indica el <strong>gen/tipo</strong> del mutante.</p>
-        </div>
-      </div>
-
-      <div class="guide-grid">
-        <article class="guide-card" data-gene="CYBER">
-          <div class="guide-strip"></div>
-          <div class="guide-inner">
-            <div class="guide-top">
-              <img class="gene-logo" src="img/cyber.png" alt="" data-empty="true">
-              <div class="guide-name">
-                <span class="gene-name">Cyber</span>
-                <span class="gene-hint">Prefijo del código</span>
-              </div>
-              <span class="gene-letter">a</span>
-            </div>
-            <div class="guide-code">
-              Ejemplo: <strong>A_01</strong>, <strong>AA_03</strong>, <strong>AF_12</strong>
-            </div>
-          </div>
-        </article>
-
-        <article class="guide-card" data-gene="SABER">
-          <div class="guide-strip"></div>
-          <div class="guide-inner">
-            <div class="guide-top">
-              <img class="gene-logo" src="img/sable.png" alt="" data-empty="true">
-              <div class="guide-name">
-                <span class="gene-name">Sable</span>
-                <span class="gene-hint">Prefijo del código</span>
-              </div>
-              <span class="gene-letter">c</span>
-            </div>
-            <div class="guide-code">
-              Ejemplo: <strong>C_01</strong>, <strong>CB_09</strong>, <strong>CF_10</strong>
-            </div>
-          </div>
-        </article>
-
-        <article class="guide-card" data-gene="NECRO">
-          <div class="guide-strip"></div>
-          <div class="guide-inner">
-            <div class="guide-top">
-              <img class="gene-logo" src="img/necro.png" alt="" data-empty="true">
-              <div class="guide-name">
-                <span class="gene-name">Necro</span>
-                <span class="gene-hint">Prefijo del código</span>
-              </div>
-              <span class="gene-letter">b</span>
-            </div>
-            <div class="guide-code">
-              Ejemplo: <strong>B_01</strong>, <strong>BA_06</strong>, <strong>BF_10</strong>
-            </div>
-          </div>
-        </article>
-
-        <article class="guide-card" data-gene="ZOOMORPH">
-          <div class="guide-strip"></div>
-          <div class="guide-inner">
-            <div class="guide-top">
-              <img class="gene-logo" src="img/zomorfo.png" alt="" data-empty="true">
-              <div class="guide-name">
-                <span class="gene-name">Zoomorph</span>
-                <span class="gene-hint">Prefijo del código</span>
-              </div>
-              <span class="gene-letter">d</span>
-            </div>
-            <div class="guide-code">
-              Ejemplo: <strong>D_01</strong>, <strong>DD_10</strong>, <strong>DF_13</strong>
-            </div>
-          </div>
-        </article>
-
-        <article class="guide-card" data-gene="GALACTIC">
-          <div class="guide-strip"></div>
-          <div class="guide-inner">
-            <div class="guide-top">
-              <img class="gene-logo" src="img/galactico.png" alt="" data-empty="true">
-              <div class="guide-name">
-                <span class="gene-name">Galactic</span>
-                <span class="gene-hint">Prefijo del código</span>
-              </div>
-              <span class="gene-letter">e</span>
-            </div>
-            <div class="guide-code">
-              Ejemplo: <strong>E_01</strong>, <strong>EA_04</strong>, <strong>EF_11</strong>
-            </div>
-          </div>
-        </article>
-
-        <article class="guide-card" data-gene="MYTHIC">
-          <div class="guide-strip"></div>
-          <div class="guide-inner">
-            <div class="guide-top">
-              <img class="gene-logo" src="img/mitico.png" alt="" data-empty="true">
-              <div class="guide-name">
-                <span class="gene-name">Mythic</span>
-                <span class="gene-hint">Prefijo del código</span>
-              </div>
-              <span class="gene-letter">f</span>
-            </div>
-            <div class="guide-code">
-              Ejemplo: <strong>F_01</strong>, <strong>FA_12</strong>, <strong>FF_02</strong>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <p class="guide-note">
-        Tip: Si te aprendes estos códigos es más fácil cambiar de mutantes <strong>CODE MGG</strong>. Mucha suerte.
-      </p>
-    </section>
-    <!-- ====== /GUÍA ====== -->
-    <section id="evo" class="evoCalc">
-      <div class="evoCalc__header">
-        <div class="evoCalc__title">
-          <h2>Calculadora de EVO</h2>
-          <p>Calcula hasta qué EVO puedes subir según tus recursos y el descuento.</p>
-        </div>
-      </div>
-
-      <div class="evoCalc__card">
-        <div class="evoCalc__media">
-          <!-- ✅ FOTO DE LA MÁQUINA EVO (pon tu imagen aquí) -->
-          <img class="evoCalc__machine" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRdt8TMntlYVRmWpwPFo9UNfcbg9r-F3FkwggUlzex3bkGX6Y69" alt="Máquina de EVO">
-          <div class="evoCalc__hint">
-            Esto funciona igual que la misma que la pagina funcional, Pude haberla echa mas presisa por erroes que note pero no confiarian y la deje para que obtenga los mismos resultados de la original
-          </div>
-        </div>
-
-        <div class="evoCalc__form">
-          <div class="evoCalc__grid">
-            <label class="evoField">
-              <span>EVO actual</span>
-              <input id="evoCurrent" type="number" min="1" placeholder="Ej: 1" value="1">
-            </label>
-
-            <label class="evoField">
-              <span>Créditos</span>
-              <input id="evoCredits" type="number" min="0" placeholder="Ej: 2000000" value="0">
-            </label>
-
-            <label class="evoField">
-              <span>Oro</span>
-              <input id="evoGold" type="number" min="0" placeholder="Ej: 1000" value="0">
-            </label>
-
-            <label class="evoField">
-              <span>Descuento</span>
-              <select id="evoDiscount">
-                <option value="0">0%</option>
-                <option value="50">50%</option>
-                <option value="60">60%</option>
-                <option value="65">65%</option>
-                <option value="70">70%</option>
-                <option value="75">75%</option>
-                <option value="80">80%</option>
-                <option value="85">85%</option>
-                <option value="90">90%</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="evoCalc__actions">
-            <button class="evoBtn" id="evoCalcBtn" type="button">Calcular</button>
-            <button class="evoBtn evoBtn--ghost" id="evoResetBtn" type="button">Reset</button>
-          </div>
-
-          <div class="evoCalc__result" id="evoResult" aria-live="polite">
-            <div class="evoResult__big">Ingresa tus datos y presiona <strong>Calcular</strong>.</div>
-            <div class="evoResult__small">Usa exactamente las reglas del script que me pasaste (cap 30 para oro y 328
-              para créditos).</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
+<!-- ====== /GUÍA ====== -->
+</main>
 
   <footer id="descargas">
     <div class="wrap">
@@ -440,10 +221,8 @@
   <script src="js/data-mutants.js"></script>
   <script src="js/stats.js"></script>
   <script src="js/mutants.js"></script>
-  <script src="js/other-codes.js"></script>
-  <script src="js/mascota.js"></script>
+<script src="js/mascota.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/evo-calc.js"></script>
 </body>
 
 </html>

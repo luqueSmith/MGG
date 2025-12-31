@@ -1,0 +1,164 @@
+/* =========================================================
+   Pages UI (Guía / Descargas / Otros / Evo) — Modern layout
+========================================================= */
+
+.page-title{
+  margin: 0;
+  font-size: 44px;
+  letter-spacing: .08em;
+}
+.page-subtitle{
+  margin: 10px 0 0;
+  font-size: 13px;
+  letter-spacing: .30em;
+  color: rgba(255,255,255,.72);
+  text-transform: uppercase;
+}
+
+.page-main{
+  padding-bottom: 28px;
+}
+
+.section{
+  margin-top: 14px;
+}
+
+.section h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  letter-spacing: .04em;
+}
+
+.section h4{
+  margin: 16px 0 8px;
+  font-size: 15px;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.90);
+}
+
+.lead{
+  color: rgba(255,255,255,.80);
+  margin: 0;
+}
+
+.grid-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.86);
+  font-size: 12px;
+  letter-spacing: .05em;
+}
+.badge.good{ border-color: rgba(0,240,255,.26); background: rgba(0,240,255,.08); }
+.badge.warn{ border-color: rgba(255,196,0,.24); background: rgba(255,196,0,.08); }
+.badge.bad{  border-color: rgba(255,80,80,.26); background: rgba(255,80,80,.08); }
+
+.kv{
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 8px 12px;
+  margin-top: 10px;
+}
+.kv b{ color: rgba(255,255,255,.90); }
+.kv span{ color: rgba(255,255,255,.76); }
+
+.note{
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.16);
+  color: rgba(255,255,255,.78);
+}
+
+.list{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: rgba(255,255,255,.78);
+}
+.list li{ margin: 8px 0; }
+
+.cta{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(0,240,255,.10);
+  border-color: rgba(0,240,255,.30);
+  box-shadow: 0 14px 40px rgba(0,0,0,.36);
+}
+.btn.secondary:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+}
+
+@media (max-width: 720px){
+  .page-title{ font-size: 34px; }
+  .grid-cards{ grid-template-columns: 1fr; }
+  .kv{ grid-template-columns: 1fr; }
+}
+/* ===============================
+   MEJORA VISUAL SOLO PARA PC
+   (no afecta móvil)
+================================ */
+@media (min-width: 1024px){
+
+  /* Limita el ancho general del contenido */
+  .page-main{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* Cards más elegantes en PC */
+  .page-main .card{
+    padding: 22px 26px;
+  }
+
+  /* Títulos más equilibrados */
+  .page-title{
+    font-size: 48px;
+  }
+
+  .page-subtitle{
+    font-size: 14px;
+    letter-spacing: .35em;
+  }
+
+  /* Texto más cómodo de leer */
+  .lead,
+  .list,
+  .note{
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Grid más ordenado en PC */
+  .grid-cards{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
