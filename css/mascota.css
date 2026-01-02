@@ -154,3 +154,8 @@
     font-size: 12px;
   }
 }
+
+/* === PERF: mascota sin GPU constante en móvil/idle/oculto === */
+body.perf-lite .mascota.idle{ animation: none !important; }
+body.perf-idle .mascota.idle{ animation-play-state: paused !important; }
+body.perf-paused .mascota{ animation-play-state: paused !important; }

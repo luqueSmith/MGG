@@ -442,3 +442,18 @@ body.newyear2026::before{
 }
 body.newyear2026 > *{ position: relative; z-index: 1; }
 body.newyear2026 .ny26-ribbon, body.newyear2026 .ny26-badge{ z-index: 9999; }
+
+/* === PERF: baja GPU en móvil/idle/oculto === */
+body.newyear2026.perf-paused .bg-overlay,
+body.newyear2026.perf-paused::before,
+body.newyear2026.perf-paused::after,
+body.newyear2026.perf-idle .bg-overlay,
+body.newyear2026.perf-idle::before,
+body.newyear2026.perf-idle::after{ animation-play-state: paused !important; }
+
+body.newyear2026.perf-lite .bg-overlay,
+body.newyear2026.perf-lite::before,
+body.newyear2026.perf-lite::after{ animation: none !important; }
+body.newyear2026.perf-lite .bg-overlay{ mix-blend-mode: normal !important; }
+body.newyear2026.perf-lite::before,
+body.newyear2026.perf-lite::after{ filter: none !important; }

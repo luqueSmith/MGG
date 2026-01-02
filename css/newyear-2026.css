@@ -322,3 +322,35 @@ body.newyear2026 .hero .wrap{
     animation: none !important;
   }
 }
+
+/* =========================================================
+   PERF: baja GPU en móvil/idle/oculto (sin cambiar el diseño)
+   - En móvil (perf-lite) dejamos confetti/overlay en 'foto fija'
+   - En idle/oculto (perf-idle/perf-paused) pausamos animaciones
+========================================================= */
+
+/* Pausar animaciones cuando la pestaña no está visible o el usuario está idle */
+body.newyear2026.perf-paused .bg-overlay,
+body.newyear2026.perf-paused::before,
+body.newyear2026.perf-paused::after,
+body.newyear2026.perf-idle .bg-overlay,
+body.newyear2026.perf-idle::before,
+body.newyear2026.perf-idle::after{
+  animation-play-state: paused !important;
+}
+
+/* En móvil/ahorro: mantenemos el look pero sin animación constante */
+body.newyear2026.perf-lite .bg-overlay,
+body.newyear2026.perf-lite::before,
+body.newyear2026.perf-lite::after{
+  animation: none !important;
+}
+body.newyear2026.perf-lite .bg-overlay{
+  mix-blend-mode: normal !important;
+}
+body.newyear2026.perf-lite::before{
+  filter: none !important;
+}
+body.newyear2026.perf-lite::after{
+  filter: none !important;
+}

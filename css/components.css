@@ -1030,3 +1030,8 @@
 #evoDiscount option:hover {
   background-color: #101826;
 }
+
+/* === PERF: desactiva brillos infinitos en móvil/idle/oculto === */
+body.perf-lite .download-shine{ animation: none !important; opacity: .35 !important; }
+body.perf-idle .download-shine,
+body.perf-paused .download-shine{ animation-play-state: paused !important; }

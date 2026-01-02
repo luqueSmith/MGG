@@ -517,3 +517,47 @@ footer {
     rgba(0,0,0,.55);
   pointer-events: none;
 }
+
+/* =========================================================
+   PERF (móvil/idle/oculto): reduce trabajo de GPU sin cambiar layout
+   Se activa con clases agregadas por utils.js:
+   - body.perf-lite  (móvil/ahorro)
+   - body.perf-idle  (sin interacción)
+   - body.perf-paused (pestaña oculta)
+========================================================= */
+body.perf-lite header,
+body.perf-lite .searchrow{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Anillos del hero: en móvil/idle los dejamos estáticos (misma estética, cero GPU constante) */
+body.perf-lite .ring{ animation: none !important; filter: none !important; }
+body.perf-idle .ring{ animation-play-state: paused !important; }
+body.perf-paused .ring{ animation-play-state: paused !important; }
+
+/* Si el usuario pidió reducir movimiento, también */
+@media (prefers-reduced-motion: reduce){
+  .ring{ animation: none !important; filter: none !important; }
+}
+
+/* === PERF: reduce GPU en móvil/idle/oculto (sin cambiar layout) === */
+body.perf-lite header,
+body.perf-lite .searchrow{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Rings girando = GPU constante */
+body.perf-lite .ring{
+  animation: none !important;
+  filter: none !important;
+}
+body.perf-idle .ring,
+body.perf-paused .ring{
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ring{ animation: none !important; filter: none !important; }
+}

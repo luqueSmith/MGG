@@ -100,3 +100,9 @@ body.christmas::after{
   animation: snow 18s linear infinite;
 }
 @keyframes snow{ to{ transform: translateY(160px);} }
+
+/* === PERF: pausa/stop animaciones en móvil/idle/oculto === */
+body.perf-paused .bg-overlay, body.perf-idle .bg-overlay{ animation-play-state: paused !important; }
+body.perf-paused::before, body.perf-paused::after, body.perf-idle::before, body.perf-idle::after{ animation-play-state: paused !important; }
+body.perf-lite .bg-overlay, body.perf-lite::before, body.perf-lite::after{ animation: none !important; filter: none !important; }
+
