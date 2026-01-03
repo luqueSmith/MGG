@@ -3,8 +3,8 @@
   const { decodeEntities, genesFromCode, GENE_META, showToast, copyTextUpper } = window.MGG_UTILS;
 
   // === EXCEPCIONES (a mano) ===
-// Clave: código EXACTO como en tu data (respeta mayúsculas) ej: "A_01", "AA_01"
-// Valor: URL exacta (respeta mayús/minús del link).
+  // Clave: código EXACTO como en tu data (respeta mayúsculas) ej: "A_01", "AA_01"
+  // Valor: URL exacta (respeta mayús/minús del link).
   const THUMB_OVERRIDES = {
     "CE_99": "https://s-ak.kobojo.com/mutants/assets/thumbnails/specimen_ce_99.png",
   };
@@ -70,6 +70,7 @@
       namePart = namePart.replace(/^\d+\.\s*/, '').trim();
       const name = decodeEntities(namePart);
       const genes = genesFromCode(code, 2);
+
       out.push({ name, code, genes });
     }
     return out;
@@ -77,6 +78,13 @@
 
   // Parse once, then free the big raw string to help RAM
   const allMutants = parseRawList(window.RAW_LIST || '');
+
+  // Precalcular minúsculas 1 sola vez (para que buscar/ordenar no recalculen miles de veces)
+  for (const m of allMutants) {
+    m.nameL = (m.name || '').toLowerCase();
+    m.codeL = (m.code || '').toLowerCase();
+  }
+
   try { window.RAW_LIST = null; } catch { }
 
   const els = {
@@ -95,8 +103,20 @@
   const MIN_CHARS_TO_RENDER = 2;  // solo renderiza cuando escribes (evita 1000 cards vacías)
 
   // gene selection: hasta 2 genes a la vez
-  // Permite filtrar por 1 o 2 genes (ej: Cyber + Necro)
   const state = { q: '', genes: [], sort: 'name-asc', limit: PAGE_SIZE };
+
+  // ===== Render caching (para evitar recalcular filtro+sort en cada render) =====
+  // Key cuando cambian filtros/sort/query
+  let lastKey = '';
+  let lastFiltered = null;     // array resultante ya filtrado+ordenado
+  let lastRenderedCount = 0;   // cuántas cards ya dibujamos en grid
+
+  function getKey() {
+    // genes ordenados para que el key sea estable
+    const genesKey = (state.genes || []).slice().sort().join(',');
+    const qKey = (state.q || '').trim().toLowerCase();
+    return `${qKey}||${genesKey}||${state.sort}`;
+  }
 
   function buildGeneFilters() {
     if (!els.geneFilters) return;
@@ -111,7 +131,6 @@
       btn.type = 'button';
       btn.dataset.gene = key;
 
-      // Icono + texto (como en tu referencia)
       const meta = GENE_META[key] || { label: key, icon: '' };
       if (meta.icon) {
         const icon = document.createElement('img');
@@ -126,6 +145,7 @@
       text.className = 'gene-label';
       text.textContent = meta.label;
       btn.appendChild(text);
+
       btn.addEventListener('click', () => {
         if (key === 'ALL') {
           state.genes = [];
@@ -133,62 +153,220 @@
           if (state.genes.includes(key)) {
             state.genes = state.genes.filter(g => g !== key);
           } else {
-            // máximo 2
             if (state.genes.length >= 2) state.genes = state.genes.slice(1);
             state.genes = [...state.genes, key];
           }
         }
         state.limit = PAGE_SIZE;
+
         for (const b of els.geneFilters.querySelectorAll('.pill')) {
           const g = b.dataset.gene;
           const activeNow = (g === 'ALL') ? state.genes.length === 0 : state.genes.includes(g);
           b.classList.toggle('active', activeNow);
         }
-        renderMutants();
+
+        invalidateCache();
+        renderMutants({ append: false });
       });
+
       els.geneFilters.appendChild(btn);
     }
   }
 
-  function applyMutantFilters() {
-    const q = state.q.trim().toLowerCase();
+  function invalidateCache() {
+    lastKey = '';
+    lastFiltered = null;
+    lastRenderedCount = 0;
+  }
+
+  function applyMutantFiltersCached() {
+    const key = getKey();
+    if (key === lastKey && lastFiltered) return lastFiltered;
+
+    // recalcular solo si cambió query/genes/sort
+    const q = (state.q || '').trim().toLowerCase();
     let list = allMutants;
 
     if (q) {
-      list = list.filter(m =>
-        m.name.toLowerCase().includes(q) ||
-        m.code.toLowerCase().includes(q)
-      );
+      list = list.filter(m => m.nameL.includes(q) || m.codeL.includes(q));
     }
+
     if (state.genes.length) {
       list = list.filter(m => state.genes.every(g => (m.genes || []).includes(g)));
     }
 
+    // Sort optimizado: usa nameL/codeL precalculados
     const [field, dir] = state.sort.split('-');
     const sign = dir === 'asc' ? 1 : -1;
 
-    list = [...list].sort((a, b) => {
-      const A = (a[field] || '').toLowerCase();
-      const B = (b[field] || '').toLowerCase();
+    const sorted = list.slice().sort((a, b) => {
+      const A = field === 'name' ? a.nameL : a.codeL;
+      const B = field === 'name' ? b.nameL : b.codeL;
       if (A < B) return -1 * sign;
       if (A > B) return 1 * sign;
 
-      const A2 = (a[field === 'name' ? 'code' : 'name'] || '').toLowerCase();
-      const B2 = (b[field === 'name' ? 'code' : 'name'] || '').toLowerCase();
+      // tie-breaker (estable)
+      const A2 = field === 'name' ? a.codeL : a.nameL;
+      const B2 = field === 'name' ? b.codeL : b.nameL;
       return A2.localeCompare(B2) * sign;
     });
 
-    return list;
+    lastKey = key;
+    lastFiltered = sorted;
+    lastRenderedCount = 0; // porque el dataset cambió, hay que re-pintar desde 0
+    return sorted;
   }
 
   function shouldRender() {
-    const qlen = state.q.trim().length;
+    const qlen = (state.q || '').trim().length;
     if (qlen >= MIN_CHARS_TO_RENDER) return true;
     if (state.genes.length) return true;
     return false;
   }
 
-  function renderMutants() {
+  function createCard(m) {
+    const card = document.createElement('article');
+    card.className = 'card';
+
+    const stripe = document.createElement('div');
+    stripe.className = 'stripe';
+    const primaryGene = (m.genes && m.genes[0]) || 'UNKNOWN';
+    stripe.style.background = `linear-gradient(180deg,
+      color-mix(in srgb, ${(GENE_META[primaryGene]?.color || 'var(--unknown)')} 85%, rgba(0,240,255,.30)),
+      rgba(157,0,255,.35)
+    )`;
+
+    const inner = document.createElement('div');
+    inner.className = 'card-inner';
+
+    // === THUMB DEL MUTANTE ===
+    const thumb = buildThumbImg(m.code, m.name);
+
+    const top = document.createElement('div');
+    top.className = 'toprow';
+
+    inner.appendChild(thumb);
+    inner.appendChild(top);
+
+    const name = document.createElement('h3');
+    name.className = 'name';
+    name.textContent = m.name;
+
+    // ===== Genes =====
+    const gene = document.createElement('div');
+    gene.className = 'gene-badges';
+
+    const geneList = (m.genes && m.genes.length) ? m.genes : ['UNKNOWN'];
+    const counts = geneList.reduce((acc, g) => {
+      acc[g] = (acc[g] || 0) + 1;
+      return acc;
+    }, {});
+
+    for (const g of Object.keys(counts)) {
+      const meta = GENE_META[g] || { label: 'Unknown', icon: '', color: 'var(--unknown)' };
+      const b = document.createElement('span');
+      b.className = 'gene-badge';
+      b.style.borderColor = `color-mix(in srgb, ${meta.color || 'var(--unknown)'} 55%, rgba(255,255,255,.10))`;
+      b.style.boxShadow = `0 0 16px color-mix(in srgb, ${meta.color || 'var(--unknown)'} 18%, transparent)`;
+
+      if (meta.icon) {
+        const reps = Math.min(2, counts[g] || 1);
+        for (let i = 0; i < reps; i++) {
+          const icon = document.createElement('img');
+          icon.className = 'gene-mini-icon';
+          icon.alt = meta.label;
+          icon.loading = 'lazy';
+          icon.decoding = 'async';
+          icon.src = meta.icon;
+          b.appendChild(icon);
+        }
+      }
+
+      const label = document.createElement('span');
+      label.className = 'gene-mini-label';
+      label.textContent = meta.label;
+      b.appendChild(label);
+
+      gene.appendChild(b);
+    }
+
+    top.appendChild(name);
+
+    const codeBox = document.createElement('div');
+    codeBox.className = 'code';
+
+    const codeText = document.createElement('strong');
+    codeText.textContent = (m.code || '').toUpperCase();
+
+    const copy = document.createElement('button');
+    copy.className = 'copybtn';
+    copy.type = 'button';
+    copy.textContent = 'COPIAR';
+    copy.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const copied = await copyTextUpper(m.code);
+      showToast(`Copiado: ${copied}`);
+    });
+
+    codeBox.appendChild(codeText);
+    codeBox.appendChild(copy);
+    inner.appendChild(codeBox);
+
+    const geneRow = document.createElement('div');
+    geneRow.className = 'gene-row';
+    geneRow.appendChild(gene);
+    inner.appendChild(geneRow);
+
+    // ===== STATS (MUTODEX) =====
+    const STATS = window.MGG_STATS || {};
+    const st = STATS[String(m.code || '').toUpperCase()];
+    if (st) {
+      const statsWrap = document.createElement('div');
+      statsWrap.className = 'mutant-stats';
+
+      const statItem = (icon, label, value) => {
+        const it = document.createElement('div');
+        it.className = 'stat';
+        it.innerHTML = `
+          <span class="sicon" aria-hidden="true">${icon}</span>
+          <span class="slabel">${label}</span>
+          <span class="sval">${value || '-'}</span>
+        `;
+        return it;
+      };
+
+      const svg = {
+        hp: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.2-8.6C.9 9 2.4 6 5.6 6c1.8 0 3.1 1 3.9 2 0 0 .9-2 3.8-2 3.2 0 4.7 3 2.8 6.4C19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="2"/></svg>',
+        atk: '<svg viewBox="0 0 24 24" fill="none"><path d="M14 4 20 10 10 20 4 14 14 4Z" stroke="currentColor" stroke-width="2"/><path d="M6.5 15.5 4 18l2 2 2.5-2.5" stroke="currentColor" stroke-width="2"/></svg>',
+        spd: '<svg viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 12-14h-7l-1-6Z" stroke="currentColor" stroke-width="2"/></svg>',
+        def: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2 20 6v6c0 6-8 10-8 10S4 18 4 12V6l8-4Z" stroke="currentColor" stroke-width="2"/></svg>',
+      };
+
+      statsWrap.appendChild(statItem(svg.hp, 'HP', st.hp));
+      statsWrap.appendChild(statItem(svg.atk, 'ATK', st.atk));
+      statsWrap.appendChild(statItem(svg.spd, 'SPD', st.speed));
+      statsWrap.appendChild(statItem(svg.def, 'DEF', st.atk2));
+      statsWrap.appendChild(statItem(svg.def, 'HAB', st.abilityVal));
+
+      inner.appendChild(statsWrap);
+    }
+
+    card.appendChild(stripe);
+    card.appendChild(inner);
+    return card;
+  }
+
+  function updateLoadMoreUI(total) {
+    if (!els.loadMoreWrap || !els.loadMoreBtn) return;
+    if (state.limit < total) {
+      els.loadMoreWrap.style.display = 'flex';
+      els.loadMoreBtn.textContent = `Cargar más (${Math.min(PAGE_SIZE, total - state.limit)})`;
+    } else {
+      els.loadMoreWrap.style.display = 'none';
+    }
+  }
+
+  function renderMutants({ append } = { append: false }) {
     if (!els.grid || !els.countAll || !els.countNow || !els.empty) return;
 
     els.countAll.textContent = allMutants.length;
@@ -198,204 +376,104 @@
       els.countNow.textContent = '0';
       els.grid.innerHTML = '';
       els.empty.style.display = 'block';
-      els.empty.querySelector('p') && (els.empty.querySelector('p').textContent =
-        `Escribe al menos ${MIN_CHARS_TO_RENDER} letras para mostrar resultados, o filtra por genes (puedes elegir 2).`);
+      const p = els.empty.querySelector('p');
+      if (p) {
+        p.textContent = `Escribe al menos ${MIN_CHARS_TO_RENDER} letras para mostrar resultados, o filtra por genes (puedes elegir 2).`;
+      }
       if (els.loadMoreWrap) els.loadMoreWrap.style.display = 'none';
+      lastRenderedCount = 0;
       return;
     }
 
-    const filtered = applyMutantFilters();
+    const filtered = applyMutantFiltersCached();
     els.countNow.textContent = filtered.length;
 
-    const visible = filtered.slice(0, state.limit);
-
-    els.grid.innerHTML = '';
     if (filtered.length === 0) {
+      els.grid.innerHTML = '';
       els.empty.style.display = 'block';
       if (els.loadMoreWrap) els.loadMoreWrap.style.display = 'none';
+      lastRenderedCount = 0;
       return;
     }
+
     els.empty.style.display = 'none';
 
-    const frag = document.createDocumentFragment();
+    // Si cambió el key (dataset), applyMutantFiltersCached ya reseteó lastRenderedCount a 0
+    // Si NO cambió el key y solo subió limit (load more), podemos APPENDEAR sin borrar todo.
+    const maxToRender = Math.min(state.limit, filtered.length);
 
-    for (const m of visible) {
-      const card = document.createElement('article');
-      card.className = 'card';
-
-      const stripe = document.createElement('div');
-      stripe.className = 'stripe';
-      const primaryGene = (m.genes && m.genes[0]) || 'UNKNOWN';
-      stripe.style.background = `linear-gradient(180deg,
-        color-mix(in srgb, ${(GENE_META[primaryGene]?.color || 'var(--unknown)')} 85%, rgba(0,240,255,.30)),
-        rgba(157,0,255,.35)
-      )`;
-
-      const inner = document.createElement('div');
-      inner.className = 'card-inner';
-
-      // === THUMB DEL MUTANTE ===
-      const thumb = buildThumbImg(m.code, m.name);
-
-      const top = document.createElement('div');
-      top.className = 'toprow';
-
-      // Inserta thumb + top
-      inner.appendChild(thumb);
-      inner.appendChild(top);
-
-
-      const name = document.createElement('h3');
-      name.className = 'name';
-      name.textContent = m.name;
-
-      // ===== Genes (se renderizan ABAJO para que no deformen la fila superior) =====
-      const gene = document.createElement('div');
-      gene.className = 'gene-badges';
-
-      // genes puede traer repetidos (ej: AA_99 => [CYBER, CYBER])
-      const geneList = (m.genes && m.genes.length) ? m.genes : ['UNKNOWN'];
-      const counts = geneList.reduce((acc, g) => {
-        acc[g] = (acc[g] || 0) + 1;
-        return acc;
-      }, {});
-
-      for (const g of Object.keys(counts)) {
-        const meta = GENE_META[g] || { label: 'Unknown', icon: '', color: 'var(--unknown)' };
-        const b = document.createElement('span');
-        b.className = 'gene-badge';
-        b.style.borderColor = `color-mix(in srgb, ${meta.color || 'var(--unknown)'} 55%, rgba(255,255,255,.10))`;
-        b.style.boxShadow = `0 0 16px color-mix(in srgb, ${meta.color || 'var(--unknown)'} 18%, transparent)`;
-
-        // Si viene repetido (ej: CYBER x2) en vez de mostrar "x2" pintamos 2 iconos.
-        // (máximo 2, porque el código solo puede traer 2 genes)
-        if (meta.icon) {
-          const reps = Math.min(2, counts[g] || 1);
-          for (let i = 0; i < reps; i++) {
-            const icon = document.createElement('img');
-            icon.className = 'gene-mini-icon';
-            icon.alt = meta.label;
-            icon.loading = 'lazy';
-            icon.decoding = 'async';
-            icon.src = meta.icon;
-            b.appendChild(icon);
-          }
-        }
-
-        const label = document.createElement('span');
-        label.className = 'gene-mini-label';
-        label.textContent = meta.label;
-        b.appendChild(label);
-
-        // Ya no mostramos "x2" (lo reemplazamos por 2 iconos).
-
-        gene.appendChild(b);
+    if (!append || lastRenderedCount === 0) {
+      // render completo
+      els.grid.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < maxToRender; i++) {
+        frag.appendChild(createCard(filtered[i]));
       }
-
-      top.appendChild(name);
-
-      const codeBox = document.createElement('div');
-      codeBox.className = 'code';
-
-      const codeText = document.createElement('strong');
-      codeText.textContent = m.code.toUpperCase();
-
-      const copy = document.createElement('button');
-      copy.className = 'copybtn';
-      copy.type = 'button';
-      copy.textContent = 'COPIAR';
-      copy.addEventListener('click', async (e) => {
-        e.stopPropagation();
-        const copied = await copyTextUpper(m.code);
-        showToast(`Copiado: ${copied}`);
-      });
-
-      codeBox.appendChild(codeText);
-      codeBox.appendChild(copy);
-
-      inner.appendChild(codeBox);
-
-      // Genes debajo del código (más limpio en móvil + no distorsiona)
-      const geneRow = document.createElement('div');
-      geneRow.className = 'gene-row';
-      geneRow.appendChild(gene);
-      inner.appendChild(geneRow);
-
-      // ===== STATS (MUTODEX) =====
-      const STATS = window.MGG_STATS || {};
-      const st = STATS[String(m.code || '').toUpperCase()];
-      if (st) {
-        const statsWrap = document.createElement('div');
-        statsWrap.className = 'mutant-stats';
-
-        const statItem = (icon, label, value) => {
-          const it = document.createElement('div');
-          it.className = 'stat';
-          it.innerHTML = `
-            <span class="sicon" aria-hidden="true">${icon}</span>
-            <span class="slabel">${label}</span>
-            <span class="sval">${value || '-'}</span>
-          `;
-          return it;
-        };
-
-        const svg = {
-          hp: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.2-8.6C.9 9 2.4 6 5.6 6c1.8 0 3.1 1 3.9 2 0 0 .9-2 3.8-2 3.2 0 4.7 3 2.8 6.4C19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="2"/></svg>',
-          atk: '<svg viewBox="0 0 24 24" fill="none"><path d="M14 4 20 10 10 20 4 14 14 4Z" stroke="currentColor" stroke-width="2"/><path d="M6.5 15.5 4 18l2 2 2.5-2.5" stroke="currentColor" stroke-width="2"/></svg>',
-          spd: '<svg viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 12-14h-7l-1-6Z" stroke="currentColor" stroke-width="2"/></svg>',
-          def: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2 20 6v6c0 6-8 10-8 10S4 18 4 12V6l8-4Z" stroke="currentColor" stroke-width="2"/></svg>',
-        };
-
-        statsWrap.appendChild(statItem(svg.hp, 'HP', st.hp));
-        statsWrap.appendChild(statItem(svg.atk, 'ATK', st.atk));
-        statsWrap.appendChild(statItem(svg.spd, 'SPD', st.speed));
-        statsWrap.appendChild(statItem(svg.def, 'DEF', st.atk2));
-        statsWrap.appendChild(statItem(svg.def, 'HAB', st.abilityVal));
-
-        inner.appendChild(statsWrap);
-      }
-
-      card.appendChild(stripe);
-      card.appendChild(inner);
-      frag.appendChild(card);
+      els.grid.appendChild(frag);
+      lastRenderedCount = maxToRender;
+      updateLoadMoreUI(filtered.length);
+      return;
     }
 
-    els.grid.appendChild(frag);
-
-    // load more
-    if (els.loadMoreWrap && els.loadMoreBtn) {
-      if (state.limit < filtered.length) {
-        els.loadMoreWrap.style.display = 'flex';
-        els.loadMoreBtn.textContent = `Cargar más (${Math.min(PAGE_SIZE, filtered.length - state.limit)})`;
-      } else {
-        els.loadMoreWrap.style.display = 'none';
+    // append incremental (solo agrega lo nuevo)
+    if (lastRenderedCount < maxToRender) {
+      const frag = document.createDocumentFragment();
+      for (let i = lastRenderedCount; i < maxToRender; i++) {
+        frag.appendChild(createCard(filtered[i]));
       }
+      els.grid.appendChild(frag);
+      lastRenderedCount = maxToRender;
     }
+
+    updateLoadMoreUI(filtered.length);
   }
 
+  // ===== Debounce + rAF =====
+  function debounce(fn, wait = 120) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), wait);
+    };
+  }
+
+  let rafId = 0;
+  function scheduleRender(append = false) {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => renderMutants({ append }));
+  }
+
+  // ===== Listeners =====
   if (els.search) {
-    els.search.addEventListener('input', (e) => {
-      state.q = e.target.value || '';
+    const onSearch = debounce((value) => {
+      state.q = value || '';
       state.limit = PAGE_SIZE;
-      renderMutants();
-    });
+      invalidateCache();
+      scheduleRender(false);
+    }, 120);
+
+    els.search.addEventListener('input', (e) => onSearch(e.target.value));
   }
+
   if (els.sort) {
     els.sort.addEventListener('change', (e) => {
       state.sort = e.target.value;
       state.limit = PAGE_SIZE;
-      renderMutants();
+      invalidateCache();
+      scheduleRender(false);
     });
   }
+
   if (els.loadMoreBtn) {
     els.loadMoreBtn.addEventListener('click', () => {
       state.limit += PAGE_SIZE;
-      renderMutants();
+      // no invalidamos cache: solo queremos agregar cards nuevas
+      scheduleRender(true);
     });
   }
 
   buildGeneFilters();
-  renderMutants();
+  renderMutants({ append: false });
 
   window.MGG_MUTANTS = { allMutants };
 })();

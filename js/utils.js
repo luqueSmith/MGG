@@ -89,6 +89,60 @@
     return upper;
   }
 
+  // =========================================================
+  // Performance helpers (GPU/CPU): pausa animaciones cuando:
+  // - pestaña no está visible
+  // - modo ahorro / reduce motion / save-data / móvil
+  // Agrega clases al <body>:
+  //   - perf-paused : página oculta
+  //   - perf-idle   : sin interacción por un rato
+  //   - perf-lite   : móvil/ahorro
+  // =========================================================
+  (function setupPerformanceClasses(){
+    function apply() {
+      const b = document.body;
+      if (!b) return false;
+
+      const isSmall = window.matchMedia && window.matchMedia('(max-width: 720px)').matches;
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saveData = !!(navigator.connection && navigator.connection.saveData);
+      const lowMem = (typeof navigator.deviceMemory === 'number') ? navigator.deviceMemory <= 4 : false;
+
+      b.classList.toggle('perf-lite', isSmall || reduceMotion || saveData || lowMem);
+      b.classList.toggle('reduced-motion', reduceMotion);
+      b.classList.toggle('perf-paused', document.hidden === true);
+      return true;
+    }
+
+    let idleT = null;
+    const IDLE_MS = 12000;
+    function setIdle(on){
+      const b = document.body;
+      if (!b) return;
+      b.classList.toggle('perf-idle', !!on);
+    }
+    function bumpIdle(){
+      setIdle(false);
+      clearTimeout(idleT);
+      idleT = setTimeout(() => setIdle(true), IDLE_MS);
+    }
+
+    if (!apply()) {
+      document.addEventListener('DOMContentLoaded', () => { apply(); bumpIdle(); }, { once: true });
+    } else {
+      bumpIdle();
+    }
+
+    window.addEventListener('resize', apply, { passive: true });
+    window.addEventListener('orientationchange', apply, { passive: true });
+    document.addEventListener('visibilitychange', apply);
+
+    ['pointerdown','touchstart','keydown','scroll','mousemove'].forEach(evt=>{
+      window.addEventListener(evt, bumpIdle, { passive: true });
+    });
+  })();
+
+
   // === EXPORTAR TODO (CLAVE DEL ARREGLO) ===
   window.MGG_UTILS = {
     decodeEntities,
