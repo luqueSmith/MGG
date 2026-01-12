@@ -13,13 +13,8 @@
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/legacy.css">
-  <link rel="stylesheet" href="css/mascota.css">
-  <!-- 🎆 Año Nuevo 2026 (cargar al final) -->
-  <link rel="stylesheet" href="css/newyear-2026.css">
+  <!-- ✅ CSS unificado (mejor rendimiento) -->
+  <link rel="stylesheet" href="css/site.css">
 
   <!-- PWA -->
   <link rel="manifest" href="./manifest.webmanifest">
@@ -31,7 +26,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 
-<body class="newyear2026">
+<body>
   <div class="bg-overlay"></div>
   <!-- Mascota -->
   <div id="mascota" class="mascota" aria-hidden="true">
@@ -49,12 +44,18 @@
           <span>MUTANTS: <span style="color:var(--accent)">GG</span> — CÓDIGOS</span>
         </div>
 
-        <nav class="menu">
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+          <span class="nav-toggle-lines" aria-hidden="true"></span><span class="nav-toggle-text">Menú</span>
+        </button>
+
+
+        <nav class="menu" id="navMenu">
           <a href="#top">Inicio</a>
-          <a href="html/descargas.html">Evo</a>
-          <a href="html/otros.html">Otros códigos</a>
-          <a href="html/guia.html">Guía</a>
-          <a href="html/descargas.html">Descargas</a>
+          <a href="HTML/servicios.html">Servicios</a>
+          <a href="HTML/evo.html">Evo</a>
+          <a href="HTML/otros.html">Otros códigos</a>
+          <a href="HTML/guia.html">Guía</a>
+          <a href="HTML/descargas.html">Descargas</a>
         </nav>
 
         <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
@@ -101,7 +102,7 @@
 
           <div class="meta-title">
             <strong>Smith Luque - Catalogo MGG</strong>
-            <span><span id="countNow">0</span> MUTANTES ENCONTRADOS · <span id="countAll">0</span> TOTAL</span>
+            <span><span id="countNow">0</span> MUTANTES ENCONTRADOS  <span id="countAll">0</span> TOTAL</span>
           </div>
         </div>
 
@@ -129,7 +130,6 @@
     </section>
 
     <!-- ====== OTROS CÓDIGOS ====== -->
-</section>
     <!-- ====== /OTROS CÓDIGOS ====== -->
 
     <!-- ====== GUÍA DE CÓDIGOS ====== -->
@@ -218,13 +218,10 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/sw-register.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/data-mutants.js"></script>
-  <script src="js/stats.js"></script>
-  <script src="js/mutants.js"></script>
-<script src="js/mascota.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/core.js" defer></script>
+  <script src="js/data-mutants.js" defer></script>
+  <!-- stats.js es pesado: se carga diferido desde pages.js -->
+  <script src="js/pages.js" defer></script>
 </body>
 
 </html>
