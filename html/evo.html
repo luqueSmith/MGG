@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mutants: Genetic Gladiators | Códigos</title>
+  <meta name="description" content="Listado de códigos para Mutants: Genetic Gladiators." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ✅ CSS unificado (mejor rendimiento) -->
+  <link rel="stylesheet" href="../css/site.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#00f0ff">
+  <link rel="icon" href="../img/logo-2.png">
+  <link rel="apple-touch-icon" href="../img/Logo_mgg.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Code MGG">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+
+<body>
+  <div class="bg-overlay"></div>
+  <!-- Mascota -->
+  <div id="mascota" class="mascota" aria-hidden="true">
+    <img id="mascotaImg" class="mascota-img" src="../img/Trono.png" alt="">
+    <div class="mascota-bubble" id="mascotaBubble">¡Hola!</div>
+  </div>
+  <!-- ANCLA REAL ARRIBA DE TODO -->
+  <div id="top"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>MUTANTS: <span style="color:var(--accent)">GG</span> — CÓDIGOS</span>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+          <span class="nav-toggle-lines" aria-hidden="true"></span><span class="nav-toggle-text">Menú</span>
+        </button>
+
+        <nav class="menu" id="navMenu">
+          <a href="../index.html">Inicio</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="evo.html" class="active">Evo</a>
+          <a href="otros.html">Otros códigos</a>
+          <a href="guia.html">Guía</a>
+          <a href="tutoriales.html">Tutoriales</a>
+          <a href="descargas.html">Descargas</a>
+        </nav>
+
+        <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
+      </div>
+    </div>
+  </header>
+
+<section class="hero" id="inicio">
+  <div class="rings" aria-hidden="true">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-badge" aria-hidden="true">
+      <img src="../img/mgg.png" alt="Mutants Genetic Gladiators" class="hero-logo">
+    </div>
+    <h1 class="page-title">EVO</h1>
+    <h2 class="page-subtitle">CALCULADORA</h2>
+  </div>
+</section>
+
+<main class="wrap page-main">
+<section id="evo" class="evoCalc">
+      <div class="evoCalc__header">
+        <div class="evoCalc__title">
+          <h2>Calculadora de EVO</h2>
+          <p>Calcula hasta qué EVO puedes subir según tus recursos y el descuento.</p>
+        </div>
+      </div>
+
+      <div class="evoCalc__card">
+        <div class="evoCalc__media">
+          <!-- ✅ FOTO DE LA MÁQUINA EVO (pon tu imagen aquí) -->
+          <img class="evoCalc__machine" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRdt8TMntlYVRmWpwPFo9UNfcbg9r-F3FkwggUlzex3bkGX6Y69" alt="Máquina de EVO">
+          <div class="evoCalc__hint">
+            Esto funciona igual que la misma que la pagina funcional, Pude haberla echa mas presisa por erroes que note pero no confiarian y la deje para que obtenga los mismos resultados de la original
+          </div>
+        </div>
+
+        <div class="evoCalc__form">
+          <div class="evoCalc__grid">
+            <label class="evoField">
+              <span>EVO actual</span>
+              <input id="evoCurrent" type="number" min="1" placeholder="Ej: 1" value="1">
+            </label>
+
+            <label class="evoField">
+              <span>Créditos</span>
+              <input id="evoCredits" type="number" min="0" placeholder="Ej: 2000000" value="0">
+            </label>
+
+            <label class="evoField">
+              <span>Oro</span>
+              <input id="evoGold" type="number" min="0" placeholder="Ej: 1000" value="0">
+            </label>
+
+            <label class="evoField">
+              <span>Descuento</span>
+              <select id="evoDiscount">
+                <option value="0">0%</option>
+                <option value="50">50%</option>
+                <option value="60">60%</option>
+                <option value="65">65%</option>
+                <option value="70">70%</option>
+                <option value="75">75%</option>
+                <option value="80">80%</option>
+                <option value="85">85%</option>
+                <option value="90">90%</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="evoCalc__actions">
+            <button class="evoBtn" id="evoCalcBtn" type="button">Calcular</button>
+            <button class="evoBtn evoBtn--ghost" id="evoResetBtn" type="button">Reset</button>
+          </div>
+
+          <div class="evoCalc__result" id="evoResult" aria-live="polite">
+            <div class="evoResult__big">Ingresa tus datos y presiona <strong>Calcular</strong>.</div>
+            <div class="evoResult__small">Usa exactamente las reglas del script que me pasaste (cap 30 para oro y 328
+              para créditos).</div>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+
+  <script src="../js/core.js" defer></script>
+  <script src="../js/pages.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mutants: Genetic Gladiators | Códigos</title>
+  <meta name="description" content="Listado de códigos para Mutants: Genetic Gladiators." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ✅ CSS unificado (mejor rendimiento) -->
+  <link rel="stylesheet" href="css/site.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#00f0ff">
+  <link rel="icon" href="img/logo-2.png">
+  <link rel="apple-touch-icon" href="../img/Logo_mgg.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Code MGG">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+
+<body>
+  <div class="bg-overlay"></div>
+  <!-- Mascota -->
+  <div id="mascota" class="mascota" aria-hidden="true">
+    <img id="mascotaImg" class="mascota-img" src="img/Trono.png" alt="">
+    <div class="mascota-bubble" id="mascotaBubble">¡Hola!</div>
+  </div>
+  <!-- ANCLA REAL ARRIBA DE TODO -->
+  <div id="top"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>MUTANTS: <span style="color:var(--accent)">GG</span> — CÓDIGOS</span>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+          <span class="nav-toggle-lines" aria-hidden="true"></span><span class="nav-toggle-text">Menú</span>
+        </button>
+
+
+        <nav class="menu" id="navMenu">
+          <a href="#top">Inicio</a>
+          <a href="html/servicios.html">Servicios</a>
+          <a href="html/evo.html">Evo</a>
+          <a href="html/otros.html">Otros códigos</a>
+          <a href="html/guia.html">Guía</a>
+          <a href="html/tutoriales.html">Tutoriales</a>
+          <a href="html/descargas.html">Descargas</a>
+        </nav>
+
+        <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="rings" aria-hidden="true">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+    </div>
+
+    <div class="wrap">
+      <div class="hero-badge" aria-hidden="true">
+        <img src="img/mgg.png" alt="Mutants Genetic Gladiators" class="hero-logo">
+      </div>
+      <h1>MUTANTS</h1>
+      <h2>GENETIC GLADIATORS</h2>
+
+      <div class="searchbar">
+        <div class="glow"></div>
+        <div class="searchrow">
+          <svg class="searchicon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <input id="searchInput" type="text" placeholder="Buscar por nombre o código (ej: AB_14). Tip: puedes seleccionar hasta 2 genes abajo."
+            autocomplete="off" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="controls">
+      <div class="meta">
+        <div class="meta-left">
+          <div class="meta-chip profile-chip" aria-hidden="true">
+            <img
+              src="img/perfil.png"
+              alt="Perfil">
+          </div>
+
+          <div class="meta-title">
+            <strong>Smith Luque - Catalogo MGG</strong>
+            <span><span id="countNow">0</span> MUTANTES ENCONTRADOS  <span id="countAll">0</span> TOTAL</span>
+          </div>
+        </div>
+
+        <div class="right-tools">
+          <label>
+            <select id="sortSelect" title="Ordenar">
+              <option value="name-asc">Orden: Nombre (A→Z)</option>
+              <option value="name-desc">Orden: Nombre (Z→A)</option>
+              <option value="code-asc">Orden: Código (A→Z)</option>
+              <option value="code-desc">Orden: Código (Z→A)</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="gene-filters" id="geneFilters" aria-label="Filtros por gen"></div>
+    </section>
+
+    <section id="grid" class="grid" aria-live="polite"></section>
+
+    <section id="emptyState" class="empty" style="display:none;">
+      <div style="font-size:56px; opacity:.35;">🧬</div>
+      <div class="big">No se encontraron mutantes</div>
+      <p class="small">Prueba cambiando el texto de búsqueda o el filtro de gen.</p>
+    </section>
+
+    <!-- ====== OTROS CÓDIGOS ====== -->
+    <!-- ====== /OTROS CÓDIGOS ====== -->
+
+    <!-- ====== GUÍA DE CÓDIGOS ====== -->
+<!-- ====== /GUÍA ====== -->
+</main>
+
+  <footer id="descargas">
+    <div class="wrap">
+      MGG Codex (Para GG) · Raul Smith Luque · En GitHub.
+    </div>
+
+    <div class="wrap">
+      <div class="download-card">
+        <div class="download-left">
+          <div class="download-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M8 10l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M4 17.5c0 1.38 1.12 2.5 2.5 2.5h11c1.38 0 2.5-1.12 2.5-2.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="download-text">
+            <div class="download-title">Descargar Script LUA</div>
+            <div class="download-sub">Compatible · Game Guardian: <strong>TodoCS.lua</strong></div>
+          </div>
+        </div>
+
+        <a class="download-btn" href="downloads/DEFINITIVA-CS-v2.lua" download="SCIRPT-NUEVA.V2.lua">
+          <span>DESCARGAR</span>
+          <span class="download-shine" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-left">
+          <div class="download-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M8 10l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M4 17.5c0 1.38 1.12 2.5 2.5 2.5h11c1.38 0 2.5-1.12 2.5-2.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="download-text">
+            <div class="download-title">Lista de Códigos</div>
+            <div class="download-sub">Formato texto: <strong>lista-codigos.txt</strong></div>
+          </div>
+        </div>
+
+        <a class="download-btn" href="downloads/lista-codigos.txt" download="lista-codigos.txt">
+          <span>DESCARGAR</span>
+          <span class="download-shine" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-left">
+          <div class="download-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M8 10l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M4 17.5c0 1.38 1.12 2.5 2.5 2.5h11c1.38 0 2.5-1.12 2.5-2.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="download-text">
+            <div class="download-title">Lista de Códigos (Excel)</div>
+            <div class="download-sub">Formato Excel: <strong>lista-codigos.xlsx</strong></div>
+          </div>
+        </div>
+
+        <a class="download-btn" href="downloads/lista-codigos.xlsx" download="lista-codigos.xlsx">
+          <span>DESCARGAR</span>
+          <span class="download-shine" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/core.js" defer></script>
+  <script src="js/data-mutants.js" defer></script>
+  <!-- stats.js es pesado: se carga diferido desde pages.js -->
+  <script src="js/pages.js" defer></script>
+</body>
+
+</html>

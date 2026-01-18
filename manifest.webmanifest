@@ -1,0 +1,39 @@
+{
+  "name": "Code MGG",
+  "short_name": "Code MGG",
+  "id": "./?source=pwa",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#050508",
+  "theme_color": "#00f0ff",
+  "description": "Códigos y guía para Mutants: Genetic Gladiators.",
+  "icons": [
+    {
+      "src": "img/Logo_mgg.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/Logo_mgg.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/Logo_mgg.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "img/Logo_mgg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

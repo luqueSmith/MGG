@@ -1,0 +1,181 @@
+Nombre,Codigo
+Celcius Thermoid,ea_99
+Robot,a_01
+Don Gamberitti,cd_14
+El Presentador,ab_14
+Mecargola,ba_14
+Sangresquito,bd_13
+Fiera del campo,bd_14
+Viajero del vortice,be_13
+Rey Azul,cc_14
+Señor Bestial,dd_14
+D.A.B,ea_14
+Mago,f_14
+Zagam Gran Rey de la avaricia,fb_14
+Altisimo Calendabro,fb_13
+Freyja Reina de los Vanir,fd_14
+Nucleo Serafico,fe_14
+Profesta del Crepusculo,ff_14
+Mascarada Emocional,ff_99
+El Arquitecto,ab_13
+peregrino espacial,ea_13
+Hielo Patinadora Yria,cf_14
+Robot Debil,a_02
+Androide,aa_01
+Goliat,aa_02
+Necrobot,ab_01
+Hypnos,ab_02
+Xenarach,ab_03
+Humanoide Perfido,ac_01
+Capitan Mecano,ac_02
+Dezinger,ac_03
+Escarabot,ad_01
+Monocerus,ad_02
+Coloso,ae_01
+Libraro,ae_02_silver
+Deus Machina,af_01
+Virgon,af_02_silver
+Zombi,b_01
+Zombi Debil,b_02
+Jack O'Lantern,b_03
+Zomborg,ba_01
+Muñeca Diabolica,ba_02
+Lord Blood,bb_01
+Espectro de la Cripta,bb_02
+Despota Negro,bc_01
+Capitan Osamenta,bc_02
+Necrodragon,bd_01
+Cancernia,bd_02_silver
+Fantasmonauta,be_01
+Caprika,be_02_silver
+Quebrantacuellos,be_03
+Baron Lundi,bf_01
+Mago Tetrico,bf_02
+Guerrero,c_01
+Guerrero Debil,c_02
+Ejecutor,ca_01
+Interceptrix,ca_02
+General Caos,ca_03
+Banshee Guerrera,cb_01
+Bushi,cb_02
+Caballero Nordico,cc_01
+Buck Maurice,cc_02
+Honey Bunny,cd_01
+Sagitauro,cd_02_silver
+Haggis,cd_03
+Marciano Errante,ce_01
+Guardian Galactico,ce_03
+Valkiria,cf_01
+Thor,cf_02
+Bestia,d_01
+Reptoide,da_01
+Aracno,da_02
+Cerbero,db_01
+Zombat,db_02
+Cobrakai,db_03
+Rakshasa,dc_01
+Leohart,dc_02_silver
+Gargantus,dc_03_gothic
+Kaiju Kitty,dd_01
+Maestro Splitter,dd_02
+Reina Parasita,de_01
+Cosmo Kong,de_02
+Dracus Nobilis,df_01
+Satiro Hechicero,df_02
+Extraterrestre,e_01
+Aniquilador,ea_01
+Sentry,ea_02
+Exopez,ea_03_silver
+Tutti Viscosi,eb_01
+Sirenia,eb_02
+Devorador,eb_03
+Sundance Bug,ec_01
+Behemoth,ec_02
+Xenos,ed_01
+Rocageno,ed_02
+Astrosurfista,ee_01
+Supernovus,ee_02
+Maestro Oida,ee_03
+Nebulon,ef_01
+Mr Marvelous,ef_02_heroes
+Aquapunzel,ef_03_silver
+Diablesa,f_01
+Mago de las Nieves,f_03
+Tecno Tao,fa_01
+Mekali,fa_02
+La Parca,fb_01
+Principe Escorpion,fb_02_silver
+Anubis,fb_03
+Gandolphus,fc_01
+Capitan Paz,fc_02
+Medusa,fd_01
+Horus,fd_02
+Ivory Hanzo,fd_03_japan
+C'thlig,fe_01
+Azuria,fe_02
+Señor del Abismo,ff_01
+Castigo,ff_02
+Oriax,fc_03
+Ragnar,cb_03
+Triple-B,ba_03
+Mandragora,ff_03
+Motero Maldito,bb_03
+Armadizo,de_03
+Mantidroide,da_03
+Carnero Vengador,bf_03_silver
+Battle Toad,cd_04
+Cezanne,dc_04
+H.U.M.A.N.,aa_03
+Rambit,d_03
+Star Trooper,ec_03
+Micky Krueger,bc_03
+Tauridus,ad_03_silver
+Autonoraptor,af_04
+Invadron,ae_03
+Bruja Malvada,fb_04
+Oso Espantoso,bd_03
+Azog,cf_04
+Geminium,ce_02_silver
+Psicojabali,dd_03
+Zena,cc_03
+Absolem,df_03
+Wampara,ed_03
+Barbaroca,af_03
+George Washington,bc_04
+Louis XVI,db_04
+Bazzinger,fa_03
+Space Princess,fe_04
+Astromago,fe_03
+Garuda,a_03
+Hada Machete,cf_03
+Genshiryoku,de_04
+El Experimento,ba_04
+Leonidas,cb_04
+Buranka,fd_04
+Mexihcatl,fc_04
+Banker,fa_04
+Emperador Galactico,bf_04_starwars
+Nebulus,fe_05_silver
+Project X27,ca_04
+Miroku,df_04
+Mapach Wik,ed_04
+El Fontanero,ac_04
+Matafantasmas,eb_04
+Exo Cookie,de_05
+Britany,bf_05
+Frostmass,c_03
+Santactopus,ec_04
+Mephisto,ef_04
+Monolith,ff_04
+Malvatron,ad_04
+Lara,cc_04
+Commander Ender,ab_04
+Zortrex,ce_04
+Tengu,bd_99
+Sacamantecas,bb_04
+Oculus,aa_04
+Supraman X,ae_04
+Cupido,cb_05
+Abraham Lincoln,af_05
+...
+Hekantocheiros,ec_13

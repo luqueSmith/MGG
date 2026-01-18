@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mutants: Genetic Gladiators | Servicios</title>
+  <meta name="description" content="Servicios y packs para Mutants: Genetic Gladiators." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ✅ CSS unificado (mejor rendimiento) -->
+  <link rel="stylesheet" href="../css/site.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#00f0ff">
+  <link rel="icon" href="../img/logo-2.png">
+  <link rel="apple-touch-icon" href="../img/Logo_mgg.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Code MGG">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- ✅ Ajustes SOLO para Servicios (móvil): compacto + sin modal -->
+  <style>
+  
+/* Botón WhatsApp flotante (solo Servicios) */
+.wa-fab{
+  position: fixed;
+  right: 22px;
+  bottom: 170px;
+  z-index: 10000;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,240,255,.28);
+  background: rgba(0,0,0,.28);
+  color: rgba(255,255,255,.92);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  -webkit-tap-highlight-color: transparent;
+}
+.wa-fab:active{ transform: scale(.98); }
+/* Mascota WhatsApp */
+  .mascota--wa{ cursor:pointer; text-decoration:none; }
+  .mascota--wa .mascota-bubble{ max-width: 190px; line-height:1.25; }
+  .mascota--wa .mascota-bubble.show{ opacity:1; transform: translateY(0); }
+
+  /* Tap cards (sin modal, sin botón "Comprar") */
+  .svc-tap{ text-decoration:none;  display:block; text-decoration:none; color: inherit; }
+  .svc-tap:active{ transform: translateY(0.5px); }
+
+  /* OFERTAS: más aire + textos no pegados */
+  .svc-offer{ overflow:hidden; }
+  .svc-offer__content{ padding: 18px 18px 16px !important; }
+  .svc-offer__title{ margin: 2px 0 10px !important; line-height: 1.2 !important; }
+  .svc-offer__meta{ display:flex; justify-content:center; padding-top: 2px !important; }
+  .svc-offer__price{ display:inline-flex; padding: 12px 14px !important; border-radius: 16px !important; }
+
+  /* Imagen oferta: sin distorsión */
+  .svc-offer__img{
+    width:100% !important;
+    height: auto !important;
+    display:block;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+  }
+
+  /* SERVICIOS PRINCIPALES: filas compactas, sin CTA extra */
+  .svc-row{ text-decoration:none; }
+  .svc-row__title{ margin-top: 0 !important; line-height: 1.2; }
+  .svc-row__right{ gap: 10px !important; }
+  .svc-row__btnWrap{ display:flex; flex-direction:column; align-items:flex-end; gap: 6px; }
+  .svc-row__price{ font-size: 14px; }
+  .svc-row__meta, .svc-row__cat, .svc-row__costLabel, .svc-row__chev{ display:none !important; }
+
+  /* PREMIUM / OTROS: grid compacto, sin imágenes estiradas */
+  .svc-special__imgWrap{
+    position: relative;
+    border-radius: 16px;
+    overflow:hidden;
+  }
+  .svc-special__imgWrap img{
+    width:100% !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display:block;
+  }
+
+  @media (max-width: 560px){
+    /* 2 por fila en móvil (premium/otros) */
+    .svc-grid:not(.svc-grid--offers){ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
+    .svc-special__imgWrap img{ height: 120px !important; }
+    .svc-special__body{ padding: 10px 10px 12px !important; }
+    .svc-special__title{ font-size: 14px !important; line-height:1.15 !important; }
+  }
+
+  /* Tap animation (sin navegar) */
+  .svc-tap{ text-decoration:none; 
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .svc-tap:active{
+    transform: scale(.985);
+  }
+.tap-pulse{
+    box-shadow: 0 0 0 4px rgba(0,240,255,.10), 0 0 28px rgba(0,240,255,.10);
+    border-color: rgba(0,240,255,.28) !important;
+  }
+  /* =========================================================
+     AJUSTES PEDIDOS (solo Servicios)
+     - Precio al costado en "Servicios principales" (también en móvil)
+     - Precios más legibles (S/ y $ separados con buen espaciado)
+     - "Premium / Otros" con precio tipo chip + top en flex
+  ========================================================= */
+
+  /* 1) Servicios principales: en móvil NO bajar el precio debajo */
+  @media (max-width: 720px){
+    .svc-row{
+      grid-template-columns: 72px 1fr auto !important;
+      grid-template-areas: none !important;
+    }
+    .svc-row__img{ grid-area: auto !important; }
+    .svc-row__main{ grid-area: auto !important; }
+    .svc-row__right{
+      grid-area: auto !important;
+      justify-content: flex-end !important;
+    }
+  }
+
+  /* 2) Precio: S/ + USD en línea, con separación */
+  .svc-row__price .price-main,
+  .svc-offer__price .price-main,
+  .svc-special__price .price-main{
+    display: inline-block !important;
+    white-space: nowrap;
+  }
+  .svc-row__price .price-sub,
+  .svc-offer__price .price-sub,
+  .svc-special__price .price-sub{
+    display: inline-block !important;
+    margin-top: 0 !important;
+    margin-left: 10px !important;
+    font-size: 11px;
+    letter-spacing: .06em;
+    opacity: .78;
+    white-space: nowrap;
+  }
+
+  /* 3) Ofertas: precio más visible (chip más pro) */
+  .svc-offer__price{
+    font-size: 16px !important;
+    letter-spacing: .06em !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    background: rgba(0,0,0,.55) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  /* 4) Premium / Otros: poner precio ABAJO para no apretar el título */
+  .svc-special__top{
+    display:flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+  .svc-special__title{
+    width: 100%;
+    min-width: 0;
+  }
+  .svc-special__price{
+    align-self: flex-end;
+    padding: 8px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.35);
+    color: var(--accent);
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-align: right;
+  }
+
+</style>
+
+</head>
+
+<body>
+  <div class="bg-overlay"></div>
+
+  <!-- Mascota (WhatsApp solo en Servicios) -->
+  <a id="mascota" class="mascota mascota--wa" href="https://wa.me/51906328464" aria-label="Escríbeme por WhatsApp" target="_blank" rel="noopener">
+    <img id="mascotaImg" class="mascota-img" src="../img/whatsapp_mascota.png" alt="WhatsApp">
+    <div class="mascota-bubble show" id="mascotaBubble">Tócame para escribirme</div>
+  </a>
+  <!-- ANCLA REAL ARRIBA DE TODO -->
+  <div id="top"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>MUTANTS: <span style="color:var(--accent)">GG</span> — SERVICIOS</span>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+          <span class="nav-toggle-lines" aria-hidden="true"></span><span class="nav-toggle-text">Menú</span>
+        </button>
+
+        <nav class="menu" id="navMenu">
+          <a href="../index.html">Inicio</a>
+          <a href="servicios.html" class="active">Servicios</a>
+          <a href="evo.html">Evo</a>
+          <a href="otros.html">Otros códigos</a>
+          <a href="guia.html">Guía</a>
+          <a href="tutoriales.html">Tutoriales</a>
+          <a href="descargas.html">Descargas</a>
+        </nav>
+
+        <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="rings" aria-hidden="true">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+    </div>
+    <div class="wrap">
+      <div class="hero-badge" aria-hidden="true">
+        <img src="../img/mgg.png" alt="Mutants Genetic Gladiators" class="hero-logo">
+      </div>
+      <h1 class="page-title">SERVICIOS</h1>
+      <h2 class="page-subtitle">PACKS / PEDIDOS</h2>
+    </div>
+  </section>
+
+  <main class="wrap page-main">
+    <section class="card section">
+      <h3>Ofertas limitadas</h3>
+      <p class="lead">Packs destacados.</p>
+      <p>Si te interesa agregar tus servicios aqui puedes escribirme al interno 😁</p>
+      <p>De echo si lo vendes mas baratos me lo escribes y remplazo por los tuyos siempre y cuando seas confiable,
+        No estare cobrando por añadirlos o remplazarlos por el mio, Solo los agregare si tu lo vendes a precios mas comodos,
+        Esto con el fin de que todos los jugadores tengamos un lugar para encontrar servicios de farmeo baratos y confiables,
+        Tambien para aprender y divirtirnos todos. 😁😁
+      </p>
+      <br>
+      <div id="offersGrid" class="grid-cards svc-grid svc-grid--offers" aria-live="polite"></div>
+    </section>
+
+    <section class="card section">
+      <h3>Servicios principales</h3>
+      <p class="lead">Opciones rápidas y directas para avanzar en el juego.</p>
+      <div id="mainList" class="svc-list" aria-live="polite"></div>
+    </section>
+
+    <section class="card section">
+      <h3>Otros </h3>
+      <p class="lead">Operaciones especiales y extras.</p>
+      <div id="specialGrid" class="grid-cards svc-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../js/core.js" defer></script>
+  <script src="../js/pages.js" defer></script>
+
+  <script>
+  // Fuerza que la "mascota" abra WhatsApp (y evita el handler de "copiar" del sitio)
+  (function () {
+    var m = document.getElementById('mascota');
+    if (!m) return;
+
+    var href = m.getAttribute('href') || 'https://wa.me/51906328464';
+    function goWA(e){
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+      }
+      window.open(href, '_blank', 'noopener');
+      return false;
+    }
+
+    // Captura para ganarle a cualquier listener global (ej: "tap-to-copy")
+    ['click','pointerup','touchend'].forEach(function(evt){
+      m.addEventListener(evt, goWA, true);
+      var img = document.getElementById('mascotaImg');
+      if (img) img.addEventListener(evt, goWA, true);
+    });
+  })();
+  </script>
+
+</body>
+</html>

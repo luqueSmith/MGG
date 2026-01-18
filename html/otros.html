@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mutants: Genetic Gladiators | Códigos</title>
+  <meta name="description" content="Listado de códigos para Mutants: Genetic Gladiators." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ✅ CSS unificado (mejor rendimiento) -->
+  <link rel="stylesheet" href="../css/site.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#00f0ff">
+  <link rel="icon" href="../img/logo-2.png">
+  <link rel="apple-touch-icon" href="../img/Logo_mgg.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Code MGG">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+
+<body>
+  <div class="bg-overlay"></div>
+  <!-- Mascota -->
+  <div id="mascota" class="mascota" aria-hidden="true">
+    <img id="mascotaImg" class="mascota-img" src="../img/Trono.png" alt="">
+    <div class="mascota-bubble" id="mascotaBubble">¡Hola!</div>
+  </div>
+  <!-- ANCLA REAL ARRIBA DE TODO -->
+  <div id="top"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>MUTANTS: <span style="color:var(--accent)">GG</span> — CÓDIGOS</span>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+          <span class="nav-toggle-lines" aria-hidden="true"></span><span class="nav-toggle-text">Menú</span>
+        </button>
+        <nav class="menu" id="navMenu">
+          <a href="../index.html">Inicio</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="evo.html">Evo</a>
+          <a href="otros.html" class="active">Otros códigos</a>
+          <a href="guia.html">Guía</a>
+          <a href="tutoriales.html">Tutoriales</a>
+          <a href="descargas.html">Descargas</a>
+        </nav>
+
+        <div class="status">DATABASE_V3.0 // OFFLINE_READY</div>
+      </div>
+    </div>
+  </header>
+
+<section class="hero" id="inicio">
+  <div class="rings" aria-hidden="true">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-badge" aria-hidden="true">
+      <img src="../img/mgg.png" alt="Mutants Genetic Gladiators" class="hero-logo">
+    </div>
+    <h1 class="page-title">OTROS</h1>
+    <h2 class="page-subtitle">CÓDIGOS</h2>
+  </div>
+</section>
+
+<main class="wrap page-main">
+<section class="other-codes" id="otros-codigos" aria-label="Otros códigos">
+      <div class="other-head">
+        <div class="other-badge" aria-hidden="true">
+          <img src="../img/logo-2.png" alt="Otros códigos">
+        </div>
+        <div class="other-title">
+          <h3>Otros códigos</h3>
+          <p>Orbes, Objetos, Estructuras, Zonas y Ofertas (Estos codigos estan separado de Mutantes).</p>
+        </div>
+      </div>
+
+
+      <div class="other-tabs" id="otherTabs" aria-label="Categorías de otros códigos"></div>
+
+      <div class="searchbar other-searchbar">
+        <div class="glow"></div>
+        <div class="searchrow">
+          <svg class="searchicon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <input id="otherSearch" type="text" placeholder="Buscar en otros códigos (nombre o código)..."
+            autocomplete="off" />
+        </div>
+      </div>
+
+      <div id="otherGrid" class="grid other-grid" aria-live="polite"></div>
+
+      <div id="otherLoadMoreWrap" class="load-more" style="display:none;">
+        <button id="otherLoadMoreBtn" class="btn">Cargar más</button>
+      </div>
+
+      <section id="otherEmpty" class="empty" style="display:none;">
+        <div style="font-size:56px; opacity:.35;">📦</div>
+        <div class="big">No se encontraron códigos</div>
+        <p class="small">Prueba cambiando la categoría o el texto de búsqueda.</p>
+      </section>
+</main>
+
+  <script src="../js/core.js" defer></script>
+  <script src="../js/pages.js" defer></script>
+</body>
+</html>
