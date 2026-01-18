@@ -1167,11 +1167,11 @@ while true do
             ChangeReactorMenu()
         elseif mainmenu == 3 then
             OthersMenu()
+        elseif mainmenu == 4 then
             MenuCambioIndividual()
         elseif mainmenu == 5 then
             UnlockBoxes()
         end
     end
     gg.sleep(100)
-
 end
