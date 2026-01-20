@@ -1146,7 +1146,7 @@ function makeVisualOnly(root){
     {
       id: 101,
       name: "54 Hornos 1M de Oro",
-      price: "S/ 50.00",
+      price: "S/ 36.00",
       category: ServiceCategory.OFFER,
       image: "../img/Oferta/1MdeOro.png",
       description:
@@ -1156,7 +1156,7 @@ function makeVisualOnly(root){
     {
       id: 2,
       name: "54 Hornos 2M de Oro",
-      price: 60,
+      price: 46,
       category: ServiceCategory.OFFER,
       image: "../img/Oferta/2MdeOro.png",
       description:
@@ -1166,7 +1166,7 @@ function makeVisualOnly(root){
     {
       id: 102,
       name: "54 Hornos 3M de Oro",
-      price: "S/ 75.00",
+      price: "S/ 56.00",
       category: ServiceCategory.OFFER,
       image: "../img/Oferta/3MdeOro.png",
       description:
