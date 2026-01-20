@@ -1095,34 +1095,50 @@ end
 -- ==========================================
 function UnlockBoxes()
     gg.setVisible(false)
-    gg.toast("📦 Buscando Cajas...")
+    gg.toast("📦 Buscando Cajas (Modo Seguro)...")
     
-    -- Limpieza inicial
+    -- 1. Limpieza inicial y CONFIGURACIÓN DE REGIONES (Importante para tu amigo)
     gg.clearResults()
+    -- Buscamos en todas las regiones posibles para evitar el "No encontrado"
+    gg.setRanges(gg.REGION_ANONYMOUS | gg.REGION_C_ALLOC | gg.REGION_OTHER | gg.REGION_BAD)
+    
     gg.searchNumber(":Allowed", gg.TYPE_BYTE)
     gg.getResults(100000)
     gg.editAll("0", gg.TYPE_BYTE)
     gg.clearResults()
 
-    -- Lista de búsquedas de cajas (Optimizada)
+    -- 2. Lista Inteligente con Refinamiento
+    -- "refine" es el número clave con el que nos quedaremos para evitar editar donde no debemos
     local boxSearches = {
-        {search = "h28416E6E697665727361727932335F426F785F3235000000106D6174657269616C000000", type = gg.TYPE_BYTE, offset = 0xfffffffffffffff8},
-        {search = "h2C416E6E69766572736172795F323031395F426F785F3900106D6174657269616C000000", type = gg.TYPE_BYTE, offset = 0xfffffffffffff578},
-        {search = "1,986,289,960;1,601,465,957;1,701,601,635;1,918,985,326", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc},
-        {search = "1,836,605,296;1,650,422,625;1,650,423,919;6,649,196", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc},
-        {search = "1,836,605,296;1,650,422,625;1,734,309,999;1,852,138,866", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc},
-        {search = "1,836,605,296;1,650,422,625;1,918,859,375;25,701", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc},
-        {search = "1,852,727,596;1,919,252,073;2,037,539,187;2,020,565,599", type = gg.TYPE_DWORD, offset = 0xffffffffffffffc0},
-        {search = "1,839,605,296;1,650,422,625;1,650,423,919;6,649,196", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc},
-        {search = "1,839,605,296;1,650,422,625;1,734,309,999;1,852,138,866", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc},
-        {search = "1,839,605,296;1,650,422,625;1,918,859,375;25,701", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc}
+        -- Cajas de Aniversario (Búsqueda Hexadecimal directa)
+        {search = "h28416E6E697665727361727932335F426F785F3235000000106D6174657269616C000000", type = gg.TYPE_BYTE, offset = 0xfffffffffffffff8, refine = nil},
+        {search = "h2C416E6E69766572736172795F323031395F426F785F3900106D6174657269616C000000", type = gg.TYPE_BYTE, offset = 0xfffffffffffff578, refine = nil},
+        
+        -- Bloques Grupales (Estos eran los que causaban el CRASH)
+        -- Ahora incluyen 'refine' para seleccionar solo el valor correcto
+        {search = "1,986,289,960;1,601,465,957;1,701,601,635;1,918,985,326", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1986289960"},
+        {search = "1,836,605,296;1,650,422,625;1,650,423,919;6,649,196", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1836605296"},
+        {search = "1,836,605,296;1,650,422,625;1,734,309,999;1,852,138,866", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1836605296"},
+        {search = "1,836,605,296;1,650,422,625;1,918,859,375;25,701", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1836605296"},
+        {search = "1,852,727,596;1,919,252,073;2,037,539,187;2,020,565,599", type = gg.TYPE_DWORD, offset = 0xffffffffffffffc0, refine = "1852727596"},
+        {search = "1,839,605,296;1,650,422,625;1,650,423,919;6,649,196", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1839605296"},
+        {search = "1,839,605,296;1,650,422,625;1,734,309,999;1,852,138,866", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1839605296"},
+        {search = "1,839,605,296;1,650,422,625;1,918,859,375;25,701", type = gg.TYPE_DWORD, offset = 0xffffffffffffffbc, refine = "1839605296"}
     }
 
     local foundCount = 0
     
     for i, item in ipairs(boxSearches) do
+        -- 1. Buscar
         gg.searchNumber(item.search, item.type)
-        local r = gg.getResults(100) -- Limitado para evitar crash
+        
+        -- 2. REFINAR (El paso clave anti-crash)
+        if item.refine ~= nil then
+            gg.refineNumber(item.refine, item.type)
+        end
+
+        -- 3. Obtener resultados y editar
+        local r = gg.getResults(100)
         if #r > 0 then
             local valuesToEdit = {}
             for k = 1, #r do
@@ -1131,23 +1147,22 @@ function UnlockBoxes()
             end
             gg.setValues(valuesToEdit)
             foundCount = foundCount + #r
+            gg.toast("✅ Grupo " .. i .. " inyectado")
         end
+        -- Limpiar para la siguiente vuelta del bucle
         gg.clearResults()
     end
     
-    -- Limpieza Final
+    -- 3. Limpieza Final
     gg.searchNumber(":Allowed", gg.TYPE_BYTE)
     gg.getResults(100000)
     gg.editAll("0", gg.TYPE_BYTE)
     gg.clearResults()
     
-    gg.processResume()
-    gg.timeJump("5:0")
-    
     if foundCount > 0 then
-        gg.toast("✅ Cajas Desbloqueadas")
+        gg.toast("✅ Cajas Desbloqueadas con éxito")
     else
-        gg.toast("⚠️ No se encontraron cajas activas en memoria")
+        gg.toast("⚠️ No se encontraron direcciones (Entra a la tienda primero)")
     end
 end
 while true do
