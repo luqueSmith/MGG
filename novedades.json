@@ -1,0 +1,70 @@
+[
+  {
+    "title": {
+      "$t": "NOVEDADES: DEL 09/05/2026 AL 15/05/2026"
+    },
+    "published": {
+      "$t": "2026-04-16T11:41:00-07:00"
+    },
+    "link": [
+      {
+        "rel": "alternate",
+        "href": "https://mutodex.blogspot.com/2026/04/novedades-del-09052026-al-15052026.html"
+      }
+    ],
+    "content": {
+      "$t": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEji9Wj_IrNqGZaSlfNzz_r6CDaTv7ivSHUYCBqodA0LenVXOdZsTSAFkf5BPV6DfzDnyKociI6PgU7zULQaV4my0Jhh9s2Hi-GJdLmOs1ltHT8ujBDnDUe59L3rPATq1yHtxD9axsM-_uJV67LQCj9tQbwH7fJu4RPOvzyIxZM1V2qr-lNGPsXUd89IpmM/w400-h205/dailynews_09052026.jpg\"><p>Anuncios, ofertas y cronología semanal.</p>"
+    }
+  },
+  {
+    "title": {
+      "$t": "NOVEDADES: DEL 02/05/2026 AL 08/05/2026"
+    },
+    "published": {
+      "$t": "2026-04-16T11:40:00-07:00"
+    },
+    "link": [
+      {
+        "rel": "alternate",
+        "href": "https://mutodex.blogspot.com/2026/04/novedades-del-02052026-al-08052026.html"
+      }
+    ],
+    "content": {
+      "$t": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhE4kao195XWzFgBDXseutVrz4xPncln4GSNO0dOB1wfRfuGNkniDM_C4DYMi0jEDUHZoRmjMieNwKQfpwMpnGVHPkhK0jG56AxbqoHe2kVw0L1iio1HNs9aaoyZpVlDPnlLx1IbRqKKuj-kj8VvS_rjbB2di2KA3_1srIVSFBcPI5emsB06cH5bn7qsw0/w400-h205/dailynews_02052026.jpg\"><p>Ofertas, mini evento y cronología semanal.</p>"
+    }
+  },
+  {
+    "title": {
+      "$t": "MUTANTE #552: KEREON DEL ABISMO"
+    },
+    "published": {
+      "$t": "2026-04-10T08:15:00-07:00"
+    },
+    "link": [
+      {
+        "rel": "alternate",
+        "href": "https://mutodex.blogspot.com/2026/04/mutante-552-kereon-del-abismo.html"
+      }
+    ],
+    "content": {
+      "$t": "<img src=\"https://s-ak.kobojo.com/mutants/assets/thumbnails/specimen_ea_15_platinum.png\"><p>Nuevo mutante agregado a la base oficial.</p>"
+    }
+  },
+  {
+    "title": {
+      "$t": "MUTANTE #551: DANDY COSMICO"
+    },
+    "published": {
+      "$t": "2026-04-02T08:06:00-07:00"
+    },
+    "link": [
+      {
+        "rel": "alternate",
+        "href": "https://mutodex.blogspot.com/2026/04/mutante-551-dandy-cosmico.html"
+      }
+    ],
+    "content": {
+      "$t": "<img src=\"https://s-ak.kobojo.com/mutants/assets/thumbnails/specimen_ce_14_platinum.png\"><p>Nuevo mutante agregado a la base oficial.</p>"
+    }
+  }
+]
