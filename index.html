@@ -6,8 +6,39 @@
     <title>MUTODEX MGG</title>
     <meta name="description" content="Catálogo de Mutants Genetic Gladiators con novedades, servicios, calculadora EVO y descargas." />
     <link rel="icon" href="https://github.com/luqueSmith/MGG/blob/main/img/Logo_mgg.png?raw=true" />
-    <script type="module" crossorigin src="/MGG/assets/index-Br6gdpw4.js"></script>
-    <link rel="stylesheet" crossorigin href="/MGG/assets/index-DHHUkp1F.css">
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          function defineFetchOn(obj) {
+            Object.defineProperty(obj, 'fetch', {
+              get: function() { return currentFetch; },
+              set: function(v) { currentFetch = v; },
+              configurable: true,
+              enumerable: true
+            });
+          }
+          try {
+            defineFetchOn(window);
+          } catch (e1) {
+            try {
+              defineFetchOn(Window.prototype);
+            } catch (e2) {
+              try {
+                defineFetchOn(Object.getPrototypeOf(window));
+              } catch (e3) {
+                console.warn('Could not redefine window.fetch early:', e3);
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Fetch redirection exception:', e);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/MGG/assets/index-BtAAASHp.js"></script>
+    <link rel="stylesheet" crossorigin href="/MGG/assets/index-CuYplUK2.css">
   </head>
   <body>
     <div id="root"></div>
