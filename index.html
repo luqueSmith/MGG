@@ -37,11 +37,52 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="/MGG/assets/index-xOOvH7MS.js"></script>
-    <link rel="stylesheet" crossorigin href="/MGG/assets/index-YtZ1riVY.css">
+    <script type="module" crossorigin src="/MGG/assets/index-BlDxDzQb.js"></script>
+    <link rel="stylesheet" crossorigin href="/MGG/assets/index-Clz_adjq.css">
+
+    <style id="mgg-responsive-hotfix">
+      html,body,#root{max-width:100%;overflow-x:hidden}*{box-sizing:border-box}.desktop-content,.desktop-content>*{min-width:0}.desktop-content .hero p{margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important;text-align:center!important;max-width:64ch!important}.mgg-forge-requirement{margin-top:4px;color:rgba(252,211,77,.92);font-size:10px;font-weight:800;line-height:1.25;overflow-wrap:anywhere}.card .mgg-forge-requirement{display:inline-flex;width:fit-content;max-width:100%;margin:0 0 16px;padding:6px 10px;border:1px solid rgba(251,191,36,.15);border-radius:8px;background:rgba(251,191,36,.06)}@media(max-width:767px){.desktop-content .hero{padding:1.4rem 1rem!important;border-radius:1.35rem!important}.desktop-content .hero h1{margin-top:.8rem!important;margin-bottom:.8rem!important;font-size:clamp(1.8rem,9vw,2.55rem)!important;line-height:1.02!important}.desktop-content .hero p{font-size:.9rem!important;line-height:1.55!important}.whatsapp-card{border-radius:1.25rem!important}.whatsapp-card .btn{width:100%!important;white-space:normal;line-height:1.2}}@media(max-width:420px){.desktop-content{padding-left:.75rem!important;padding-right:.75rem!important}.mgg-forge-requirement{font-size:9px}}
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <script id="mgg-service-requirements-hotfix">
+      (function(){
+        var labels={
+          es:{mutant:'Requisito mínimo: 3 forjas de oro',other:'Requisito: tener al menos 7 a 9 forjas de oro'},
+          en:{mutant:'Minimum requirement: 3 gold forges',other:'Requirement: at least 7 to 9 gold forges'},
+          pt:{mutant:'Requisito mínimo: 3 forjas de ouro',other:'Requisito: ter pelo menos 7 a 9 forjas de ouro'},
+          fr:{mutant:'Minimum requis : 3 forges d’or',other:'Requis : au moins 7 à 9 forges d’or'},
+          de:{mutant:'Mindestanforderung: 3 Goldschmieden',other:'Voraussetzung: mindestens 7 bis 9 Goldschmieden'}
+        };
+        var mainTitles={
+          'SERVICIOS PRINCIPALES':'es','CORE SERVICES':'en','SERVIÇOS PRINCIPAIS':'pt','SERVICES PRINCIPAUX':'fr','HAUPTDIENSTE':'de'
+        };
+        var otherTitles={
+          'OTROS SERVICIOS':'es','EXPANSION PACKS':'en','OUTROS SERVIÇOS':'pt','AUTRES SERVICES':'fr','WEITERE DIENSTE':'de'
+        };
+        function clean(v){return (v||'').replace(/\s+/g,' ').trim().toUpperCase()}
+        function forgeProduct(name){var n=clean(name);return n==='FORJAS DE ORO'||n==='GOLD FORGES'||n==='FORJAS DE OURO'||n==='FORGES D’OR'||n==='FORGES D\'OR'||n==='GOLDSCHMIEDEN'}
+        function isMutant(name){var n=clean(name);return n==='MUTANTE'||n==='MUTANT'}
+        function addToCard(card,lang){
+          if(card.querySelector('[data-mgg-forge-requirement]'))return;
+          var title=card.querySelector('h4,h3');if(!title||forgeProduct(title.textContent))return;
+          var el=document.createElement('div');el.dataset.mggForgeRequirement='1';el.className='mgg-forge-requirement';el.textContent=(labels[lang]||labels.es)[isMutant(title.textContent)?'mutant':'other'];
+          if(title.tagName==='H4'){var price=title.nextElementSibling;(price&&price.parentNode?price.parentNode:title.parentNode).insertBefore(el,price&&price.nextSibling||title.nextSibling)}
+          else{var desc=title.nextElementSibling;if(desc&&desc.tagName==='P')desc.insertAdjacentElement('afterend',el);else title.insertAdjacentElement('afterend',el)}
+        }
+        function apply(){
+          if(location.hash.indexOf('/servicios')===-1)return;
+          document.querySelectorAll('h2').forEach(function(h){
+            var key=clean(h.textContent),lang=mainTitles[key]||otherTitles[key];if(!lang)return;
+            var section=h.closest('section');if(!section)return;section.querySelectorAll('article').forEach(function(card){addToCard(card,lang)});
+          });
+        }
+        var queued=false;function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;apply()})}
+        addEventListener('hashchange',schedule);new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});schedule();
+      })();
+    </script>
   </body>
 </html>
 
