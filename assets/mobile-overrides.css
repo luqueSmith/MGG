@@ -1,0 +1,309 @@
+/* MUTODEX MGG — mejoras de experiencia móvil. No altera el diseño de escritorio. */
+:root {
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 767px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 320px;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+    overscroll-behavior-x: none;
+  }
+
+  #root,
+  #root > div {
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  .site-header {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header-inner {
+    min-height: 60px !important;
+    gap: 8px !important;
+    padding-inline: 12px !important;
+  }
+
+  .header-inner .brand {
+    min-width: 0;
+    gap: 8px !important;
+  }
+
+  .header-inner .brand-logo {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .header-inner .brand strong {
+    font-size: 12px !important;
+    white-space: nowrap;
+  }
+
+  .header-inner .brand span {
+    font-size: 7px !important;
+    letter-spacing: .14em !important;
+  }
+
+  .header-inner > div:last-child {
+    gap: 6px !important;
+  }
+
+  .header-inner button {
+    min-height: 40px;
+    touch-action: manipulation;
+  }
+
+  .app-shell {
+    width: 100%;
+    padding: 12px 0 116px !important;
+  }
+
+  .desktop-content {
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: auto !important;
+    padding-inline: 12px !important;
+  }
+
+  .desktop-content,
+  .desktop-content * {
+    min-width: 0;
+  }
+
+  .desktop-content .panel {
+    padding: 14px !important;
+    margin-bottom: 14px;
+    border-radius: 18px !important;
+  }
+
+  .desktop-content .panel[class*="!p-0"] {
+    padding: 0 !important;
+  }
+
+  .desktop-content .hero {
+    padding: 22px 14px !important;
+    border-radius: 20px !important;
+  }
+
+  .desktop-content .hero h1 {
+    max-width: 100%;
+    margin: 10px auto !important;
+    font-size: clamp(1.55rem, 7vw, 2.2rem) !important;
+    line-height: 1.12 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .desktop-content .hero p {
+    max-width: 100% !important;
+    font-size: .9rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .desktop-content h1,
+  .desktop-content h2,
+  .desktop-content h3,
+  .desktop-content h4,
+  .desktop-content p,
+  .desktop-content a,
+  .desktop-content button {
+    overflow-wrap: anywhere;
+  }
+
+  .desktop-content p {
+    line-height: 1.55;
+  }
+
+  /* Las cuadrículas grandes pasan a dos columnas; las composiciones especiales se apilan. */
+  .desktop-content .grid[class*="grid-cols-6"],
+  .desktop-content .grid[class*="grid-cols-5"],
+  .desktop-content .grid[class*="grid-cols-4"],
+  .desktop-content .grid[class*="grid-cols-3"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .desktop-content .grid[class*="grid-cols-["] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .desktop-content .grid > *,
+  .desktop-content section,
+  .desktop-content article {
+    min-width: 0;
+  }
+
+  .desktop-content img,
+  .desktop-content video,
+  .desktop-content iframe,
+  .desktop-content svg {
+    max-width: 100%;
+  }
+
+  .desktop-content img,
+  .desktop-content video {
+    height: auto;
+  }
+
+  .desktop-content input,
+  .desktop-content select,
+  .desktop-content textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 44px;
+    font-size: 16px !important;
+  }
+
+  .desktop-content button,
+  .desktop-content .btn,
+  .desktop-content a.btn {
+    min-height: 42px;
+    touch-action: manipulation;
+  }
+
+  .desktop-content .overflow-x-auto,
+  .desktop-content [class*="overflow-x-auto"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .desktop-content table {
+    max-width: 100%;
+  }
+
+  .site-footer {
+    padding-top: 28px !important;
+    padding-bottom: 128px !important;
+  }
+
+  .site-footer > .container {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 22px !important;
+    padding-inline: 16px !important;
+  }
+
+  /* El panel lateral del menú siempre cabe en la pantalla del teléfono. */
+  #root nav.fixed {
+    width: min(88vw, 340px) !important;
+    max-width: 100vw !important;
+  }
+
+  .mobile-apk-cta {
+    position: fixed;
+    z-index: 80;
+    left: 12px;
+    right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: auto;
+    max-width: 480px;
+    min-height: 66px;
+    margin-inline: auto;
+    padding: 10px 14px;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(96, 165, 250, .5);
+    border-radius: 18px;
+    background: linear-gradient(115deg, #1455bd 0%, #1d4ed8 55%, #172554 100%);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, .48), 0 0 24px rgba(37, 99, 235, .22);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-apk-cta:active {
+    transform: scale(.985);
+  }
+
+  .mobile-apk-cta__icon {
+    display: grid;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, .12);
+    font-size: 23px;
+    line-height: 1;
+  }
+
+  .mobile-apk-cta__copy {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .mobile-apk-cta__copy strong {
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: .015em;
+  }
+
+  .mobile-apk-cta__copy small {
+    color: rgba(219, 234, 254, .9);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .mobile-apk-cta__tag {
+    flex: 0 0 auto;
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 9px;
+    background: rgba(2, 6, 23, .25);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-inner {
+    padding-inline: 9px !important;
+  }
+
+  .header-inner .brand {
+    gap: 6px !important;
+  }
+
+  .header-inner .brand-logo {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .mobile-apk-cta {
+    left: 8px;
+    right: 8px;
+    padding-inline: 10px;
+  }
+
+  .mobile-apk-cta__copy strong {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-apk-cta {
+    display: none !important;
+  }
+}
